@@ -3,12 +3,15 @@ const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const Joi = require("joy");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 
+// Protect Routes
+const auth = require("../middleware/login");
+
 // Import Config
 const key = require("../config/keys").secretOrKey;
+
 // Import User Schemas
 const User = require("../models/User");
 
@@ -63,4 +66,9 @@ router.post("/login", async (req, res) => {
     .json({ token });
 });
 
+//User Profile
+// router.get("/me", auth, async (req, res, next) => {
+//   const user = await User.findById(req.user.id).select("-password");
+//   res.status(200).json({ user });
+// });
 module.exports = router;
