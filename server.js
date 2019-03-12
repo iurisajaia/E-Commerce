@@ -21,7 +21,9 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
+const auth = require("./middleware/login");
+
+app.get("/", auth, (req, res) => {
   res.send("Hello E-Commerce");
 });
 

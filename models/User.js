@@ -15,6 +15,10 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  money: {
+    type: Number,
+    default: 1000
+  },
   email: {
     type: String,
     required: true
@@ -36,7 +40,11 @@ const UserSchema = new Schema({
     select: true
   },
   gender: {
-    type: String
+    type: String,
+    required: true
+  },
+  products: {
+    type: Array
   },
   date: {
     type: Date,
