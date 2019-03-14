@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 
 // Require Routes
@@ -13,6 +14,8 @@ const auth = require("./middleware/login");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Use Cors
+app.use(cors());
 // DB Config
 const db = require("./config/keys").mongoURI;
 

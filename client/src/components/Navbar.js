@@ -3,9 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarCollapse"
@@ -13,27 +13,27 @@ const Navbar = () => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon" />
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <Link to="/" class="nav-link">
+      <div className="collapse navbar-collapse" id="navbarCollapse">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+            <Link to="/" className="nav-link">
               Home
             </Link>
           </li>
-          <li class="nav-item">
-            <Link to="/registration" class="nav-link">
+          <li className="nav-item">
+            <Link to="/registration" className="nav-link">
               Registration
             </Link>
           </li>
-          <li class="nav-item">
-            <Link to="/login" class="nav-link">
+          <li className="nav-item">
+            <Link to="/login" className="nav-link">
               Login
             </Link>
           </li>
         </ul>
-        {/* <form class="form-inline mt-2 mt-md-0">
+        {/* <form className="form-inline mt-2 mt-md-0">
         </form> */}
       </div>
     </nav>

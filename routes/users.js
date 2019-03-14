@@ -35,6 +35,7 @@ router.post("/registration", async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
+      // repassword: req.body.repassword,
       month: req.body.month,
       day: req.body.day,
       year: req.body.year,
