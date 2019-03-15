@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Product from './product';
 class Home extends Component {
   state = {
     posts:[]
@@ -39,8 +40,8 @@ class Home extends Component {
           Login
         </Link>
         {(this.state.posts)? (this.state.posts.map(post => {
-          console.log(post)
-          return (<p key={post.userId}>{post.title}</p>)
+          {/* console.log(post) */}
+          return (<Product key={post.userId} post={post}/>)
         })) : null}
       </div>
     );
