@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import axios from 'axios';
+import axios from 'axios';
 
 export default class details extends Component {
   // componentDidMount(){
@@ -12,9 +12,21 @@ export default class details extends Component {
   //      })
   //     })
   // }
+  state = {
+    product: []
+  };
+  async componentDidMount() {
+    const products = await axios.get("https://jsonplaceholder.typicode.com/posts");
+    const targetProduct = products.data.filter(product => {
+      return product.id == this.props.match.params.id;
+    })
+    this.setState({product:targetProduct});
+  }
+
+
   render() {
-    return (
-      <>
+    let {product} = this.state;
+    const pageInfo = (product.length) ? (
         <div className="container">
           <div className="card mt-4">
             <img
@@ -22,13 +34,11 @@ export default class details extends Component {
               src="http://placehold.it/900x400"
             />
             <div className="card-body">
-              <h3 className="card-title">{this.props.match.params.id}</h3>
+              <h2>{console.log(product)}</h2>
+              <h3 className="card-title">{product[0].title}</h3>
               <h4>$24.99</h4>
               <p className="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta.
-                Totam id dolores, sint aperiam sequi pariatur praesentium animi
-                perspiciatis molestias iure, ducimus!
+              {product[0].body}
               </p>
               <span className="text-warning">
                 &#9733; &#9733; &#9733; &#9733; &#9734;
@@ -76,6 +86,14 @@ export default class details extends Component {
             </div>
           </div>
         </div>
+    ) : (<div>Epmty List</div>)
+
+
+
+
+    return (
+      <>
+        {pageInfo}
       </>
     );
   }
