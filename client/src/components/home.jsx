@@ -1,6 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 class Home extends Component {
+  state = {
+    posts:[]
+  }
+  componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(res =>{
+            console.log(res)
+            this.setState({
+                posts:res.data.slice(0,20)
+            })
+        })
+    }
   state = {};
   render() {
     return (
@@ -25,6 +38,10 @@ class Home extends Component {
         <Link to="/login" className="btn btn-primary btn-lg ml-4" role="button">
           Login
         </Link>
+        {(this.state.posts)? (this.state.posts.map(post => {
+          console.log(post)
+          return (<p key={post.userId}>{post.title}</p>)
+        })) : null}
       </div>
     );
   }
