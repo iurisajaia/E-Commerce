@@ -15,9 +15,6 @@ const key = require("../config/keys").secretOrKey;
 // Import User Schemas
 const User = require("../models/User");
 
-// Import User Validation
-const validate = require("../validation/user").validate;
-
 // User Registration
 router.post("/registration", async (req, res) => {
   let errors = [];
@@ -97,20 +94,35 @@ router.post("/registration", async (req, res) => {
 
 // User Login
 router.post("/login", async (req, res) => {
+  if (
+    req.body.email == "" ||
+    req.body.email == undefined ||
+    req.body.email == null ||
+    req.body.password == "" ||
+    req.body.password == undefined ||
+    req.body.password == null
+  ) {
+    return res.json({ error: "all fields are required" });
+  }
   let user = await User.findOne({ email: req.body.email });
 
   if (!user) {
     return res.status(400).json({ error: "incorrect email or password" });
+  } else {
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!validPassword) {
+      return res.status(400).json({ error: "Invalid password" });
+    } else {
+      const token = jwt.sign({ _id: user.id }, key);
+      return res
+        .header("x-auth-token", token)
+        .status(200)
+        .json({ token });
+    }
   }
-
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).json("Invalid email or password");
-
-  const token = jwt.sign({ _id: user.id }, key);
-  return res
-    .header("x-auth-token", token)
-    .status(200)
-    .json({ token });
 });
 
 //User Profile
