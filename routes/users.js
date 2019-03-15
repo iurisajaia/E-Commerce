@@ -20,35 +20,78 @@ const validate = require("../validation/user").validate;
 
 // User Registration
 router.post("/registration", async (req, res) => {
-  const { error } = validate(req.body);
+  let errors = [];
 
-  if (error) return res.status(400).send(error.details[0].message);
+  if (
+    req.body.firstname == "" ||
+    req.body.firstname == undefined ||
+    req.body.firstname == null ||
+    req.body.lastname == "" ||
+    req.body.lastname == undefined ||
+    req.body.lastname == null ||
+    req.body.username == "" ||
+    req.body.username == undefined ||
+    req.body.username == null ||
+    req.body.email == "" ||
+    req.body.email == undefined ||
+    req.body.email == null ||
+    req.body.password == "" ||
+    req.body.password == undefined ||
+    req.body.password == null ||
+    req.body.repassword == "" ||
+    req.body.repassword == undefined ||
+    req.body.repassword == null ||
+    req.body.month == "" ||
+    req.body.month == undefined ||
+    req.body.month == null ||
+    req.body.day == "" ||
+    req.body.day == undefined ||
+    req.body.day == null ||
+    req.body.year == "" ||
+    req.body.year == undefined ||
+    req.body.year == null ||
+    req.body.gender == "" ||
+    req.body.gender == undefined ||
+    req.body.gender == null
+  ) {
+    errors.push({ message: "ყველა ველი სავალდებულოა" });
+  }
+
+  if (req.body.password.legnth < 6) {
+    errors.push({ message: "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს" });
+  }
+
+  if (req.body.password != req.body.repassword) {
+    errors.push({ message: "პაროლები არ ემთხვევა" });
+  }
 
   let user = await User.findOne({ email: req.body.email });
 
   if (user) {
-    return res.status(400).json({ error: "email already exists" });
-  } else {
-    if (req.body.password != req.body.repassword) {
-      res.status(400).json({ error: "password error" });
-    } else {
-      const newUser = new User({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        month: req.body.month,
-        day: req.body.day,
-        year: req.body.year,
-        gender: req.body.gender
-      });
+    errors.push({ message: "იმეილი უკვე დარეგისტრირებულია" });
+  }
 
-      const salt = await bcrypt.genSalt(10);
-      newUser.password = await bcrypt.hash(newUser.password, salt);
-      await newUser.save();
-      return res.status(200).json({ user: newUser });
-    }
+  if (errors.length > 0) {
+    res.status(400).json({ errors });
+  } else {
+    const newUser = new User({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      month: req.body.month,
+      day: req.body.day,
+      year: req.body.year,
+      gender: req.body.gender
+    });
+
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
+    await newUser.save();
+    return res
+      .status(200)
+      .json({ success: "თქვენ წარმატებით გაირეთ რეგისტრაცია" });
   }
 });
 

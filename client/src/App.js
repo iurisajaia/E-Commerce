@@ -5,7 +5,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./components/user/login";
 import Registration from "./components/user/registration";
 import Home from "./components/home";
-import Details from "./components/details";
+import Products from "./components/products/products";
+import Details from "./components/products/details";
 import jwt_decode from "jwt-decode";
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
+            <Route exact path="/products" component={Products} />
             <Route exact path="/details/:id" component={Details} />
             {/* <Route exact path='/:id'/> */}
           </Switch>
