@@ -24,6 +24,10 @@ function validateUser(user) {
       .min(8)
       .max(255)
       .required(),
+    repassword: Joi.string()
+      .min(8)
+      .max(255)
+      .required(),
     day: Joi.string().required(),
     month: Joi.string().required(),
     year: Joi.string().required(),

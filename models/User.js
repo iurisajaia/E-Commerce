@@ -46,6 +46,10 @@ const UserSchema = new Schema({
   products: {
     type: Array
   },
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
   date: {
     type: Date,
     default: Date.now

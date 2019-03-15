@@ -29,23 +29,26 @@ router.post("/registration", async (req, res) => {
   if (user) {
     return res.status(400).json({ error: "email already exists" });
   } else {
-    const newUser = new User({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      // repassword: req.body.repassword,
-      month: req.body.month,
-      day: req.body.day,
-      year: req.body.year,
-      gender: req.body.gender
-    });
+    if (req.body.password != req.body.repassword) {
+      res.status(400).json({ error: "password error" });
+    } else {
+      const newUser = new User({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        month: req.body.month,
+        day: req.body.day,
+        year: req.body.year,
+        gender: req.body.gender
+      });
 
-    const salt = await bcrypt.genSalt(10);
-    newUser.password = await bcrypt.hash(newUser.password, salt);
-    await newUser.save();
-    return res.status(200).json({ user: newUser });
+      const salt = await bcrypt.genSalt(10);
+      newUser.password = await bcrypt.hash(newUser.password, salt);
+      await newUser.save();
+      return res.status(200).json({ user: newUser });
+    }
   }
 });
 

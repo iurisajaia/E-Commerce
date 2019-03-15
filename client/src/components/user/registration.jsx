@@ -11,7 +11,7 @@ class Registration extends Component {
       username: event.target.username.value,
       email: event.target.email.value,
       password: event.target.password.value,
-      // repassword: event.target.repassword.value,
+      repassword: event.target.repassword.value,
       day: event.target.day.value,
       month: event.target.month.value,
       year: event.target.year.value,
