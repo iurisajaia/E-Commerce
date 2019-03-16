@@ -9,7 +9,6 @@ import Products from "./components/products/products";
 import Details from "./components/products/details";
 import Profile from "./components/user/profile";
 import jwt_decode from "jwt-decode";
-// import { decode } from "punycode";
 
 class App extends Component {
   state = {
@@ -21,6 +20,26 @@ class App extends Component {
       var decoded = jwt_decode(token);
       this.setState({ decoded, active: true });
     }
+
+    Promise.all([
+      fetch("http://localhost:5000/admin/companies"),
+      fetch("http://localhost:5000/admin/categories"),
+      fetch("http://localhost:5000/all-product")
+    ])
+      .then(([companies, categories, products]) => {
+        return Promise.all([
+          companies.json(),
+          categories.json(),
+          products.json()
+        ]);
+      })
+      .then(([companies, categories, products]) => {
+        this.setState({
+          companies: companies.companies,
+          categories: categories.categories,
+          products
+        });
+      });
   }
   render() {
     var user;
@@ -28,6 +47,7 @@ class App extends Component {
     if (this.state.decoded) {
       user = this.state.decoded;
     }
+    var companies = this.state.companies;
 
     return (
       <BrowserRouter>
@@ -41,8 +61,8 @@ class App extends Component {
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
-            <Route exact path="/products" component={Products} />
-            <Route exact path="/details/:id" component={Details} />
+            <Products exact path="/products" companies={companies} />
+            <Details exact path="/details/:id" companies={companies} />
             <Route exact path="/me" component={Profile} user={user} />
           </Switch>
         </div>

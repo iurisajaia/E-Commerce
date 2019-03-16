@@ -11,17 +11,17 @@ class ProfileNav extends Component {
           </a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu1">
+          <a data-toggle="tab" href="#menu1" className="mr-3">
             Products
           </a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu2">
+          <a data-toggle="tab" href="#menu2" className="mr-3">
             Categories
           </a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu3">
+          <a data-toggle="tab" href="#menu3" className="mr-3">
             Companies
           </a>
         </li>

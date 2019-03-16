@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Details from "./details";
 
 export default function details(props) {
   const { product } = props;
@@ -20,10 +19,7 @@ export default function details(props) {
               <Link to={/details/ + product._id}>{product.title}</Link>
             </h4>
             <h5>$24.99</h5>
-            <p className="card-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-              numquam aspernatur!
-            </p>
+            <p className="card-text">{product.description}</p>
           </div>
           <div className="card-footer">
             <small className="text-muted">
