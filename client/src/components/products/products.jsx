@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Product from "./product";
 class Home extends Component {
   state = {
@@ -23,15 +24,15 @@ class Home extends Component {
             <div className="col-lg-3">
               <h1 className="my-4">Shop Name</h1>
               <div className="list-group">
-                <a href="#" className="list-group-item">
+                <Link to="#" className="list-group-item">
                   Category 1
-                </a>
-                <a href="#" className="list-group-item">
+                </Link>
+                <Link to="#" className="list-group-item">
                   Category 2
-                </a>
-                <a href="#" className="list-group-item">
+                </Link>
+                <Link to="#" className="list-group-item">
                   Category 3
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -79,9 +80,9 @@ class Home extends Component {
                     />
                   </div>
                 </div>
-                <a
+                <Link
                   className="carousel-control-prev"
-                  href="#carouselExampleIndicators"
+                  to="#carouselExampleIndicators"
                   role="button"
                   data-slide="prev"
                 >
@@ -90,7 +91,7 @@ class Home extends Component {
                     aria-hidden="true"
                   />
                   <span className="sr-only">Previous</span>
-                </a>
+                </Link>
                 <a
                   className="carousel-control-next"
                   href="#carouselExampleIndicators"

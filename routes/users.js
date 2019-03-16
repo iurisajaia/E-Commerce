@@ -116,7 +116,20 @@ router.post("/login", async (req, res) => {
     if (!validPassword) {
       return res.status(400).json({ error: "Invalid password" });
     } else {
-      const token = jwt.sign({ _id: user.id }, key);
+      const token = jwt.sign(
+        {
+          _id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          username: user.username,
+          email: user.email,
+          day: user.day,
+          month: user.month,
+          year: user.year,
+          gender: user.gender
+        },
+        key
+      );
       return res
         .header("x-auth-token", token)
         .status(200)
@@ -126,8 +139,14 @@ router.post("/login", async (req, res) => {
 });
 
 //User Profile
-// router.get("/me", auth, async (req, res, next) => {
-//   const user = await User.findById(req.user.id).select("-password");
-//   res.status(200).json({ user });
-// });
+router.get("/me", auth, async (req, res, next) => {
+  const user = await User.findById(req.user._id).select("-password");
+
+  if (user.isAdmin) {
+    const alluser = await User.find();
+    res.status(200).json({ alluser, user });
+  } else {
+    res.status(200).json({ user });
+  }
+});
 module.exports = router;

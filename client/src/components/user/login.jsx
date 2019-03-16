@@ -26,6 +26,7 @@ class Login extends Component {
         } else {
           this.setState({ error: false, success: "Success" });
           localStorage.setItem("token", token.token);
+          setInterval((window.location = "/products"), 2000);
         }
       })
       .catch(error => {

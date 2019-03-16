@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Details from "./details";
+// import Details from "./details";
 
 export default function details(props) {
   const { post } = props;
@@ -8,13 +8,13 @@ export default function details(props) {
     <React.Fragment>
       <div className="col-lg-4 col-md-6 mb-4">
         <div className="card h-100">
-          <a href="#">
+          <Link to="#">
             <img
               className="card-img-top"
               src="http://placehold.it/700x400"
               alt=""
             />
-          </a>
+          </Link>
           <div className="card-body">
             <h4 className="card-title">
               <Link to={/details/ + post.id}>{post.title}</Link>

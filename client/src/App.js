@@ -7,6 +7,7 @@ import Registration from "./components/user/registration";
 import Home from "./components/home";
 import Products from "./components/products/products";
 import Details from "./components/products/details";
+import Profile from "./components/user/profile";
 import jwt_decode from "jwt-decode";
 
 class App extends Component {
@@ -21,10 +22,14 @@ class App extends Component {
     }
   }
   render() {
+    var user;
+    if (this.state.decoded) {
+      user = this.state.decoded;
+    }
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar />
+          <Navbar user={user} />
           <br />
           <br />
           <br />
@@ -35,7 +40,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/products" component={Products} />
             <Route exact path="/details/:id" component={Details} />
-            {/* <Route exact path='/:id'/> */}
+            <Route exact path="/me" component={Profile} user={user} />
           </Switch>
         </div>
       </BrowserRouter>
