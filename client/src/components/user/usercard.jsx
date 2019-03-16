@@ -4,7 +4,6 @@ class UserCard extends Component {
   state = {};
   render() {
     const user = this.props.user;
-    console.log(user);
     return (
       <>
         <div className="card col-md-4 col-sm-12 mb-3">

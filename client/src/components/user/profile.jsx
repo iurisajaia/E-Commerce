@@ -1,8 +1,38 @@
 import React, { Component } from "react";
 import axios from "axios";
 import UserCard from "./usercard";
+import Products from "./admin/products";
+import Categories from "./admin/categories";
+import UserArea from "./profile/userArea";
+import ProfileNav from "./profile/profileNav";
 class Profile extends Component {
   state = {};
+
+  sendMessage = event => {
+    event.preventDefault();
+    const data = {
+      message: event.target.message.value,
+      user: event.target.hidden.value
+    };
+
+    // console.log(data);
+
+    fetch("http://localhost:5000/message/:id", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   componentDidMount() {
     const token = localStorage.getItem("token");
@@ -30,28 +60,24 @@ class Profile extends Component {
     var admin;
     if (this.state.alluser) {
       admin = this.state.alluser;
-      console.log(admin);
     }
     return (
       <div className="container mt-5">
-        {user && !admin && (
-          <>
-            <ul className="list-group">
-              <li className="list-group-item">{user.firstname}</li>
-              <li className="list-group-item"> {user.lastname}</li>
-              <li className="list-group-item">{user.username}</li>
-              <li className="list-group-item">{user.email}</li>
-            </ul>
-          </>
-        )}
+        {user && !admin && <UserArea user={user} />}
         {!user && <> You are not logged in</>}
         {admin && (
           <>
-            <h1>All User</h1>
-            <div className="row">
-              {admin.map(users => {
-                return <UserCard key={users._id} user={users} />;
-              })}
+            <ProfileNav />
+            <div className="tab-content active">
+              <div id="home" className="tab-pane fade in active show">
+                <div className="row">
+                  {admin.map(users => {
+                    return <UserCard key={users._id} user={users} />;
+                  })}
+                </div>
+              </div>
+              <Products />
+              <Categories />
             </div>
           </>
         )}

@@ -9,6 +9,7 @@ import Products from "./components/products/products";
 import Details from "./components/products/details";
 import Profile from "./components/user/profile";
 import jwt_decode from "jwt-decode";
+// import { decode } from "punycode";
 
 class App extends Component {
   state = {
@@ -23,9 +24,11 @@ class App extends Component {
   }
   render() {
     var user;
+
     if (this.state.decoded) {
       user = this.state.decoded;
     }
+
     return (
       <BrowserRouter>
         <div className="App">

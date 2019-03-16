@@ -6,7 +6,7 @@ const app = express();
 
 // Require Routes
 const users = require("./routes/users");
-const admin = require("./routes/admin");
+const categories = require("./routes/categories");
 // Protect Routes
 const auth = require("./middleware/login");
 
@@ -33,7 +33,7 @@ app.get("/", auth, (req, res) => {
 
 // Use Routes
 app.use("/", users);
-app.use("/", admin);
+app.use("/", categories);
 
 const port = process.env.port || 5000;
 

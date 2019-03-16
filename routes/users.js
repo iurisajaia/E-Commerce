@@ -128,7 +128,8 @@ router.post("/login", async (req, res) => {
           year: user.year,
           gender: user.gender
         },
-        key
+        key,
+        { expiresIn: "1h" }
       );
       return res
         .header("x-auth-token", token)
@@ -147,6 +148,24 @@ router.get("/me", auth, async (req, res, next) => {
     res.status(200).json({ alluser, user });
   } else {
     res.status(200).json({ user });
+  }
+});
+
+// Send Message
+router.put("/message/:id", async (req, res) => {
+  // console.log(req.body);
+  const user = await User.find({ isAdmin: true });
+
+  if (user) {
+    const newMessage = {
+      messageBody: req.body.message,
+      messageUser: req.body.user
+    };
+
+    await user[0].messages.push(newMessage);
+    user[0].save().then(res.status(200).json("message sent!"));
+  } else {
+    res.status(400).json("არ გაიგზავნა");
   }
 });
 module.exports = router;

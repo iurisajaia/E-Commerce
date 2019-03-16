@@ -50,6 +50,22 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
+  messages: [
+    {
+      messageBody: {
+        type: String,
+        required: true
+      },
+      messageDate: {
+        type: Date,
+        default: Date.now
+      },
+      messageUser: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      }
+    }
+  ],
   date: {
     type: Date,
     default: Date.now
