@@ -49,7 +49,7 @@ class Categories extends Component {
     var companies;
     if (this.state.companies) {
       companies = this.state.companies.companies;
-      console.log(companies);
+      // console.log(companies);
     }
     return (
       <div id="menu3" className="tab-pane fade">

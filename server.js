@@ -8,6 +8,7 @@ const app = express();
 const users = require("./routes/users");
 const categories = require("./routes/categories");
 const companies = require("./routes/companies");
+const products = require("./routes/products");
 // Protect Routes
 const auth = require("./middleware/login");
 
@@ -36,6 +37,7 @@ app.get("/", auth, (req, res) => {
 app.use("/", users);
 app.use("/", categories);
 app.use("/", companies);
+app.use("/", products);
 
 const port = process.env.port || 5000;
 
