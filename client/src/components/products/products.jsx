@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import Product from "./product";
 class Home extends Component {
   state = {
-    posts: []
+    products: []
   };
   componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then(res => {
+    axios.get("http://localhost:5000/all-product").then(res => {
       // console.log(res);
       this.setState({
-        posts: res.data.slice(0, 20)
+        // posts: res.data.slice(0, 20)
+        products: res.data
       });
     });
   }
-  state = {};
   render() {
     return (
       // <h1>test</h1>
@@ -107,9 +107,9 @@ class Home extends Component {
               </div>
 
               <div className="row">
-                {this.state.posts
-                  ? this.state.posts.map(post => {
-                      return <Product key={post.id} post={post} />;
+                {this.state.products
+                  ? this.state.products.map(product => {
+                      return <Product key={product._id} product={product} />;
                     })
                   : null}
               </div>

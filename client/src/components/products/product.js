@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import Details from "./details";
 
 export default function details(props) {
-  const { post } = props;
+  const { product } = props;
   return (
     <React.Fragment>
       <div className="col-lg-4 col-md-6 mb-4">
@@ -17,7 +17,7 @@ export default function details(props) {
           </Link>
           <div className="card-body">
             <h4 className="card-title">
-              <Link to={/details/ + post.id}>{post.title}</Link>
+              <Link to={/details/ + product._id}>{product.title}</Link>
             </h4>
             <h5>$24.99</h5>
             <p className="card-text">

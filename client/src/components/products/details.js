@@ -18,10 +18,10 @@ export default class details extends Component {
   };
   async componentDidMount() {
     const products = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+      "http://localhost:5000/all-product"
     );
     const targetProduct = products.data.filter(product => {
-      return product.id == this.props.match.params.id;
+      return product._id == this.props.match.params.id;
     });
     this.setState({ product: targetProduct });
   }
@@ -39,7 +39,7 @@ export default class details extends Component {
           <div className="card-body">
             <h3 className="card-title">{product[0].title}</h3>
             <h4>$24.99</h4>
-            <p className="card-text">{product[0].body}</p>
+            <p className="card-text">{product[0].description}</p>
             <span className="text-warning">
               &#9733; &#9733; &#9733; &#9733; &#9734;
             </span>
