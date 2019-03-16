@@ -21,7 +21,7 @@ export default class details extends Component {
       "https://jsonplaceholder.typicode.com/posts"
     );
     const targetProduct = products.data.filter(product => {
-      return product.id === this.props.match.params.id;
+      return product.id == this.props.match.params.id;
     });
     this.setState({ product: targetProduct });
   }

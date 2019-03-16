@@ -20,7 +20,11 @@ class ProfileNav extends Component {
             Categories
           </a>
         </li>
-        {/* <li><a data-toggle="tab" href="#menu3">Menu 3</a></li> */}
+        <li>
+          <a data-toggle="tab" href="#menu3">
+            Companies
+          </a>
+        </li>
       </ul>
     );
   }

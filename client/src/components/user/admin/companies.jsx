@@ -3,13 +3,13 @@ import React, { Component } from "react";
 class Categories extends Component {
   state = {};
 
-  addCategory = event => {
+  addCompany = event => {
     event.preventDefault();
     const data = {
-      name: event.target.category.value
+      name: event.target.company.value
     };
 
-    fetch("http://localhost:5000/add-category", {
+    fetch("http://localhost:5000/add-company", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,18 +27,18 @@ class Categories extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:5000/admin/categories", {
+    fetch("http://localhost:5000/admin/companies", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       }
     })
       .then(res => res.json())
-      .then(categories => {
-        if (categories) {
-          this.setState({ categories });
+      .then(companies => {
+        if (companies) {
+          this.setState({ companies });
         } else {
-          console.log("no categories");
+          console.log("no companies");
         }
       })
       .catch(error => {
@@ -46,28 +46,29 @@ class Categories extends Component {
       });
   }
   render() {
-    var categories;
-    if (this.state.categories) {
-      categories = this.state.categories.categories;
+    var companies;
+    if (this.state.companies) {
+      companies = this.state.companies.companies;
+      console.log(companies);
     }
     return (
-      <div id="menu2" className="tab-pane fade">
-        <form className="form-group container m-2" onSubmit={this.addCategory}>
+      <div id="menu3" className="tab-pane fade">
+        <form className="form-group container m-2" onSubmit={this.addCompany}>
           <input
             type="text"
-            placeholder="enter new category"
-            id="category"
+            placeholder="enter new company"
+            id="company"
             className="form-control"
           />
           <button type="submit" className="btn btn-success">
             Submit
           </button>
         </form>
-        {categories && (
+        {companies && (
           <>
             <h5>Categories</h5>
             <ul className="list-group">
-              {categories.map(cat => {
+              {companies.map(cat => {
                 return (
                   <li key={cat._id} className="list-group-item">
                     {cat.name}
@@ -77,7 +78,7 @@ class Categories extends Component {
             </ul>
           </>
         )}
-        {!categories && <></>}
+        {!companies && <></>}
       </div>
     );
   }

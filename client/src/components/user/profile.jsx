@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import UserCard from "./usercard";
+// import UserCard from "./usercard";
 import Products from "./admin/products";
 import Categories from "./admin/categories";
 import UserArea from "./profile/userArea";
 import ProfileNav from "./profile/profileNav";
+import Users from "./admin/users";
+import Companies from "./admin/companies";
 class Profile extends Component {
   state = {};
 
@@ -69,15 +71,10 @@ class Profile extends Component {
           <>
             <ProfileNav />
             <div className="tab-content active">
-              <div id="home" className="tab-pane fade in active show">
-                <div className="row">
-                  {admin.map(users => {
-                    return <UserCard key={users._id} user={users} />;
-                  })}
-                </div>
-              </div>
+              <Users admin={admin} />
               <Products />
               <Categories />
+              <Companies />
             </div>
           </>
         )}
