@@ -6,6 +6,27 @@ export default class details extends Component {
   state = {
     product: []
   };
+
+  addToCartHandler = () => {
+    const productID = this.props.computedMatch.params.id;
+    const token = localStorage.getItem('token');
+    axios.post('http://localhost:5000/addtocart', {
+      productID,
+      token
+    })
+      .then(function (response) {
+        // const {data} = response;
+        // const targetProduct = data.filter(product => product._id === ID);
+        // if(targetProduct) {
+        //   console.log(targetProduct)
+        // }
+        console.log(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   async componentDidMount() {
     const products = await axios.get("http://localhost:5000/all-product");
     const targetProduct = products.data.filter(product => {
@@ -75,6 +96,12 @@ export default class details extends Component {
               Back To Products
             </Link>
           </div>
+          {localStorage.getItem('token') ? (
+            <div>
+            <button className='addToCartBtn' onClick={this.addToCartHandler}>Add to Cart</button>
+          </div>
+          ): null}
+          
         </div>
       </div>
     ) : (
