@@ -4,6 +4,7 @@ const keys = require("../config/keys");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
 const router = express.Router();
 
 // Protect Routes
@@ -47,6 +48,24 @@ router.post("/add-product", async (req, res) => {
 
     await newProduct.save();
     return res.status(200).json({ product: newProduct });
+  }
+});
+
+router.put("/add-new-company", async (req, res) => {
+  // console.log(req.body);
+  const product = await Product.findOne({ _id: req.body.product });
+
+  if (product) {
+    const newCompany = {
+      company: req.body.company,
+      price: req.body.price
+    };
+    // console.log(product);
+
+    await product.companies.push(newCompany);
+    product.save().then(res.status(200).json("new company added!"));
+  } else {
+    res.status(400).json("არ გაიგზავნა");
   }
 });
 module.exports = router;

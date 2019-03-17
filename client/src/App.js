@@ -48,6 +48,7 @@ class App extends Component {
       user = this.state.decoded;
     }
     var companies = this.state.companies;
+    var products = this.state.products;
 
     return (
       <BrowserRouter>
@@ -63,7 +64,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Products exact path="/products" companies={companies} />
             <Details exact path="/details/:id" companies={companies} />
-            <Route exact path="/me" component={Profile} user={user} />
+            <Profile exact path="/me" user={user} products={products} />
           </Switch>
         </div>
       </BrowserRouter>

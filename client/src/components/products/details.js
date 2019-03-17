@@ -6,41 +6,86 @@ export default class details extends Component {
   state = {
     product: []
   };
-
+  addCompanyToProduct = event => {
+    event.preventDefault();
+    const data = {
+      company: event.target.company.value,
+      price: event.target.price.value,
+      product: event.target.product.value
+    };
+    fetch("http://localhost:5000/add-new-company", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   addToCartHandler = () => {
     const productID = this.props.computedMatch.params.id;
-    const token = localStorage.getItem('token');
-    axios.post('http://localhost:5000/addtocart', {
-      productID,
-      token
-    })
-      .then(function (response) {
+    const token = localStorage.getItem("token");
+    axios
+      .post("http://localhost:5000/addtocart", {
+        productID,
+        token
+      })
+      .then(function(response) {
         // const {data} = response;
         // const targetProduct = data.filter(product => product._id === ID);
         // if(targetProduct) {
         //   console.log(targetProduct)
         // }
-        console.log(response.data)
+        // console.log(response.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
-  }
+  };
 
   async componentDidMount() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://localhost:5000/me", {
+          headers: {
+            "x-auth-token": token
+          }
+        })
+        .then(res => {
+          this.setState({ user: res.data.user, alluser: res.data.alluser });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+
     const products = await axios.get("http://localhost:5000/all-product");
     const targetProduct = products.data.filter(product => {
-      return product._id == this.props.computedMatch.params.id;
+      return product._id.match(this.props.computedMatch.params.id);
     });
     // const filteredCompanies = this.props.companies.filter(company => {
     //   return targetProduct.companies._id == this.props.companies._id;
     // });
-    console.log(targetProduct);
+    // console.log(targetProduct[0].companies[0].company);
+    // console.log(this.props.companies);
     this.setState({ product: targetProduct });
   }
 
   render() {
-    // console.log(this.props.companies);
+    var user = this.state.user;
+    var admin = this.state.alluser;
+    var companies;
+    if (this.props.companies) {
+      companies = this.props.companies;
+    }
     let { product } = this.state;
     const pageInfo = product.length ? (
       <div className="container">
@@ -96,13 +141,46 @@ export default class details extends Component {
               Back To Products
             </Link>
           </div>
-          {localStorage.getItem('token') ? (
+          {localStorage.getItem("token") ? (
             <div>
-            <button className='addToCartBtn' onClick={this.addToCartHandler}>Add to Cart</button>
-          </div>
-          ): null}
-          
+              <button className="addToCartBtn" onClick={this.addToCartHandler}>
+                Add to Cart
+              </button>
+            </div>
+          ) : null}
         </div>
+        {admin && (
+          <>
+            <hr />
+            <div className="row">
+              <form
+                className="col-md-6 form-group"
+                onSubmit={this.addCompanyToProduct}
+              >
+                {companies && (
+                  <select id="company" className="custom-select">
+                    {companies.map(company => {
+                      return (
+                        <option key={company._id} value={company._id}>
+                          {company.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                )}
+                <input type="hidden" id="product" value={product[0]._id} />
+                <input
+                  type="number"
+                  className="form-control mt-1 mb-1"
+                  id="price"
+                />
+                <button type="submit" className="btn btn-success">
+                  Add Company
+                </button>
+              </form>
+            </div>
+          </>
+        )}
       </div>
     ) : (
       <div>Epmty List</div>
@@ -110,13 +188,4 @@ export default class details extends Component {
 
     return <>{pageInfo}</>;
   }
-  //   render() {
-  //     const id = this.props.match.params.id;
-  //     return (
-  //       <div>
-  //         <h1> ai sad dagendzra</h1>
-  //         {/* <h1>{post.title}</h1> */}
-  //       </div>
-  //     )
-  //   }
 }

@@ -54,6 +54,10 @@ class Profile extends Component {
     }
   }
   render() {
+    var products;
+    if (this.props.products) {
+      products = this.props.products;
+    }
     var user;
     if (this.state.user) {
       user = this.state.user;
@@ -62,6 +66,7 @@ class Profile extends Component {
     var admin;
     if (this.state.alluser) {
       admin = this.state.alluser;
+      // console.log(admin);
     }
     return (
       <div className="container mt-5">
@@ -72,7 +77,7 @@ class Profile extends Component {
             <ProfileNav />
             <div className="tab-content active">
               <Users admin={admin} />
-              <Products />
+              <Products products={products} />
               <Categories />
               <Companies />
             </div>

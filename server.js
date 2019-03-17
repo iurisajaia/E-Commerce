@@ -12,6 +12,9 @@ const products = require("./routes/products");
 // Protect Routes
 const auth = require("./middleware/login");
 
+// Public Folder
+app.use(express.static("./public"));
+
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

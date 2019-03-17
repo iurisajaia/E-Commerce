@@ -4,7 +4,7 @@ const keys = require("../config/keys");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwt_decode = require('jwt-decode');
+const jwt_decode = require("jwt-decode");
 const router = express.Router();
 
 // Protect Routes
@@ -170,21 +170,17 @@ router.put("/message/:id", async (req, res) => {
   }
 });
 
-
-
 // Insert Product In User Prop
 router.post("/addtocart", async (req, res) => {
   const decoded = jwt_decode(req.body.token);
   const productID = req.body.productID;
   let user = await User.findById({ _id: decoded._id });
 
-  // If Product Is In Cart remove it, else 
+  // If Product Is In Cart remove it, else
   let inCart = user.products;
-  inCart.includes(productID) ? (
-    inCart.splice(inCart.indexOf(productID))
-  ) : (
-    inCart.push(productID)
-  )
+  inCart.includes(productID)
+    ? inCart.splice(inCart.indexOf(productID))
+    : inCart.push(productID);
 
   user.products = inCart;
   user.save().then(res.status(200).json(user));
