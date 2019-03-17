@@ -8,11 +8,13 @@ export default class details extends Component {
   };
   addCompanyToProduct = event => {
     event.preventDefault();
+
     const data = {
       company: event.target.company.value,
       price: event.target.price.value,
       product: event.target.product.value
     };
+
     fetch("http://localhost:5000/add-new-company", {
       method: "PUT",
       headers: {
@@ -71,28 +73,38 @@ export default class details extends Component {
     const targetProduct = products.data.filter(product => {
       return product._id.match(this.props.computedMatch.params.id);
     });
-    // const filteredCompanies = this.props.companies.filter(company => {
-    //   return targetProduct.companies._id == this.props.companies._id;
-    // });
-    // console.log(targetProduct[0].companies[0].company);
-    // console.log(this.props.companies);
+
+    // var filteredCompanies = [];
+    // for (let x = 0; x < targetProduct[0].companies.length; x++) {
+    //   for (let i = 0; i < this.props.companies.length; i++) {
+    //     if (
+    //       targetProduct[0].companies[x].company == this.props.companies[i]._id
+    //     ) {
+    //       filteredCompanies.push(this.props.companies[i]);
+    //     }
+    //   }
+    // }
+    // , sellers: filteredCompanies
+
     this.setState({ product: targetProduct });
   }
 
   render() {
-    var user = this.state.user;
+    // var sellers = this.state.sellers;
+    // console.log(sellers);
     var admin = this.state.alluser;
     var companies;
     if (this.props.companies) {
       companies = this.props.companies;
     }
+    // console.log(companies);
     let { product } = this.state;
     const pageInfo = product.length ? (
       <div className="container">
         <div className="card mt-4">
           <img
             className="card-img-top img-fluid"
-            src="http://placehold.it/900x400"
+            src={product[0].imageUrl}
             alt={product[0].title}
           />
           <div className="card-body">
@@ -113,9 +125,15 @@ export default class details extends Component {
             <hr />
             {product[0].companies.map(company => {
               return (
-                <p key={company._id} className="badge badge-primary ml-1">
-                  {company._id} -{company.price}
-                </p>
+                <div key={company._id} className="row mb-1">
+                  <div className="col-4">seller : {company.name} </div>
+                  <div className="col-4">price : ${company.price}</div>
+                  <div className="col-4">
+                    <button className="btn btn-warning btn-sm">
+                      Add To Cart
+                    </button>
+                  </div>
+                </div>
               );
             })}
 
@@ -161,7 +179,12 @@ export default class details extends Component {
                   <select id="company" className="custom-select">
                     {companies.map(company => {
                       return (
-                        <option key={company._id} value={company._id}>
+                        <option
+                          key={company.name}
+                          type="radio"
+                          value={company.name}
+                          name="company"
+                        >
                           {company.name}
                         </option>
                       );
