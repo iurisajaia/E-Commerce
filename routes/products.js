@@ -40,8 +40,9 @@ router.post("/add-product", async (req, res) => {
       description: req.body.description,
       tags: req.body.tags,
       categories: req.body.categories,
+      imageUrl: req.body.imageUrl,
       companies: {
-        company: req.body.company,
+        name: req.body.name,
         price: req.body.price
       }
     });
@@ -57,10 +58,9 @@ router.put("/add-new-company", async (req, res) => {
 
   if (product) {
     const newCompany = {
-      company: req.body.company,
+      name: req.body.company,
       price: req.body.price
     };
-    // console.log(product);
 
     await product.companies.push(newCompany);
     product.save().then(res.status(200).json("new company added!"));

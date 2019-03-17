@@ -15,17 +15,19 @@ const UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "categories"
   },
+  imageUrl: {
+    type: String
+  },
   tags: {
     type: Array
   },
   companies: [
     {
+      name: {
+        type: String
+      },
       price: {
         type: Number
-      },
-      company: {
-        type: Schema.Types.ObjectId,
-        ref: "companies"
       }
     }
   ],
