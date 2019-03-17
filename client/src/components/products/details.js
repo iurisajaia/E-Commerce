@@ -29,25 +29,22 @@ export default class details extends Component {
         console.error(error);
       });
   };
-  addToCartHandler = () => {
+  addToCartHandler = async () => {
     const productID = this.props.computedMatch.params.id;
-    const token = localStorage.getItem("token");
-    axios
-      .post("http://localhost:5000/addtocart", {
-        productID,
-        token
-      })
-      .then(function(response) {
-        // const {data} = response;
-        // const targetProduct = data.filter(product => product._id === ID);
-        // if(targetProduct) {
-        //   console.log(targetProduct)
-        // }
-        // console.log(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    // const token = localStorage.getItem("token");
+    let cart = []
+    if(localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
+    }else {
+      // cart = []
+      localStorage.setItem('cart',JSON.stringify(cart));
+    }
+    const res = await axios.get('http://localhost:5000/all-product');
+    const product = res.data.filter(el => {
+      return el._id == productID;
+    });
+    cart.push(product[0]);
+    localStorage.setItem('cart',JSON.stringify(cart))
   };
 
   async componentDidMount() {
@@ -71,11 +68,6 @@ export default class details extends Component {
     const targetProduct = products.data.filter(product => {
       return product._id.match(this.props.computedMatch.params.id);
     });
-    // const filteredCompanies = this.props.companies.filter(company => {
-    //   return targetProduct.companies._id == this.props.companies._id;
-    // });
-    // console.log(targetProduct[0].companies[0].company);
-    // console.log(this.props.companies);
     this.setState({ product: targetProduct });
   }
 

@@ -8,6 +8,7 @@ import Home from "./components/home";
 import Products from "./components/products/products";
 import Details from "./components/products/details";
 import Profile from "./components/user/profile";
+import Cart from "./components/Cart";
 import jwt_decode from "jwt-decode";
 
 class App extends Component {
@@ -62,6 +63,7 @@ class App extends Component {
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
+            <Route exact path="/cart" component={Cart} />
             <Products exact path="/products" companies={companies} />
             <Details exact path="/details/:id" companies={companies} />
             <Profile exact path="/me" user={user} products={products} />

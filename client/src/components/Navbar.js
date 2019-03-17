@@ -41,6 +41,11 @@ class Navbar extends Component {
                     Products
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/cart" className="nav-link">
+                    Cart
+                  </Link>
+                </li>
               </ul>
               <div className="form-inline mt-2 mt-md-0">
                 <Link to="/me">{user.username}</Link>
