@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import axios from "axios";
 import { Link } from "react-router-dom";
 class Products extends Component {
   state = {};
@@ -32,35 +31,13 @@ class Products extends Component {
       });
   };
 
-  componentDidMount() {
-    Promise.all([
-      fetch("http://localhost:5000/admin/companies"),
-      fetch("http://localhost:5000/admin/categories")
-    ])
-      .then(([companies, categories]) => {
-        return Promise.all([companies.json(), categories.json()]);
-      })
-      .then(([companies, categories]) => {
-        this.setState({ companies, categories });
-      });
-  }
   render() {
-    var companies;
-    var categories;
-    var products;
-    if (this.state.companies) {
-      companies = this.state.companies.companies;
-      // console.log(companies);
-    }
+    var companies = this.props.companies;
 
-    if (this.state.categories) {
-      categories = this.state.categories.categories;
-      // console.log(categories);
-    }
+    var categories = this.props.categories;
 
-    if (this.props.products) {
-      products = this.props.products;
-    }
+    var products = this.props.products;
+
     return (
       <>
         <div id="menu1" className="tab-pane fade">
@@ -113,24 +90,24 @@ class Products extends Component {
             />
             <button className="btn btn-success">Add Product</button>
           </form>
-        </div>
 
-        <div className="row m-3">
-          {products.map(prod => {
-            return (
-              <div className="col-lg-4 col-md-6 mb-4" key={prod._id}>
-                <div className="card h-100">
-                  <div className="card-body">
-                    <h4 className="card-title">
-                      <Link to={/details/ + prod._id}>{prod.title}</Link>
-                    </h4>
-                    <h5>$24.99</h5>
-                    <p className="card-text">{prod.description}</p>
+          <div className="row m-3">
+            {products.map(prod => {
+              return (
+                <div className="col-lg-4 col-md-6 mb-4" key={prod._id}>
+                  <div className="card h-100">
+                    <div className="card-body">
+                      <h4 className="card-title">
+                        <Link to={/details/ + prod._id}>{prod.title}</Link>
+                      </h4>
+                      <h5>$24.99</h5>
+                      <p className="card-text">{prod.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </>
     );

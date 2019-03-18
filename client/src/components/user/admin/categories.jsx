@@ -26,30 +26,8 @@ class Categories extends Component {
       });
   };
 
-  componentDidMount() {
-    fetch("http://localhost:5000/admin/categories", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(categories => {
-        if (categories) {
-          this.setState({ categories });
-        } else {
-          console.log("no categories");
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
   render() {
-    var categories;
-    if (this.state.categories) {
-      categories = this.state.categories.categories;
-    }
+    var categories = this.props.categories;
     return (
       <div id="menu2" className="tab-pane fade">
         <form className="form-group container m-2" onSubmit={this.addCategory}>

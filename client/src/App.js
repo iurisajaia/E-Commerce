@@ -43,6 +43,7 @@ class App extends Component {
       });
   }
   render() {
+    // console.log(this.state);
     var user;
 
     if (this.state.decoded) {
@@ -50,6 +51,7 @@ class App extends Component {
     }
     var companies = this.state.companies;
     var products = this.state.products;
+    var categories = this.state.categories;
 
     return (
       <BrowserRouter>
@@ -64,9 +66,22 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
             <Route exact path="/cart" component={Cart} />
-            <Products exact path="/products" companies={companies} />
+            <Products
+              exact
+              path="/products"
+              companies={companies}
+              categories={categories}
+              products={products}
+            />
             <Details exact path="/details/:id" companies={companies} />
-            <Profile exact path="/me" user={user} products={products} />
+            <Profile
+              exact
+              path="/me"
+              user={user}
+              products={products}
+              companies={companies}
+              categories={categories}
+            />
           </Switch>
         </div>
       </BrowserRouter>

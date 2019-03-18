@@ -1,32 +1,38 @@
-import React, { Component } from 'react'
-import axios from 'axios';
+import React, { Component } from "react";
+// import axios from 'axios';
 
 export default class Cart extends Component {
-    state = {
-        cartItems: ''
+  state = {
+    cartItems: ""
+  };
+  async componentDidMount() {
+    if (localStorage.getItem("cart")) {
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      this.setState({ cartItems });
     }
-    async componentDidMount() {
-        if(localStorage.getItem('cart')) {
-           const cartItems =  JSON.parse(localStorage.getItem('cart'));
-           this.setState({cartItems})
-        }
-    }
+  }
 
   render() {
     const res = this.state.cartItems ? (
-        this.state.cartItems.map(el => {
-            return <li key={el._id}>
-                <p>{el.title}</p>
-                <p>{el.description}</p>
-                <p><img src={el.imageUrl} alt={el.imageUrl}/></p>
-            </li>
-        })
-    ): (<h2></h2>)
-    
+      this.state.cartItems.map(el => {
+        return (
+          <li key={el._id} className="list-group-item">
+            <p>{el.title}</p>
+            {/* <p>{el.description}</p>
+            <p>
+              <img src={el.imageUrl} alt={el.imageUrl} />
+            </p> */}
+          </li>
+        );
+      })
+    ) : (
+      <> </>
+    );
+
     return (
       <div>
         <div>{res || this.state.result}</div>
       </div>
-    )
+    );
   }
 }

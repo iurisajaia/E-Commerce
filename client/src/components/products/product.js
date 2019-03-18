@@ -18,7 +18,6 @@ export default function details(props) {
             <h4 className="card-title">
               <Link to={/details/ + product._id}>{product.title}</Link>
             </h4>
-            <h5>$24.99</h5>
             <p className="card-text">{product.description}</p>
           </div>
           <div className="card-footer">

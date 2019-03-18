@@ -4,7 +4,7 @@ import axios from "axios";
 import Products from "./admin/products";
 import Categories from "./admin/categories";
 import UserArea from "./profile/userArea";
-import ProfileNav from "./profile/profileNav";
+import ProfileNav from "./profileNav";
 import Users from "./admin/users";
 import Companies from "./admin/companies";
 class Profile extends Component {
@@ -58,6 +58,14 @@ class Profile extends Component {
     if (this.props.products) {
       products = this.props.products;
     }
+    var companies;
+    if (this.props.companies) {
+      companies = this.props.companies;
+    }
+    var categories;
+    if (this.props.categories) {
+      categories = this.props.categories;
+    }
     var user;
     if (this.state.user) {
       user = this.state.user;
@@ -66,7 +74,6 @@ class Profile extends Component {
     var admin;
     if (this.state.alluser) {
       admin = this.state.alluser;
-      // console.log(admin);
     }
     return (
       <div className="container mt-5">
@@ -77,9 +84,13 @@ class Profile extends Component {
             <ProfileNav />
             <div className="tab-content active">
               <Users admin={admin} />
-              <Products products={products} />
-              <Categories />
-              <Companies />
+              <Products
+                products={products}
+                companies={companies}
+                categories={categories}
+              />
+              <Categories categories={categories} />
+              <Companies companies={companies} />
             </div>
           </>
         )}

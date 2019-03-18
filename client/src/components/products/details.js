@@ -6,6 +6,8 @@ export default class details extends Component {
   state = {
     product: []
   };
+
+  //  Add New Company To Product
   addCompanyToProduct = event => {
     event.preventDefault();
 
@@ -31,22 +33,24 @@ export default class details extends Component {
         console.error(error);
       });
   };
+
+  // Add product in cart
   addToCartHandler = async () => {
     const productID = this.props.computedMatch.params.id;
     // const token = localStorage.getItem("token");
-    let cart = []
-    if(localStorage.getItem('cart')) {
-      cart = JSON.parse(localStorage.getItem('cart'));
-    }else {
+    let cart = [];
+    if (localStorage.getItem("cart")) {
+      cart = JSON.parse(localStorage.getItem("cart"));
+    } else {
       // cart = []
-      localStorage.setItem('cart',JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
-    const res = await axios.get('http://localhost:5000/all-product');
+    const res = await axios.get("http://localhost:5000/all-product");
     const product = res.data.filter(el => {
-      return el._id == productID;
+      return el._id.match(productID);
     });
     cart.push(product[0]);
-    localStorage.setItem('cart',JSON.stringify(cart))
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   async componentDidMount() {
@@ -70,22 +74,6 @@ export default class details extends Component {
     const targetProduct = products.data.filter(product => {
       return product._id.match(this.props.computedMatch.params.id);
     });
-<<<<<<< HEAD
-=======
-
-    // var filteredCompanies = [];
-    // for (let x = 0; x < targetProduct[0].companies.length; x++) {
-    //   for (let i = 0; i < this.props.companies.length; i++) {
-    //     if (
-    //       targetProduct[0].companies[x].company == this.props.companies[i]._id
-    //     ) {
-    //       filteredCompanies.push(this.props.companies[i]);
-    //     }
-    //   }
-    // }
-    // , sellers: filteredCompanies
-
->>>>>>> b6eef8e7eff87e947b4e6b2efde015c49b5d4db5
     this.setState({ product: targetProduct });
   }
 
@@ -109,7 +97,6 @@ export default class details extends Component {
           />
           <div className="card-body">
             <h3 className="card-title">{product[0].title}</h3>
-            <h4>$24.99</h4>
             <p className="card-text">{product[0].description}</p>
             {product[0].tags.map(tag => {
               return (
