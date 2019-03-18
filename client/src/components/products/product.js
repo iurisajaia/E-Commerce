@@ -8,11 +8,7 @@ export default function details(props) {
       <div className="col-lg-4 col-md-6 mb-4">
         <div className="card h-100">
           <Link to="#">
-            <img
-              className="card-img-top"
-              src="http://placehold.it/700x400"
-              alt=""
-            />
+            <img className="card-img-top" src={product.imageUrl} alt="" />
           </Link>
           <div className="card-body">
             <h4 className="card-title">

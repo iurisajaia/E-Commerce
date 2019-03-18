@@ -21,6 +21,20 @@ const UserSchema = new Schema({
   tags: {
     type: Array
   },
+  reviews: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      },
+      userName: {
+        type: String
+      },
+      review: {
+        type: String
+      }
+    }
+  ],
   companies: [
     {
       name: {

@@ -34,6 +34,33 @@ export default class details extends Component {
       });
   };
 
+  // Add review to product
+  handleNewReview = event => {
+    event.preventDefault();
+
+    const data = {
+      review: event.target.review.value,
+      product: event.target.product.value,
+      user: event.target.user.value,
+      userName: event.target.userName.value
+    };
+
+    fetch("http://localhost:5000/add-new-review", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   // Add product in cart
   addToCartHandler = async () => {
     const productID = this.props.computedMatch.params.id;
@@ -79,13 +106,12 @@ export default class details extends Component {
 
   render() {
     // var sellers = this.state.sellers;
-    // console.log(sellers);
+    var user = this.state.user;
     var admin = this.state.alluser;
     var companies;
     if (this.props.companies) {
       companies = this.props.companies;
     }
-    // console.log(companies);
     let { product } = this.state;
     const pageInfo = product.length ? (
       <div className="container">
@@ -134,18 +160,46 @@ export default class details extends Component {
         <div className="card card-outline-secondary my-4">
           <div className="card-header">Product Reviews</div>
           <div className="card-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et
-              enim aperiam inventore, similique necessitatibus neque non!
-              Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
-              mollitia, necessitatibus quae sint natus.
-            </p>
-            <small className="text-muted">Posted by Anonymous on 3/1/17</small>
+            {product[0].reviews.map(review => {
+              return (
+                <div key={review._id}>
+                  <p> {review.review}</p>
+                  <small className="text-muted">
+                    Posted by {review.userName} on 3/1/17
+                  </small>
+                </div>
+              );
+            })}
+
             <hr />
             <Link to="/products" className="btn btn-success">
               Back To Products
             </Link>
           </div>
+          <br />
+          <br />
+          <br />
+          <hr />
+          <div className="form-group">
+            <form className="form-group" onSubmit={this.handleNewReview}>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Add Review"
+                id="review"
+              />
+              <input type="hidden" id="product" value={product[0]._id} />
+              {user && (
+                <>
+                  <input type="hidden" id="user" value={user._id} />
+                  <input type="hidden" id="userName" value={user.firstname} />
+                </>
+              )}
+              <button className="btn btn-warning btn-block">Add Review</button>
+            </form>
+          </div>
+          <hr />
+
           {localStorage.getItem("token") ? (
             <div>
               <button className="addToCartBtn" onClick={this.addToCartHandler}>

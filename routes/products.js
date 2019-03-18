@@ -68,4 +68,22 @@ router.put("/add-new-company", async (req, res) => {
     res.status(400).json("არ გაიგზავნა");
   }
 });
+
+router.put("/add-new-review", async (req, res) => {
+  // console.log(req.body);
+  const product = await Product.findOne({ _id: req.body.product });
+
+  if (product) {
+    const newReview = {
+      user: req.body.user,
+      userName: req.body.userName,
+      review: req.body.review
+    };
+
+    await product.reviews.push(newReview);
+    product.save().then(res.status(200).json("new review added!"));
+  } else {
+    res.status(400).json("არ დაემატა");
+  }
+});
 module.exports = router;
