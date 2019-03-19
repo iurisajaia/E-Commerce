@@ -93,6 +93,49 @@ router.post("/registration", async (req, res) => {
   }
 });
 
+// Update User {
+router.put("/update-user", async (req, res) => {
+  let user = await User.findOne({ _id: req.body.id });
+
+  if (user) {
+    if (req.body.newpassword && req.body.oldpassword) {
+      const validPassword = await bcrypt.compare(
+        req.body.oldpassword,
+        user.password
+      );
+      if (!validPassword) {
+        return res.status(400).json({ error: "old password is incorrect" });
+      } else {
+        user.firstname = req.body.firstname;
+        user.lastame = req.body.lastname;
+        user.username = req.body.username;
+        user.email = req.body.email;
+        user.password = req.body.newpassword;
+
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
+
+        await user.save();
+        res.status(200).json("success");
+      }
+    } else if (!req.body.newpassword && !req.body.oldpassword) {
+      user.firstname = req.body.firstname;
+      user.lastame = req.body.lastname;
+      user.username = req.body.username;
+      user.email = req.body.email;
+      await user.save();
+      res.status(200).json("success");
+    } else {
+      user.firstname = req.body.firstname;
+      user.lastame = req.body.lastname;
+      user.username = req.body.username;
+      user.email = req.body.email;
+      await user.save();
+      return res.status(400).json({ error: "old password is incorrect" });
+    }
+  }
+});
+
 // User Login
 router.post("/login", async (req, res) => {
   if (
@@ -143,7 +186,7 @@ router.post("/login", async (req, res) => {
 
 //User Profile
 router.get("/me", auth, async (req, res, next) => {
-  const user = await User.findById(req.user._id).select("-password");
+  const user = await User.findById(req.user._id);
 
   if (user.isAdmin) {
     const alluser = await User.find();

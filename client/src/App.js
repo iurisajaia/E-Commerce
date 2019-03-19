@@ -7,7 +7,6 @@ import Registration from "./components/user/registration";
 import Home from "./components/home";
 import Products from "./components/products/products";
 import Details from "./components/products/details";
-import Category from "./components/products/category";
 import Profile from "./components/user/profile";
 import Cart from "./components/Cart";
 import jwt_decode from "jwt-decode";
@@ -83,7 +82,6 @@ class App extends Component {
               companies={companies}
               categories={categories}
             />
-            <Category exact path="/cat/:id" products={products} />
           </Switch>
         </div>
       </BrowserRouter>
