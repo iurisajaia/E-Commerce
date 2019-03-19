@@ -2,14 +2,40 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Product from "./product";
 class Home extends Component {
-  state = {};
+  state = {
+    dogs: [{ name: "max" }, { name: "not" }, { name: "alex" }],
+    search: ""
+  };
+  componentWillReceiveProps(props) {
+    this.setState({ products: props.products });
+  }
 
+  filterProducts = e => {
+    this.setState({ search: e.target.value });
+  };
   render() {
+    var productsup = this.state.products;
+    if (productsup) {
+      var filteredProds = productsup.filter(product => {
+        return product.title
+          .toLowerCase()
+          .includes(this.state.search.toLowerCase());
+      });
+    }
+
     var companies = this.props.companies;
     var categories = this.props.categories;
     var products = this.props.products;
+
     return (
       <>
+        <div>
+          <input
+            type="text"
+            className="form-control"
+            onChange={this.filterProducts}
+          />
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
@@ -33,8 +59,8 @@ class Home extends Component {
 
             <div className="col-lg-9">
               <div className="row">
-                {products
-                  ? products.map(product => {
+                {filteredProds
+                  ? filteredProds.map(product => {
                       return (
                         <Product
                           key={product._id}

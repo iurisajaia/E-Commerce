@@ -127,7 +127,8 @@ router.post("/login", async (req, res) => {
           day: user.day,
           month: user.month,
           year: user.year,
-          gender: user.gender
+          gender: user.gender,
+          money: user.money
         },
         key,
         { expiresIn: "1h" }

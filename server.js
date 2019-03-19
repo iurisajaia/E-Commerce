@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+// const path = require("path");
 const cors = require("cors");
 const app = express();
 
@@ -13,8 +14,8 @@ const products = require("./routes/products");
 const auth = require("./middleware/login");
 
 // Public Folder
-app.use(express.static("./public"));
-
+// app.use(express.static("./public"));
+// app.use(express.static(path.join(__dirname, "/uploads")));
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

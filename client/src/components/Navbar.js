@@ -12,8 +12,8 @@ class Navbar extends Component {
     var user;
     if (this.props.user) {
       user = this.props.user;
-      // console.log(user);
     }
+    // console.log(user);
     return (
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <button
@@ -49,6 +49,9 @@ class Navbar extends Component {
               </ul>
               <div className="form-inline mt-2 mt-md-0">
                 <Link to="/me">{user.username}</Link>
+                <span className="badge badge-warning ml-2 mr-2">
+                  $ {user.money}
+                </span>
                 <button
                   className="btn btn-outline-danger my-2 my-sm-0 ml-2"
                   type="submit"

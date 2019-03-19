@@ -1,28 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 class Products extends Component {
   state = {};
 
   addProduct = event => {
     event.preventDefault();
-    const data = {
-      title: event.target.title.value,
-      description: event.target.description.value,
-      price: event.target.price.value,
-      categories: event.target.categories.value,
-      company: event.target.company.value,
-      tags: event.target.tags.value
-    };
+    const data = new FormData();
 
-    fetch("http://localhost:5000/add-product", {
+    data.append("title", event.target.title.value);
+    data.append("description", event.target.description.value);
+    data.append("price", event.target.price.value);
+    data.append("categories", event.target.categories.value);
+    data.append("company", event.target.company.value);
+    data.append("tags", event.target.tags.value);
+    data.append("imageUrl", event.target.imageUrl.files[0]);
+
+    // for (var pair of data.entries()) {
+    //   console.log(pair[0] + " " + pair[1]);
+    // }
+
+    axios({
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(data)
+      url: "http://localhost:5000/add-product",
+      data: data,
+      config: { headers: { "Content-Type": "multpart/form-data" } }
     })
-      .then(res => res.json())
       .then(res => {
         console.log(res);
       })
@@ -42,6 +45,7 @@ class Products extends Component {
       <>
         <div id="menu1" className="tab-pane fade">
           <form className="form-group" onSubmit={this.addProduct}>
+            <input type="file" id="imageUrl" name="imageUrl" />
             <input
               type="text"
               placeholder="title"

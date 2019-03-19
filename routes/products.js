@@ -29,7 +29,9 @@ router.get("/all-product", async (req, res) => {
   }
 });
 
-router.post("/add-product", async (req, res) => {
+const upload = multer({ dest: "./uploads/" });
+
+router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
   const product = await Product.findOne({ title: req.body.title });
 
   if (product) {
@@ -40,7 +42,7 @@ router.post("/add-product", async (req, res) => {
       description: req.body.description,
       tags: req.body.tags,
       categories: req.body.categories,
-      imageUrl: req.body.imageUrl,
+      imageUrl: req.file.path,
       companies: {
         name: req.body.name,
         price: req.body.price
