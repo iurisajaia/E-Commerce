@@ -29,7 +29,29 @@ router.get("/all-product", async (req, res) => {
   }
 });
 
-const upload = multer({ dest: "./uploads/" });
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
 
 router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
   const product = await Product.findOne({ title: req.body.title });
@@ -42,7 +64,7 @@ router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
       description: req.body.description,
       tags: req.body.tags,
       categories: req.body.categories,
-      imageUrl: req.file.path,
+      imageUrl: req.file.filename,
       companies: {
         name: req.body.name,
         price: req.body.price

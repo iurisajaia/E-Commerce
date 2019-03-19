@@ -113,12 +113,13 @@ export default class details extends Component {
       companies = this.props.companies;
     }
     let { product } = this.state;
+    // console.log(product);
     const pageInfo = product.length ? (
       <div className="container">
         <div className="card mt-4">
           <img
             className="card-img-top img-fluid"
-            src={product[0].imageUrl}
+            src={`http://localhost:5000/${product[0].imageUrl}`}
             alt={product[0].title}
           />
           <div className="card-body">

@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import Product from "./product";
 class Home extends Component {
   state = {
-    dogs: [{ name: "max" }, { name: "not" }, { name: "alex" }],
-    search: ""
+    search: "",
+    category: ""
   };
-  componentWillReceiveProps(props) {
-    this.setState({ products: props.products });
-  }
 
+  // Handle filter with search input
   filterProducts = e => {
     this.setState({ search: e.target.value });
   };
+
   render() {
-    var productsup = this.state.products;
+    // filter products with search
+    var productsup = this.props.products;
     if (productsup) {
       var filteredProds = productsup.filter(product => {
         return product.title
@@ -25,7 +25,6 @@ class Home extends Component {
 
     var companies = this.props.companies;
     var categories = this.props.categories;
-    var products = this.props.products;
 
     return (
       <>
@@ -45,9 +44,10 @@ class Home extends Component {
                   ? categories.map(category => {
                       return (
                         <Link
+                          to={`cat/${category._id}`}
                           key={category._id}
-                          to={`cat/${category.name}`}
                           className="list-group-item"
+                          value={category._id}
                         >
                           {category.name}
                         </Link>
