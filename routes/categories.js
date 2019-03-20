@@ -24,6 +24,7 @@ router.get("/admin/categories", async (req, res) => {
     res.status(400).json("No Categories");
   }
 });
+
 router.post("/add-category", async (req, res) => {
   const category = await Categories.findOne({ name: req.body.name });
 
@@ -34,7 +35,7 @@ router.post("/add-category", async (req, res) => {
       name: req.body.name
     });
     await newCategory.save();
-    res.status(200).json("კატეგორია დაემატა");
+    res.status(200).json(newCategory);
   }
 });
 

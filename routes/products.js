@@ -19,16 +19,6 @@ const Categories = require("../models/Categories");
 const Companies = require("../models/Companies");
 const Product = require("../models/Product");
 
-router.get("/all-product", async (req, res) => {
-  const product = await Product.find();
-
-  if (!product) {
-    return res.status(400).json("No Products");
-  } else {
-    return res.status(200).json(product);
-  }
-});
-
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, "uploads/");
@@ -45,12 +35,23 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
+
 const upload = multer({
   storage: storage,
   limits: {
     fileSize: 1024 * 1024 * 5
   },
   fileFilter: fileFilter
+});
+
+router.get("/all-product", async (req, res) => {
+  const product = await Product.find();
+
+  if (!product) {
+    return res.status(400).json("No Products");
+  } else {
+    return res.status(200).json(product);
+  }
 });
 
 router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
@@ -72,7 +73,7 @@ router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
     });
 
     await newProduct.save();
-    return res.status(200).json({ product: newProduct });
+    return res.status(200).json({ newProduct });
   }
 });
 
@@ -105,9 +106,10 @@ router.put("/add-new-review", async (req, res) => {
     };
 
     await product.reviews.push(newReview);
-    product.save().then(res.status(200).json("new review added!"));
+    product.save().then(res.status(200).json(product));
   } else {
     res.status(400).json("არ დაემატა");
   }
 });
+
 module.exports = router;

@@ -9,8 +9,6 @@ class Login extends Component {
       password: event.target.password.value
     };
 
-    // console.log(data);
-
     fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {

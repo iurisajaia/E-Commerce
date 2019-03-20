@@ -1,44 +1,28 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import AsideCategories from "./asidecategories";
 import Product from "./product";
-
 import { MyContext } from "../../State";
 
-class Home extends Component {
+class Categories extends Component {
   static contextType = MyContext;
 
-  state = {
-    search: "",
-    category: ""
-  };
-
-  // Handle filter with search input
-  filterProducts = e => {
-    this.setState({ search: e.target.value });
-  };
-
+  state = {};
   render() {
     var productsup = this.context.state.products;
     if (productsup) {
       var filteredProds = productsup.filter(product => {
-        return product.title
+        return product.categories
           .toLowerCase()
-          .includes(this.state.search.toLowerCase());
+          .includes(this.props.computedMatch.params.id.toLowerCase());
       });
     }
+    console.log(productsup, " ", this.props.computedMatch.params.id);
 
     return (
       <MyContext.Consumer>
         {context => (
           <>
-            <div>
-              <input
-                type="text"
-                className="form-control"
-                onChange={this.filterProducts}
-              />
-            </div>
+            <div style={{ marginTop: 50 }} />
             <div className="container">
               <div className="row">
                 {/* <AsideCategories categories={categories} /> */}
@@ -49,7 +33,7 @@ class Home extends Component {
                       ? context.state.categories.map(category => {
                           return (
                             <Link
-                              to={`cat/${category._id}`}
+                              to={`${category._id}`}
                               key={category._id}
                               className="list-group-item"
                               value={category._id}
@@ -85,4 +69,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Categories;

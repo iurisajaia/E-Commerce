@@ -7,6 +7,9 @@ import UserArea from "./profile/userArea";
 import ProfileNav from "./profileNav";
 import Users from "./admin/users";
 import Companies from "./admin/companies";
+
+import { MyContext } from "../../State";
+
 class Profile extends Component {
   state = {};
 
@@ -36,65 +39,29 @@ class Profile extends Component {
       });
   };
 
-  componentDidMount() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("http://localhost:5000/me", {
-          headers: {
-            "x-auth-token": token
-          }
-        })
-        .then(res => {
-          this.setState({ user: res.data.user, alluser: res.data.alluser });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  }
   render() {
-    var products;
-    if (this.props.products) {
-      products = this.props.products;
-    }
-    var companies;
-    if (this.props.companies) {
-      companies = this.props.companies;
-    }
-    var categories;
-    if (this.props.categories) {
-      categories = this.props.categories;
-    }
-    var user;
-    if (this.state.user) {
-      user = this.state.user;
-    }
-
-    var admin;
-    if (this.state.alluser) {
-      admin = this.state.alluser;
-    }
     return (
-      <div className="container mt-5">
-        {user && !admin && <UserArea user={user} />}
-        {!user && <> You are not logged in</>}
-        {admin && (
+      <MyContext.Consumer>
+        {context => (
           <>
-            <ProfileNav />
-            <div className="tab-content active">
-              <Users admin={admin} />
-              <Products
-                products={products}
-                companies={companies}
-                categories={categories}
-              />
-              <Categories categories={categories} />
-              <Companies companies={companies} />
+            <div className="container mt-5">
+              {context.state.user && !context.state.admin && <UserArea />}
+              {!context.state.user && <> You are not logged in</>}
+              {context.state.admin && (
+                <>
+                  <ProfileNav />
+                  <div className="tab-content active">
+                    <Users />
+                    <Products />
+                    <Categories />
+                    <Companies />
+                  </div>
+                </>
+              )}
             </div>
           </>
         )}
-      </div>
+      </MyContext.Consumer>
     );
   }
 }

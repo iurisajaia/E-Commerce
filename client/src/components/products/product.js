@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 export default function details(props) {
   const { product } = props;
+
   return (
     <React.Fragment>
       <div className="col-lg-4 col-md-6 mb-4">

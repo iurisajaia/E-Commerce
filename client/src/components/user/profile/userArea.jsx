@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
+import { MyContext } from "../../../State";
 class UserArea extends Component {
+  static contextType = MyContext;
+
   state = {
     firstname: "",
     lastname: "",
@@ -12,11 +15,11 @@ class UserArea extends Component {
   };
   componentDidMount() {
     this.setState({
-      firstname: this.props.user.firstname,
-      lastname: this.props.user.lastname,
-      username: this.props.user.username,
-      email: this.props.user.email,
-      id: this.props.user._id
+      firstname: this.context.state.user.firstname,
+      lastname: this.context.state.user.lastname,
+      username: this.context.state.user.username,
+      email: this.context.state.user.email,
+      id: this.context.state.user._id
     });
   }
 
@@ -73,77 +76,82 @@ class UserArea extends Component {
   };
 
   render() {
-    const user = this.props.user;
-
     return (
-      <>
-        <>
-          <form onSubmit={this.updateUser}>
-            <input
-              type="text"
-              value={this.state.firstname}
-              onChange={this.changeUserName.bind(this)}
-            />
-            <input
-              type="text"
-              value={this.state.lastname}
-              onChange={this.changeUserLastName.bind(this)}
-            />
-            <input
-              type="text"
-              value={this.state.username}
-              onChange={this.changeUserUserName.bind(this)}
-            />
-            <input
-              type="email"
-              value={this.state.email}
-              onChange={this.changeUserEmail.bind(this)}
-            />
-            <input
-              type="password"
-              value={this.state.oldpassword}
-              placeholder="old password"
-              onChange={this.changeUserOldPass.bind(this)}
-            />
-            <input
-              type="password"
-              value={this.state.newpassword}
-              placeholder="new password"
-              onChange={this.changeUserNewPass.bind(this)}
-            />
-            <br />
-            <button type="submit" className="btn btn-success">
-              Update User
-            </button>
-            {this.state.error && (
-              <>
-                <p className="alert alert-danger">{this.state.error}</p>
-              </>
-            )}
-            {this.state.success && (
-              <>
-                <p className="alert alert-success">{this.state.success}</p>
-              </>
-            )}
-          </form>
-        </>
-        {/* )} */}
+      <MyContext.Consumer>
+        {context => (
+          <>
+            <form onSubmit={this.updateUser}>
+              <input
+                type="text"
+                value={this.state.firstname}
+                onChange={this.changeUserName.bind(this)}
+              />
+              <input
+                type="text"
+                value={this.state.lastname}
+                onChange={this.changeUserLastName.bind(this)}
+              />
+              <input
+                type="text"
+                value={this.state.username}
+                onChange={this.changeUserUserName.bind(this)}
+              />
+              <input
+                type="email"
+                value={this.state.email}
+                onChange={this.changeUserEmail.bind(this)}
+              />
+              <input
+                type="password"
+                value={this.state.oldpassword}
+                placeholder="old password"
+                onChange={this.changeUserOldPass.bind(this)}
+              />
+              <input
+                type="password"
+                value={this.state.newpassword}
+                placeholder="new password"
+                onChange={this.changeUserNewPass.bind(this)}
+              />
+              <br />
+              <button type="submit" className="btn btn-success">
+                Update User
+              </button>
+              {this.state.error && (
+                <>
+                  <p className="alert alert-danger">{this.state.error}</p>
+                </>
+              )}
+              {this.state.success && (
+                <>
+                  <p className="alert alert-success">{this.state.success}</p>
+                </>
+              )}
+            </form>
 
-        <ul className="list-group">
-          <li className="list-group-item">{user.firstname}</li>
-          <li className="list-group-item"> {user.lastname}</li>
-          <li className="list-group-item">{user.username}</li>
-          <li className="list-group-item">{user.email}</li>
-        </ul>
-        <br />
-        {/* <h4>Send Message To Admin</h4> */}
-        {/* <form onSubmit={this.sendMessage} className="form-group">
+            <ul className="list-group">
+              <li className="list-group-item">
+                {context.state.user.firstname}
+              </li>
+              <li className="list-group-item">
+                {" "}
+                {context.state.user.lastname}
+              </li>
+              <li className="list-group-item">{context.state.user.username}</li>
+              <li className="list-group-item">{context.state.user.email}</li>
+            </ul>
+            <br />
+
+            {/* <h4>Send Message To Admin</h4> */}
+            {/* <form onSubmit={this.sendMessage} className="form-group">
               <textarea id="message" className="form-control" />
               <input type="hidden" value={user._id} id="hidden" />
               <button type="submit">Send</button>
             </form> */}
-        {/* } */}
-      </>
+            {/* } */}
+          </>
+        )}
+      </MyContext.Consumer>
     );
   }
 }

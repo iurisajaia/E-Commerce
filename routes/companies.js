@@ -29,7 +29,7 @@ router.post("/add-company", async (req, res) => {
       name: req.body.name
     });
     await newCompany.save();
-    res.status(200).json("კომპანია დაემატა");
+    res.status(200).json(newCompany);
   }
 });
 

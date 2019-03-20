@@ -12,6 +12,7 @@ export default class Cart extends Component {
     }
   }
 
+  // Remove Product From Cart
   remove = id => {
     let items = JSON.parse(localStorage.getItem("cart"));
     let tartetProduct = items.filter(product => {
