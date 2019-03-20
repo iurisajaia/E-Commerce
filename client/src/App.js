@@ -9,7 +9,9 @@ import Products from "./components/products/products";
 import Details from "./components/products/details";
 import Profile from "./components/user/profile";
 import Cart from "./components/Cart";
+import Compare from "./components/compare";
 import Categories from "./components/products/categories";
+import jwt_decode from "jwt-decode";
 
 import MyProvider from "./State";
 
@@ -24,7 +26,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/registration" component={Registration} />
               <Route exact path="/login" component={Login} />
-
+              <Route exact path="/compare" component={Compare} />
               <Home exact path="/" />
               <Route exact path="/cart" component={Cart} />
 

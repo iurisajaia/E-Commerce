@@ -53,6 +53,24 @@ export default class details extends Component {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
+  addToDetails = async () => {
+    const productID = this.props.computedMatch.params.id;
+    let details = [];
+    if (localStorage.getItem("details")) {
+      details = JSON.parse(localStorage.getItem("details"));
+    } else {
+      localStorage.setItem("details", JSON.stringify(details));
+    }
+    const res = await axios.get("http://localhost:5000/all-product");
+    const product = res.data.filter(el => {
+      return el._id.match(productID);
+    });
+    if (details.length < 2) {
+      details.push(product[0]);
+      localStorage.setItem("details", JSON.stringify(details));
+    }
+  };
+
   async componentDidMount() {
     const products = await axios.get("http://localhost:5000/all-product");
     const targetProduct = products.data.filter(product => {
@@ -99,6 +117,7 @@ export default class details extends Component {
                             <button className="btn btn-warning btn-sm">
                               Add To Cart
                             </button>
+                            <button onClick={this.addToDetails}>Compare</button>
                           </div>
                         </div>
                       );

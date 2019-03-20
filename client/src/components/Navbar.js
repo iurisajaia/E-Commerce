@@ -46,6 +46,11 @@ class Navbar extends Component {
                           Cart
                         </Link>
                       </li>
+                      <li className="nav-item">
+                        <Link to="/compare" className="nav-link">
+                          Compare
+                        </Link>
+                      </li>
                     </ul>
                     <div className="form-inline mt-2 mt-md-0">
                       <Link to="/me">{context.state.user.username}</Link>
