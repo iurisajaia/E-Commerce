@@ -9,6 +9,7 @@ import Products from "./components/products/products";
 import Details from "./components/products/details";
 import Profile from "./components/user/profile";
 import Cart from "./components/Cart";
+import Compare from "./components/compare";
 import jwt_decode from "jwt-decode";
 
 class App extends Component {
@@ -66,6 +67,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/compare" component={Compare} />
             <Products
               exact
               path="/products"
