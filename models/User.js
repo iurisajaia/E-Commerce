@@ -49,6 +49,7 @@ const UserSchema = new Schema({
   products: {
     type: Array
   },
+
   isAdmin: {
     type: Boolean,
     default: false

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 // import UserCard from "./usercard";
 import Products from "./admin/products";
 import Categories from "./admin/categories";

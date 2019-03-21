@@ -42,16 +42,20 @@ class Navbar extends Component {
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link to="/cart" className="nav-link">
-                          Cart
-                        </Link>
-                      </li>
-                      <li className="nav-item">
                         <Link to="/compare" className="nav-link">
                           Compare
                         </Link>
                       </li>
+                      <li className="nav-item">
+                        <Link to="/cart" className="nav-link">
+                          <i className="fas fa-cart-plus" />
+                          <span className="badge badge-primary">
+                            {/* {context.state.carts.length} */}
+                          </span>
+                        </Link>
+                      </li>
                     </ul>
+
                     <div className="form-inline mt-2 mt-md-0">
                       <Link to="/me">{context.state.user.username}</Link>
                       <span className="badge badge-warning ml-2 mr-2">

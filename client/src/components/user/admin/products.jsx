@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { MyContext } from "../../../State";
 class Products extends Component {
   state = {};
@@ -25,12 +25,6 @@ class Products extends Component {
                   placeholder="description"
                   className="form-control"
                 />
-                <input
-                  type="text"
-                  placeholder="tags"
-                  id="tags"
-                  className="form-control"
-                />
                 {context.state.categories && (
                   <select id="categories" className="custom-select">
                     {context.state.categories.map(category => {
@@ -42,23 +36,7 @@ class Products extends Component {
                     })}
                   </select>
                 )}
-                {context.state.companies && (
-                  <select id="company" className="custom-select">
-                    {context.state.companies.map(company => {
-                      return (
-                        <option key={company._id} value={company._id}>
-                          {company.name}
-                        </option>
-                      );
-                    })}
-                  </select>
-                )}
-                <input
-                  type="number"
-                  placeholder="price"
-                  id="price"
-                  className="form-control"
-                />
+
                 <button className="btn btn-success">Add Product</button>
               </form>
 
@@ -74,6 +52,13 @@ class Products extends Component {
                           <h5>$24.99</h5>
                           <p className="card-text">{prod.description}</p>
                         </div>
+                        <button
+                          className="btn btn-danger"
+                          value={prod._id}
+                          onClick={context.removeProduct}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   );

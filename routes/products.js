@@ -63,13 +63,8 @@ router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
     const newProduct = new Product({
       title: req.body.title,
       description: req.body.description,
-      tags: req.body.tags,
       categories: req.body.categories,
-      imageUrl: req.file.filename,
-      companies: {
-        name: req.body.name,
-        price: req.body.price
-      }
+      imageUrl: req.file.filename
     });
 
     await newProduct.save();
@@ -112,4 +107,64 @@ router.put("/add-new-review", async (req, res) => {
   }
 });
 
+router.post("/remove-product", async (req, res) => {
+  const product = await Product.findOne({ _id: req.body.id });
+
+  if (product) {
+    product.remove();
+    product.save;
+    res.status(200).json({ prod: product });
+  } else {
+    res.status(400).json({ msg: "some unknow error" });
+  }
+});
+
+// Add Product To Cart
+router.post("/add-product-to-cart", async (req, res) => {
+  const cart = await Cart.findOne({
+    user: req.body.user,
+    product: req.body.product
+  });
+
+  if (cart) {
+    res.status(400).json({ msg: "ეს პროდუქტი უკვე დამატებულია" });
+  } else {
+    const newCart = new Cart({
+      user: req.body.user,
+      product: req.body.product,
+      company: req.body.company,
+      price: req.body.price,
+      count: req.body.count
+    });
+
+    await newCart.save();
+    res.status(200).json(newCart);
+  }
+});
+
+// Get ALl Cart
+router.get("/get-all-cart", async (req, res) => {
+  const cart = await Cart.find();
+
+  if (cart) {
+    await res.status(200).json(cart);
+  } else {
+    await res.status(400).json({ msg: "No Carts" });
+  }
+});
+
+router.post("/remove-product-from-cart", async (req, res) => {
+  const cart = await Cart.findOne({
+    user: req.body.user,
+    product: req.body.product
+  });
+
+  if (cart) {
+    await cart.remove();
+    await cart.save();
+    res.status(200).json(cart);
+  } else {
+    console.log("unknow error");
+  }
+});
 module.exports = router;

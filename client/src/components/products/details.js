@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { MyContext } from "../../State";
 export default class details extends Component {
+  static contextType = MyContext;
   state = {
     product: []
   };
@@ -114,14 +115,50 @@ export default class details extends Component {
                           <div className="col-4">seller : {company.name} </div>
                           <div className="col-4">price : ${company.price}</div>
                           <div className="col-4">
-                            <button className="btn btn-warning btn-sm">
-                              Add To Cart
-                            </button>
-                            <button onClick={this.addToDetails}>Compare</button>
+                            {/* Add To Cart */}
+                            {context.state.user ? (
+                              <div>
+                                <form onSubmit={context.addProductToShopCart}>
+                                  <input
+                                    type="hidden"
+                                    value={context.state.user._id}
+                                    id="user"
+                                  />
+                                  <input
+                                    type="hidden"
+                                    value={product[0]._id}
+                                    id="product"
+                                  />
+                                  <input
+                                    type="hidden"
+                                    value={company.name}
+                                    id="company"
+                                  />
+                                  <input
+                                    type="hidden"
+                                    value={company.price}
+                                    id="price"
+                                  />
+                                  <button className="btn btn-warning btn-sm">
+                                    Add To Cart
+                                  </button>
+                                </form>
+                              </div>
+                            ) : null}
                           </div>
                         </div>
                       );
                     })}
+
+                    {/* product already added message  */}
+                    {/* {context.state.productMsg ? (
+                      <>
+                        <p className="alert alert-danger">
+                          {context.state.productMsg}
+                        </p>
+                      </>
+                    ) : null} */}
+                    <button onClick={this.addToDetails}>Compare</button>
 
                     {/* <span className="text-warning">
               &#9733; &#9733; &#9733; &#9733; &#9734;
@@ -193,18 +230,6 @@ export default class details extends Component {
                   </div>
                   {/* / Add Review */}
                   <hr />
-
-                  {/* Add TO Cart */}
-                  {context.state.user ? (
-                    <div>
-                      <button
-                        className="addToCartBtn"
-                        onClick={this.addToCartHandler}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  ) : null}
                 </div>
                 {context.state.admin && (
                   <>

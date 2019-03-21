@@ -16,7 +16,7 @@ class Categories extends Component {
           .includes(this.props.computedMatch.params.id.toLowerCase());
       });
     }
-    console.log(productsup, " ", this.props.computedMatch.params.id);
+    // console.log(productsup, " ", this.props.computedMatch.params.id);
 
     return (
       <MyContext.Consumer>

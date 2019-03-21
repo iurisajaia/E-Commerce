@@ -32,20 +32,23 @@ class MyProvider extends Component {
     Promise.all([
       fetch("http://localhost:5000/admin/companies"),
       fetch("http://localhost:5000/admin/categories"),
-      fetch("http://localhost:5000/all-product")
+      fetch("http://localhost:5000/all-product"),
+      fetch("http://localhost:5000/get-all-cart")
     ])
-      .then(([companies, categories, products]) => {
+      .then(([companies, categories, products, carts]) => {
         return Promise.all([
           companies.json(),
           categories.json(),
-          products.json()
+          products.json(),
+          carts.json()
         ]);
       })
-      .then(([companies, categories, products]) => {
+      .then(([companies, categories, products, carts]) => {
         this.setState({
           companies: companies.companies,
           categories: categories.categories,
-          products
+          products,
+          carts
         });
       });
   }
@@ -110,10 +113,7 @@ class MyProvider extends Component {
 
     data.append("title", event.target.title.value);
     data.append("description", event.target.description.value);
-    data.append("price", event.target.price.value);
     data.append("categories", event.target.categories.value);
-    data.append("company", event.target.company.value);
-    data.append("tags", event.target.tags.value);
     data.append("imageUrl", event.target.imageUrl.files[0]);
 
     // for (var pair of data.entries()) {
@@ -164,6 +164,60 @@ class MyProvider extends Component {
       });
   };
 
+  // Add Product To Shopping Cart
+  addProductToShopCart = e => {
+    e.preventDefault();
+    const data = {
+      user: e.target.user.value,
+      product: e.target.product.value,
+      company: e.target.company.value,
+      price: e.target.price.value,
+      count: 1
+    };
+    fetch("http://localhost:5000/add-product-to-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        var carts = this.state.carts;
+        carts.push(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  // remove Product
+  removeProduct = e => {
+    e.preventDefault();
+    const data = {
+      id: e.target.value
+    };
+    fetch("http://localhost:5000/remove-product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    e.target.parentElement.parentElement.remove();
+  };
+  // Edit Product (Name/Description)
+  editProduct = e => {};
+
   render() {
     return (
       <MyContext.Provider
@@ -172,7 +226,9 @@ class MyProvider extends Component {
           addCompany: this.addCompany,
           addCategory: this.addCategory,
           addProduct: this.addProduct,
-          handleNewReview: this.handleNewReview
+          handleNewReview: this.handleNewReview,
+          addProductToShopCart: this.addProductToShopCart,
+          removeProduct: this.removeProduct
         }}
       >
         {this.props.children}

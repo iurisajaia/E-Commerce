@@ -15,6 +15,8 @@ const key = require("../config/keys").secretOrKey;
 
 // Import User Schemas
 const User = require("../models/User");
+// Import Cart Model
+const Cart = require("../models/Cart");
 
 // User Registration
 router.post("/registration", async (req, res) => {
@@ -171,7 +173,8 @@ router.post("/login", async (req, res) => {
           month: user.month,
           year: user.year,
           gender: user.gender,
-          money: user.money
+          money: user.money,
+          cart: user.cart
         },
         key,
         { expiresIn: "1h" }

@@ -36,3 +36,8 @@ small {
     transform: rotate(360deg);
   }
 }
+
+.fa-cart-plus {
+  color: #fff;
+  font-size: 25px;
+}

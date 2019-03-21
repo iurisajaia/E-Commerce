@@ -20,6 +20,7 @@ class Home extends Component {
 
   render() {
     var productsup = this.context.state.products;
+
     if (productsup) {
       var filteredProds = productsup.filter(product => {
         return product.title
