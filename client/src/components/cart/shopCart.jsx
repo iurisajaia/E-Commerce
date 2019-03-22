@@ -9,6 +9,7 @@ class ShopCart extends Component {
     var carts = this.context.state.carts;
     var user = this.context.state.user;
     var removeProductFromCart = this.context.removeProductFromCart;
+    var updateCart = this.context.updateCart;
     var total = this.context.state.cartTotal;
     return (
       <>
@@ -19,8 +20,14 @@ class ShopCart extends Component {
                 return (
                   <div key={cart._id} className="row">
                     <div className="col-md-2">
-                      quantity : <br /> {cart.quantity}
-                      <select onChange={this.updateCart}>
+                      quantity :{" "}
+                      {cart.total > cart.price ? cart.total / cart.price : null}{" "}
+                      <br /> {cart.quantity}
+                      <select
+                        onChange={updateCart}
+                        data-prodid={cart._id}
+                        data-userid={user._id}
+                      >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

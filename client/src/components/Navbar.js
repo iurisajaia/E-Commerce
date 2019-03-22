@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { MyContext } from "../State";
 
 class Navbar extends Component {
+  static contextType = MyContext;
+
   state = {
     compareLength: 0
   };
@@ -14,7 +16,9 @@ class Navbar extends Component {
   componentDidMount() {
     var compare = JSON.parse(localStorage.getItem("details"));
     if (compare) {
-      this.setState({ compareLength: compare.length });
+      this.setState({
+        compareLength: compare.length
+      });
     }
   }
 
@@ -67,7 +71,8 @@ class Navbar extends Component {
                         <Link to="/cart" className="nav-link">
                           <i className="fas fa-cart-plus" />
                           <span className="badge badge-primary">
-                            {/* {context.state.carts.length} */}
+                            {context.state.user.firstname}
+                            {/* {prodlength.length} */}
                           </span>
                         </Link>
                       </li>

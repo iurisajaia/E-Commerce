@@ -53,6 +53,7 @@ class MyProvider extends Component {
           for (let i = 0; i < products.length; i++) {
             for (let a = 0; a < filtered.length; a++) {
               if (products[i]._id.match(filtered[a].product)) {
+                products[i].total = products[i].price * filtered[a].quantity;
                 filteredprods.push(products[i]);
               }
             }
@@ -61,7 +62,7 @@ class MyProvider extends Component {
           // Count Products Prices
           var numbers = [];
           for (let x = 0; x < filteredprods.length; x++) {
-            numbers.push(filteredprods[x].price);
+            numbers.push(filteredprods[x].total);
             var total = 0;
             for (var i in numbers) {
               total += numbers[i];
@@ -276,7 +277,7 @@ class MyProvider extends Component {
       .then(res => {
         var defiltered = [];
         for (var r = 0; r < this.state.carts.length; r++) {
-          if (this.state.carts[r]._id != res.product) {
+          if (this.state.carts[r]._id !== res.product) {
             defiltered.push(this.state.carts[r]);
           }
         }
@@ -294,9 +295,54 @@ class MyProvider extends Component {
       .catch(error => {
         console.error(error);
       });
-    // e.target.parentElement.parentElement.remove();
   };
 
+  // Update Cart
+  updateCart = e => {
+    e.preventDefault();
+    const data = {
+      product: e.target.dataset.prodid,
+      user: e.target.dataset.userid,
+      quantity: e.target.value
+    };
+    fetch("http://localhost:5000/update-cart", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        var changedfiltered = [];
+        for (let i = 0; i < this.state.products.length; i++) {
+          for (let a = 0; a < res.length; a++) {
+            if (this.state.products[i]._id.match(res[a].product)) {
+              this.state.products[i].total =
+                this.state.products[i].price * res[a].quantity;
+              changedfiltered.push(this.state.products[i]);
+            }
+          }
+        }
+
+        // Count Products Prices
+        var numbers = [];
+        for (let x = 0; x < changedfiltered.length; x++) {
+          numbers.push(changedfiltered[x].total);
+          var total = 0;
+          for (var i in numbers) {
+            total += numbers[i];
+          }
+        }
+
+        this.setState({ carts: changedfiltered, cartTotal: total });
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   render() {
     return (
       <MyContext.Provider
@@ -308,7 +354,8 @@ class MyProvider extends Component {
           handleNewReview: this.handleNewReview,
           addProductToShopCart: this.addProductToShopCart,
           removeProduct: this.removeProduct,
-          removeProductFromCart: this.removeProductFromCart
+          removeProductFromCart: this.removeProductFromCart,
+          updateCart: this.updateCart
         }}
       >
         {this.props.children}

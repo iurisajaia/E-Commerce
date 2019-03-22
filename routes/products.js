@@ -174,4 +174,24 @@ router.post("/remove-product-from-cart", async (req, res) => {
     console.log("unknow error");
   }
 });
+
+// Update Cart
+router.put("/update-cart", async (req, res) => {
+  const cart = await Cart.findOne({
+    user: req.body.user,
+    product: req.body.product
+  });
+  if (cart) {
+    cart.quantity = req.body.quantity;
+    await cart.save();
+
+    const all = await Cart.find({
+      user: req.body.user
+    });
+    res.status(200).json(all);
+  } else {
+    console.log("cart not found to change quantity");
+  }
+});
+
 module.exports = router;

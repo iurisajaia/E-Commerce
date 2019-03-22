@@ -35,6 +35,10 @@ const UserSchema = new Schema({
       }
     }
   ],
+  total: {
+    type: Number,
+    default: 1
+  },
   company: {
     type: String,
     required: true
