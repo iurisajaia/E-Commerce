@@ -36,6 +36,18 @@ class Products extends Component {
                     })}
                   </select>
                 )}
+                {context.state.companies && (
+                  <select id="company" className="custom-select">
+                    {context.state.companies.map(company => {
+                      return (
+                        <option key={company._id} value={company.name}>
+                          {company.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                )}
+                <input type="number" className="form-control" id="price" />
 
                 <button className="btn btn-success">Add Product</button>
               </form>

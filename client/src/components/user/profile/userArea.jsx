@@ -11,9 +11,14 @@ class UserArea extends Component {
     email: "",
     oldpassword: "",
     newpassword: "",
-    id: ""
+    id: "",
+    city: "",
+    adress: "",
+    zip: "",
+    phone: ""
   };
   componentDidMount() {
+    console.log(this.context.state.user)
     this.setState({
       firstname: this.context.state.user.firstname,
       lastname: this.context.state.user.lastname,
@@ -23,6 +28,7 @@ class UserArea extends Component {
     });
   }
 
+  // Update User
   updateUser = e => {
     e.preventDefault();
     const data = {
@@ -56,6 +62,42 @@ class UserArea extends Component {
       });
   };
 
+  // Update Info
+  updateInfo = e => {
+    e.preventDefault();
+    const data = {
+      city: this.state.city,
+      adress: this.state.adress,
+      zip: this.state.zip,
+      phone: this.state.phone,
+      id: this.state.id
+    };
+    fetch("http://localhost:5000/update-info", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.adressInfo) {
+          this.setState({
+            phone: res.adressInfo.phone,
+            adress: res.adressInfo.adress,
+            zip: res.adressInfo.zip,
+            city: res.adressInfo.city
+          });
+        }
+
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   changeUserName = e => {
     this.setState({ firstname: e.target.value });
   };
@@ -74,60 +116,115 @@ class UserArea extends Component {
   changeUserNewPass = e => {
     this.setState({ newpassword: e.target.value });
   };
+  changeUserCity = e => {
+    this.setState({ city: e.target.value });
+  };
+  changeUserAdress = e => {
+    this.setState({ adress: e.target.value });
+  };
+  changeUserZip = e => {
+    this.setState({ zip: e.target.value });
+  };
+  changeUserPhone = e => {
+    this.setState({ phone: e.target.value });
+  };
 
   render() {
+    console.log(this.state, "userarea");
     return (
       <MyContext.Consumer>
         {context => (
           <>
-            <form onSubmit={this.updateUser}>
-              <input
-                type="text"
-                value={this.state.firstname}
-                onChange={this.changeUserName.bind(this)}
-              />
-              <input
-                type="text"
-                value={this.state.lastname}
-                onChange={this.changeUserLastName.bind(this)}
-              />
-              <input
-                type="text"
-                value={this.state.username}
-                onChange={this.changeUserUserName.bind(this)}
-              />
-              <input
-                type="email"
-                value={this.state.email}
-                onChange={this.changeUserEmail.bind(this)}
-              />
-              <input
-                type="password"
-                value={this.state.oldpassword}
-                placeholder="old password"
-                onChange={this.changeUserOldPass.bind(this)}
-              />
-              <input
-                type="password"
-                value={this.state.newpassword}
-                placeholder="new password"
-                onChange={this.changeUserNewPass.bind(this)}
-              />
-              <br />
-              <button type="submit" className="btn btn-success">
-                Update User
-              </button>
-              {this.state.error && (
-                <>
-                  <p className="alert alert-danger">{this.state.error}</p>
-                </>
-              )}
-              {this.state.success && (
-                <>
-                  <p className="alert alert-success">{this.state.success}</p>
-                </>
-              )}
-            </form>
+            <div className="row">
+              <form onSubmit={this.updateUser} className="col-md-6 form-group">
+                <input
+                  className="form-control"
+                  type="text"
+                  value={this.state.firstname}
+                  onChange={this.changeUserName.bind(this)}
+                />
+                <input
+                  className="form-control"
+                  type="text"
+                  value={this.state.lastname}
+                  onChange={this.changeUserLastName.bind(this)}
+                />
+                <input
+                  className="form-control"
+                  type="text"
+                  value={this.state.username}
+                  onChange={this.changeUserUserName.bind(this)}
+                />
+                <input
+                  className="form-control"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.changeUserEmail.bind(this)}
+                />
+                <input
+                  className="form-control"
+                  type="password"
+                  value={this.state.oldpassword}
+                  placeholder="old password"
+                  onChange={this.changeUserOldPass.bind(this)}
+                />
+                <input
+                  className="form-control"
+                  type="password"
+                  value={this.state.newpassword}
+                  placeholder="new password"
+                  onChange={this.changeUserNewPass.bind(this)}
+                />
+                <br />
+                <button type="submit" className="btn btn-success btn-block">
+                  Update User
+                </button>
+                {this.state.error && (
+                  <>
+                    <p className="alert alert-danger">{this.state.error}</p>
+                  </>
+                )}
+                {this.state.success && (
+                  <>
+                    <p className="alert alert-success">{this.state.success}</p>
+                  </>
+                )}
+              </form>
+
+              <form className="col-md-6 form-group" onSubmit={this.updateInfo}>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  placeholder="city"
+                  onChange={this.changeUserCity.bind(this)}
+                />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="adress"
+                  placeholder="adress"
+                  onChange={this.changeUserAdress.bind(this)}
+                />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="zip"
+                  placeholder="zip code"
+                  onChange={this.changeUserZip.bind(this)}
+                />
+                <input
+                  type="number"
+                  className="form-control"
+                  id="phone"
+                  placeholder="phone number"
+                  onChange={this.changeUserPhone.bind(this)}
+                />
+                <button type="submit" className="btn btn-success btn-block">
+                  Update Info
+                </button>
+              </form>
+            </div>
 
             <ul className="list-group">
               <li className="list-group-item">

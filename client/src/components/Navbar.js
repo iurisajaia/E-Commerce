@@ -3,18 +3,32 @@ import React, { Component } from "react";
 import { MyContext } from "../State";
 
 class Navbar extends Component {
-  state = {};
+  state = {
+    compareLength: 0
+  };
   handleLogout = () => {
     localStorage.clear();
     window.location = "/";
   };
 
+  componentDidMount() {
+    var compare = JSON.parse(localStorage.getItem("details"));
+    if (compare) {
+      this.setState({ compareLength: compare.length });
+    }
+  }
+
   render() {
+    var compareLength;
+    if (this.state.compareLength > 0) {
+      compareLength = this.state.compareLength;
+    }
+
     return (
       <MyContext.Consumer>
         {context => (
           <>
-            {/* {console.log(context, "navbar")} */}
+            {console.log(context.state, "navbar")}
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
               <button
                 className="navbar-toggler"
@@ -44,6 +58,9 @@ class Navbar extends Component {
                       <li className="nav-item">
                         <Link to="/compare" className="nav-link">
                           Compare
+                          <span className="badge badge-primary">
+                            {compareLength}
+                          </span>
                         </Link>
                       </li>
                       <li className="nav-item">

@@ -13,6 +13,9 @@ class Home extends Component {
     category: ""
   };
 
+  componentDidMount() {
+    this.setState({ cart: this.context.state.carts });
+  }
   // Handle filter with search input
   filterProducts = e => {
     this.setState({ search: e.target.value });

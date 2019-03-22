@@ -8,31 +8,35 @@ import Home from "./components/home";
 import Products from "./components/products/products";
 import Details from "./components/products/details";
 import Profile from "./components/user/profile";
-import Cart from "./components/user/profile/cart";
+import ShopCart from "./components/cart/shopCart";
 import Compare from "./components/compare";
 import Categories from "./components/products/categories";
 import MyProvider from "./State";
+import Some from "./components/cart/test";
 
 class App extends Component {
+  state = {};
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
           <MyProvider>
             <Navbar />
-            <div style={{ paddingTop: 50 }} />
+            <div className="pt50" />
             <Switch>
               <Route exact path="/registration" component={Registration} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/compare" component={Compare} />
               <Home exact path="/" />
-              <Route path="/cart" component={Cart} />
 
               <Products path="/products" />
 
+              <ShopCart exact path="/cart" />
               <Details exact path="/details/:id" />
               <Categories exact path="/cat/:id" />
               <Profile exact path="/me" />
+              <Some exact path="/sometest" />
             </Switch>
           </MyProvider>
         </div>

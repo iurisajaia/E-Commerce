@@ -49,11 +49,19 @@ const UserSchema = new Schema({
   products: {
     type: Array
   },
-
   isAdmin: {
     type: Boolean,
     default: false
   },
+  adressInfo: [
+    {
+      phone: { type: Number },
+      city: { type: String },
+      adress: { type: String },
+      zip: { type: String }
+    }
+  ],
+
   messages: [
     {
       messageBody: {

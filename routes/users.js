@@ -138,6 +138,28 @@ router.put("/update-user", async (req, res) => {
   }
 });
 
+// Update User Info
+router.put("/update-info", async (req, res) => {
+  let user = await User.findOne({ _id: req.body.id });
+
+  if (user) {
+    if (user.addressInfo) {
+      console.log(user);
+    } else {
+      const newadress = {
+        phone: req.body.phone,
+        adress: req.body.adress,
+        city: req.body.city,
+        zip: req.body.zip
+      };
+      user.adressInfo.push(newadress);
+      user.save();
+      res.status(200).json(user);
+    }
+  } else {
+    console.log("not found");
+  }
+});
 // User Login
 router.post("/login", async (req, res) => {
   if (
@@ -174,7 +196,8 @@ router.post("/login", async (req, res) => {
           year: user.year,
           gender: user.gender,
           money: user.money,
-          cart: user.cart
+          cart: user.cart,
+          adressInfo: user.adressInfo
         },
         key,
         { expiresIn: "1h" }

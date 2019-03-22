@@ -94,61 +94,27 @@ export default class details extends Component {
                     src={`http://localhost:5000/${product[0].imageUrl}`}
                     alt={product[0].title}
                   />
+                  <h4>{product[0].price}$</h4>
+                  <h4>seller : {product[0].company}</h4>
+                  <form onSubmit={context.addProductToShopCart}>
+                    <input type="hidden" value={product[0]._id} id="product" />
+
+                    {context.state.user && (
+                      <>
+                        <input
+                          type="hidden"
+                          id="user"
+                          value={context.state.user._id}
+                        />
+                      </>
+                    )}
+                    <button className="btn btn-warning">Add To Cart</button>
+                  </form>
                   <div className="card-body">
                     <h3 className="card-title">{product[0].title}</h3>
                     <p className="card-text">{product[0].description}</p>
-                    {product[0].tags.map(tag => {
-                      return (
-                        <Link
-                          to={tag}
-                          key={Math.random()}
-                          className="badge badge-primary ml-1"
-                        >
-                          {tag}
-                        </Link>
-                      );
-                    })}
+
                     <hr />
-                    {product[0].companies.map(company => {
-                      return (
-                        <div key={company._id} className="row mb-1">
-                          <div className="col-4">seller : {company.name} </div>
-                          <div className="col-4">price : ${company.price}</div>
-                          <div className="col-4">
-                            {/* Add To Cart */}
-                            {context.state.user ? (
-                              <div>
-                                <form onSubmit={context.addProductToShopCart}>
-                                  <input
-                                    type="hidden"
-                                    value={context.state.user._id}
-                                    id="user"
-                                  />
-                                  <input
-                                    type="hidden"
-                                    value={product[0]._id}
-                                    id="product"
-                                  />
-                                  <input
-                                    type="hidden"
-                                    value={company.name}
-                                    id="company"
-                                  />
-                                  <input
-                                    type="hidden"
-                                    value={company.price}
-                                    id="price"
-                                  />
-                                  <button className="btn btn-warning btn-sm">
-                                    Add To Cart
-                                  </button>
-                                </form>
-                              </div>
-                            ) : null}
-                          </div>
-                        </div>
-                      );
-                    })}
 
                     {/* product already added message  */}
                     {/* {context.state.productMsg ? (
@@ -176,6 +142,7 @@ export default class details extends Component {
                       return (
                         <div key={review._id}>
                           <p> {review.review}</p>
+
                           <small className="text-muted">
                             Posted by {review.userName} on 3/1/17
                           </small>

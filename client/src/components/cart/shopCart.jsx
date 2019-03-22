@@ -1,46 +1,15 @@
 import React, { Component } from "react";
-import { MyContext } from "../../../State";
-class Cart extends Component {
+import { MyContext } from "../../State";
+class ShopCart extends Component {
   static contextType = MyContext;
 
   state = {};
 
-  async componentDidMount() {
-    fetch("http://localhost:5000/get-all-cart")
-      .then(res => res.json())
-      .then(res => this.setState({ carts: res }))
-      .catch(err => console.log(err));
-  }
-
-  // remove product from cart
-  removeProductFromCart = e => {
-    e.preventDefault();
-    const data = {
-      product: e.target.cartProduct.value,
-      user: e.target.cartUser.value
-    };
-    fetch("http://localhost:5000/remove-product-from-cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    e.target.parentElement.parentElement.remove();
-  };
-
   render() {
     var carts = this.context.state.carts;
     var user = this.context.state.user;
-
+    var removeProductFromCart = this.context.removeProductFromCart;
+    var total = this.context.state.cartTotal;
     return (
       <>
         {carts && (
@@ -71,25 +40,25 @@ class Cart extends Component {
                       price : <br /> {cart.price}
                     </div>
                     <div className="col-md-2">
-                      product : <br /> {cart.product}
+                      <img
+                        className="img-thumbnail"
+                        src={cart.imageUrl}
+                        alt=""
+                      />
                     </div>
                     <div className="col-md-2">
-                      product : <br /> {cart.user}
-                    </div>
-                    <div className="col-md-2">
-                      <form action="" onSubmit={this.removeProductFromCart}>
-                        <input type="hidden" value={cart.user} id="cartUser" />
-                        <input
-                          type="hidden"
-                          value={cart.product}
-                          id="cartProduct"
-                        />
+                      <form action="" onSubmit={removeProductFromCart}>
+                        <input type="hidden" value={user._id} id="cartUser" />
+                        <input type="hidden" value={cart._id} id="cartId" />
                         <button className="btn btn-danger">Remove</button>
                       </form>
                     </div>
                   </div>
                 );
               })}
+              {total > 0 ? (
+                <h4 className="alert alert-warning d-block mt-2">{total}</h4>
+              ) : null}
             </div>
           </>
         )}
@@ -98,4 +67,4 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+export default ShopCart;

@@ -26,7 +26,7 @@ class MyProvider extends Component {
           console.log(err);
         });
       var decoded = jwt_decode(token);
-      //   this.setState({ user: decoded,  });
+      this.setState({ user: decoded, cartTotal: decoded.total });
     }
 
     Promise.all([
@@ -44,11 +44,36 @@ class MyProvider extends Component {
         ]);
       })
       .then(([companies, categories, products, carts]) => {
+        if (this.state.user) {
+          var filtered = carts.filter(cart => {
+            return cart.user.match(this.state.user._id);
+          });
+
+          var filteredprods = [];
+          for (let i = 0; i < products.length; i++) {
+            for (let a = 0; a < filtered.length; a++) {
+              if (products[i]._id.match(filtered[a].product)) {
+                filteredprods.push(products[i]);
+              }
+            }
+          }
+
+          // Count Products Prices
+          var numbers = [];
+          for (let x = 0; x < filteredprods.length; x++) {
+            numbers.push(filteredprods[x].price);
+            var total = 0;
+            for (var i in numbers) {
+              total += numbers[i];
+            }
+          }
+
+          this.setState({ carts: filteredprods, cartTotal: total });
+        }
         this.setState({
           companies: companies.companies,
           categories: categories.categories,
-          products,
-          carts
+          products
         });
       });
   }
@@ -115,6 +140,8 @@ class MyProvider extends Component {
     data.append("description", event.target.description.value);
     data.append("categories", event.target.categories.value);
     data.append("imageUrl", event.target.imageUrl.files[0]);
+    data.append("company", event.target.company.value);
+    data.append("price", event.target.price.value);
 
     // for (var pair of data.entries()) {
     //   console.log(pair[0] + " " + pair[1]);
@@ -169,10 +196,7 @@ class MyProvider extends Component {
     e.preventDefault();
     const data = {
       user: e.target.user.value,
-      product: e.target.product.value,
-      company: e.target.company.value,
-      price: e.target.price.value,
-      count: 1
+      product: e.target.product.value
     };
     fetch("http://localhost:5000/add-product-to-cart", {
       method: "POST",
@@ -184,8 +208,22 @@ class MyProvider extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        var carts = this.state.carts;
-        carts.push(res);
+        if (!res.msg) {
+          var carts = this.state.carts;
+          carts.push(res);
+
+          // Count Products Prices
+          var numbers = [];
+          for (let x = 0; x < carts.length; x++) {
+            numbers.push(carts[x].price);
+            var total = 0;
+            for (var i in numbers) {
+              total += numbers[i];
+            }
+          }
+
+          this.setState({ carts, cartTotal: total });
+        }
       })
       .catch(error => {
         console.error(error);
@@ -208,15 +246,56 @@ class MyProvider extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        console.log(res);
       })
       .catch(error => {
         console.error(error);
       });
     e.target.parentElement.parentElement.remove();
   };
+
   // Edit Product (Name/Description)
   editProduct = e => {};
+
+  // remove product from cart
+  removeProductFromCart = e => {
+    e.preventDefault();
+    const data = {
+      user: e.target.cartUser.value,
+      product: e.target.cartId.value
+    };
+    fetch("http://localhost:5000/remove-product-from-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        var defiltered = [];
+        for (var r = 0; r < this.state.carts.length; r++) {
+          if (this.state.carts[r]._id != res.product) {
+            defiltered.push(this.state.carts[r]);
+          }
+        }
+        // Count Products Prices
+        var nums = [];
+        for (let x = 0; x < defiltered.length; x++) {
+          nums.push(defiltered[x].price);
+          var tot = 0;
+          for (var i in nums) {
+            tot += nums[i];
+          }
+        }
+        this.setState({ carts: defiltered, cartTotal: tot });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    // e.target.parentElement.parentElement.remove();
+  };
 
   render() {
     return (
@@ -228,7 +307,8 @@ class MyProvider extends Component {
           addProduct: this.addProduct,
           handleNewReview: this.handleNewReview,
           addProductToShopCart: this.addProductToShopCart,
-          removeProduct: this.removeProduct
+          removeProduct: this.removeProduct,
+          removeProductFromCart: this.removeProductFromCart
         }}
       >
         {this.props.children}

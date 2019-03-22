@@ -35,16 +35,14 @@ const UserSchema = new Schema({
       }
     }
   ],
-  companies: [
-    {
-      name: {
-        type: String
-      },
-      price: {
-        type: Number
-      }
-    }
-  ],
+  company: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now

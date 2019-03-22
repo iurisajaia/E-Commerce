@@ -64,7 +64,9 @@ router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       categories: req.body.categories,
-      imageUrl: req.file.filename
+      imageUrl: req.file.filename,
+      company: req.body.company,
+      price: req.body.price
     });
 
     await newProduct.save();
@@ -132,13 +134,17 @@ router.post("/add-product-to-cart", async (req, res) => {
     const newCart = new Cart({
       user: req.body.user,
       product: req.body.product,
-      company: req.body.company,
-      price: req.body.price,
-      count: req.body.count
+      quantity: req.body.count
     });
 
     await newCart.save();
-    res.status(200).json(newCart);
+
+    const product = await Product.findOne({ _id: req.body.product });
+    if (product) {
+      res.status(200).json(product);
+    } else {
+      console.log("some error");
+    }
   }
 });
 
@@ -153,6 +159,7 @@ router.get("/get-all-cart", async (req, res) => {
   }
 });
 
+// Remove Product from Shopping Cart
 router.post("/remove-product-from-cart", async (req, res) => {
   const cart = await Cart.findOne({
     user: req.body.user,

@@ -13,14 +13,7 @@ const CartSchema = new Schema({
     ref: "products",
     required: true
   },
-  company: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: String,
-    required: true
-  },
+
   quantity: {
     type: Number,
     default: 1
