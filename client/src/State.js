@@ -337,12 +337,12 @@ class MyProvider extends Component {
         }
 
         this.setState({ carts: changedfiltered, cartTotal: total });
-        console.log(res);
       })
       .catch(error => {
         console.error(error);
       });
   };
+
   render() {
     return (
       <MyContext.Provider

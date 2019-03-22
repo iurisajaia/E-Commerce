@@ -18,13 +18,17 @@ class UserArea extends Component {
     phone: ""
   };
   componentDidMount() {
-    console.log(this.context.state.user)
+    // console.log(this.context.state.user)
     this.setState({
       firstname: this.context.state.user.firstname,
       lastname: this.context.state.user.lastname,
       username: this.context.state.user.username,
       email: this.context.state.user.email,
-      id: this.context.state.user._id
+      id: this.context.state.user._id,
+      city: this.context.state.user.city,
+      adress: this.context.state.user.adress,
+      phone: this.context.state.user.phone,
+      zip: this.context.state.user.zip
     });
   }
 
@@ -50,12 +54,13 @@ class UserArea extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.error) {
-          this.setState({ error: res.error });
-        } else {
-          this.setState({ error: false, success: "Success" });
+        if (res.token) {
+          localStorage.setItem("token", res.token);
         }
-        console.log(this.state);
+        if (res.passwordchanged) {
+          localStorage.clear();
+          setInterval((window.location = "/login"), 2000);
+        }
       })
       .catch(error => {
         console.error(error);
@@ -82,16 +87,9 @@ class UserArea extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.adressInfo) {
-          this.setState({
-            phone: res.adressInfo.phone,
-            adress: res.adressInfo.adress,
-            zip: res.adressInfo.zip,
-            city: res.adressInfo.city
-          });
+        if (res.token) {
+          localStorage.setItem("token", res.token);
         }
-
-        console.log(res);
       })
       .catch(error => {
         console.error(error);
@@ -130,7 +128,7 @@ class UserArea extends Component {
   };
 
   render() {
-    console.log(this.state, "userarea");
+    // console.log(this.state, "userarea");
     return (
       <MyContext.Consumer>
         {context => (
@@ -197,6 +195,7 @@ class UserArea extends Component {
                   className="form-control"
                   id="city"
                   placeholder="city"
+                  value={this.state.city}
                   onChange={this.changeUserCity.bind(this)}
                 />
                 <input
@@ -204,20 +203,23 @@ class UserArea extends Component {
                   className="form-control"
                   id="adress"
                   placeholder="adress"
+                  value={this.state.adress}
                   onChange={this.changeUserAdress.bind(this)}
                 />
                 <input
                   type="text"
                   className="form-control"
                   id="zip"
+                  value={this.state.zip}
                   placeholder="zip code"
                   onChange={this.changeUserZip.bind(this)}
                 />
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   id="phone"
                   placeholder="phone number"
+                  value={this.state.phone}
                   onChange={this.changeUserPhone.bind(this)}
                 />
                 <button type="submit" className="btn btn-success btn-block">

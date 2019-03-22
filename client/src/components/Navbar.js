@@ -32,7 +32,7 @@ class Navbar extends Component {
       <MyContext.Consumer>
         {context => (
           <>
-            {console.log(context.state, "navbar")}
+            {/* {console.log(context.state, "navbar")} */}
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
               <button
                 className="navbar-toggler"

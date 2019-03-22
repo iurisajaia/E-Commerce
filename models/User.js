@@ -53,14 +53,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
-  adressInfo: [
-    {
-      phone: { type: Number },
-      city: { type: String },
-      adress: { type: String },
-      zip: { type: String }
-    }
-  ],
+  phone: { type: String, default: "000 000 000" },
+  city: { type: String, default: "Tbilisi" },
+  adress: { type: String, default: "Chavchavadze Ave" },
+  zip: { type: String, default: "0112" },
 
   messages: [
     {

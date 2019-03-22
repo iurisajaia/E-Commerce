@@ -109,7 +109,7 @@ router.put("/update-user", async (req, res) => {
         return res.status(400).json({ error: "old password is incorrect" });
       } else {
         user.firstname = req.body.firstname;
-        user.lastame = req.body.lastname;
+        user.lastname = req.body.lastname;
         user.username = req.body.username;
         user.email = req.body.email;
         user.password = req.body.newpassword;
@@ -118,18 +118,67 @@ router.put("/update-user", async (req, res) => {
         user.password = await bcrypt.hash(user.password, salt);
 
         await user.save();
-        res.status(200).json("success");
+
+        const token = jwt.sign(
+          {
+            _id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            username: user.username,
+            email: user.email,
+            day: user.day,
+            month: user.month,
+            year: user.year,
+            gender: user.gender,
+            money: user.money,
+            cart: user.cart,
+            adress: user.adress,
+            phone: user.phone,
+            zip: user.zip,
+            city: user.city
+          },
+          key,
+          { expiresIn: "1h" }
+        );
+        return res
+          .header("x-auth-token", token)
+          .status(200)
+          .json({ token, passwordchanged: true });
       }
     } else if (!req.body.newpassword && !req.body.oldpassword) {
       user.firstname = req.body.firstname;
-      user.lastame = req.body.lastname;
+      user.lastname = req.body.lastname;
       user.username = req.body.username;
       user.email = req.body.email;
       await user.save();
-      res.status(200).json("success");
+      const token = jwt.sign(
+        {
+          _id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          username: user.username,
+          email: user.email,
+          day: user.day,
+          month: user.month,
+          year: user.year,
+          gender: user.gender,
+          money: user.money,
+          cart: user.cart,
+          adress: user.adress,
+          phone: user.phone,
+          zip: user.zip,
+          city: user.city
+        },
+        key,
+        { expiresIn: "1h" }
+      );
+      return res
+        .header("x-auth-token", token)
+        .status(200)
+        .json({ token });
     } else {
       user.firstname = req.body.firstname;
-      user.lastame = req.body.lastname;
+      user.lastname = req.body.lastname;
       user.username = req.body.username;
       user.email = req.body.email;
       await user.save();
@@ -143,19 +192,37 @@ router.put("/update-info", async (req, res) => {
   let user = await User.findOne({ _id: req.body.id });
 
   if (user) {
-    if (user.addressInfo) {
-      console.log(user);
-    } else {
-      const newadress = {
-        phone: req.body.phone,
-        adress: req.body.adress,
-        city: req.body.city,
-        zip: req.body.zip
-      };
-      user.adressInfo.push(newadress);
-      user.save();
-      res.status(200).json(user);
-    }
+    user.phone = req.body.phone;
+    user.adress = req.body.adress;
+    user.city = req.body.city;
+    user.zip = req.body.zip;
+
+    await user.save();
+    const token = jwt.sign(
+      {
+        _id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        username: user.username,
+        email: user.email,
+        day: user.day,
+        month: user.month,
+        year: user.year,
+        gender: user.gender,
+        money: user.money,
+        cart: user.cart,
+        adress: user.adress,
+        phone: user.phone,
+        zip: user.zip,
+        city: user.city
+      },
+      key,
+      { expiresIn: "1h" }
+    );
+    return res
+      .header("x-auth-token", token)
+      .status(200)
+      .json({ token });
   } else {
     console.log("not found");
   }
@@ -197,7 +264,10 @@ router.post("/login", async (req, res) => {
           gender: user.gender,
           money: user.money,
           cart: user.cart,
-          adressInfo: user.adressInfo
+          adress: user.adress,
+          phone: user.phone,
+          zip: user.zip,
+          city: user.city
         },
         key,
         { expiresIn: "1h" }
