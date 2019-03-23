@@ -68,8 +68,13 @@ class Navbar extends Component {
                         </Link>
                       </li>
                       <li className="nav-item">
+<<<<<<< HEAD
                         <Link to="/subscribe" className="nav-link">
                           Subscribe
+=======
+                        <Link to="/orders" className="nav-link">
+                          Orders
+>>>>>>> 8f47ed05afea97d1952092d545b6ae11d3e547ee
                         </Link>
                       </li>
                       <li className="nav-item">

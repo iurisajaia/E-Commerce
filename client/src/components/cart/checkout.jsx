@@ -48,7 +48,7 @@ class Checkout extends Component {
               <form className="form-group" onSubmit={context.cheCkoutProduct}>
                 <div className="row">
                   <div className="col-md-6 mb-3">
-                    {context.state.user ? (
+                    {/* {context.state.user ? (
                       <>
                         <input
                           type="hidden"
@@ -61,7 +61,7 @@ class Checkout extends Component {
                           id="usercarts"
                         />
                       </>
-                    ) : null}
+                    ) : null} */}
                     <label htmlFor="cc-name">Name on card</label>
                     <input
                       type="text"
