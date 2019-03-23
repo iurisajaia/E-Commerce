@@ -18,6 +18,7 @@ const key = require("../config/keys").secretOrKey;
 const Categories = require("../models/Categories");
 const Companies = require("../models/Companies");
 const Product = require("../models/Product");
+const Orders = require("../models/Orders");
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -206,6 +207,16 @@ router.put("/update-cart", async (req, res) => {
     res.status(200).json(all);
   } else {
     console.log("cart not found to change quantity");
+  }
+});
+
+// Get All Orders
+router.get("/get-all-orders", async (req, res) => {
+  const orders = await Orders.find({});
+  if (orders) {
+    res.status(200).json(orders);
+  } else {
+    res.status(400).json({ msg: "No Orders" });
   }
 });
 

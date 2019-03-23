@@ -37,17 +37,19 @@ class MyProvider extends Component {
       fetch("http://localhost:5000/admin/companies"),
       fetch("http://localhost:5000/admin/categories"),
       fetch("http://localhost:5000/all-product"),
-      fetch("http://localhost:5000/get-all-cart")
+      fetch("http://localhost:5000/get-all-cart"),
+      fetch("http://localhost:5000/get-all-orders")
     ])
-      .then(([companies, categories, products, carts]) => {
+      .then(([companies, categories, products, carts, orders]) => {
         return Promise.all([
           companies.json(),
           categories.json(),
           products.json(),
-          carts.json()
+          carts.json(),
+          orders.json()
         ]);
       })
-      .then(([companies, categories, products, carts]) => {
+      .then(([companies, categories, products, carts, orders]) => {
         if (this.state.user) {
           var filtered = carts.filter(cart => {
             return cart.user.match(this.state.user._id);
@@ -73,12 +75,27 @@ class MyProvider extends Component {
             }
           }
 
-          this.setState({ carts: filteredprods, cartTotal: total });
+          // Filter Orders
+          var filteredOrders = [];
+          for (let o = 0; o < orders.length; o++) {
+            for (let u = 0; u < this.state.user.orders.length; u++) {
+              if (orders[o]._id.match(this.state.user.orders[u])) {
+                filteredOrders.push(orders[o]);
+              }
+            }
+          }
+
+          this.setState({
+            carts: filteredprods,
+            cartTotal: total,
+            userorders: filteredOrders
+          });
         }
         this.setState({
           companies: companies.companies,
           categories: categories.categories,
-          products
+          products,
+          orders
         });
       });
   }
@@ -353,7 +370,7 @@ class MyProvider extends Component {
     e.preventDefault();
     const data = {
       carts: this.state.carts,
-      user: e.target.idofuser.value,
+      user: this.state.user,
       total: this.state.cartTotal
     };
     fetch("http://localhost:5000/buy-products", {
@@ -368,7 +385,7 @@ class MyProvider extends Component {
       .then(res => {
         if (res) {
           localStorage.setItem("token", res);
-          setInterval((window.location = "/me"), 2000);
+          setInterval((window.location = "/orders"), 2000);
         }
       })
       .catch(error => {

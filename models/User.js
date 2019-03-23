@@ -20,7 +20,7 @@ const UserSchema = new Schema({
   },
   money: {
     type: Number,
-    default: 1000
+    default: 10000
   },
   email: {
     type: String,
