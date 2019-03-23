@@ -32,7 +32,7 @@ class Navbar extends Component {
       <MyContext.Consumer>
         {context => (
           <>
-            {/* {console.log(context.state, "navbar")} */}
+            {console.log(context.state, "navbar")}
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
               <button
                 className="navbar-toggler"
@@ -70,10 +70,12 @@ class Navbar extends Component {
                       <li className="nav-item">
                         <Link to="/cart" className="nav-link">
                           <i className="fas fa-cart-plus" />
-                          <span className="badge badge-primary">
-                            {context.state.user.firstname}
-                            {/* {prodlength.length} */}
-                          </span>
+
+                          {context.state.carts ? (
+                            <span className="badge badge-primary">
+                              {context.state.carts.length}
+                            </span>
+                          ) : null}
                         </Link>
                       </li>
                     </ul>

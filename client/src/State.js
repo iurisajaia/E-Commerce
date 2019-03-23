@@ -348,6 +348,34 @@ class MyProvider extends Component {
       });
   };
 
+  // Checkout Product
+  cheCkoutProduct = e => {
+    e.preventDefault();
+    const data = {
+      carts: this.state.carts,
+      user: e.target.idofuser.value,
+      total: this.state.cartTotal
+    };
+    fetch("http://localhost:5000/buy-products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res) {
+          localStorage.setItem("token", res);
+          setInterval((window.location = "/me"), 2000);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -360,7 +388,8 @@ class MyProvider extends Component {
           addProductToShopCart: this.addProductToShopCart,
           removeProduct: this.removeProduct,
           removeProductFromCart: this.removeProductFromCart,
-          updateCart: this.updateCart
+          updateCart: this.updateCart,
+          cheCkoutProduct: this.cheCkoutProduct
         }}
       >
         {this.props.children}

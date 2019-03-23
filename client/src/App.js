@@ -12,7 +12,7 @@ import ShopCart from "./components/cart/shopCart";
 import Compare from "./components/compare";
 import Categories from "./components/products/categories";
 import MyProvider from "./State";
-import Some from "./components/cart/test";
+import Checkout from "./components/cart/checkout";
 
 class App extends Component {
   state = {};
@@ -36,7 +36,7 @@ class App extends Component {
               <Details exact path="/details/:id" />
               <Categories exact path="/cat/:id" />
               <Profile exact path="/me" />
-              <Some exact path="/sometest" />
+              <Checkout exact path="/checkout" />
             </Switch>
           </MyProvider>
         </div>

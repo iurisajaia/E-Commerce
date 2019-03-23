@@ -17,6 +17,8 @@ const key = require("../config/keys").secretOrKey;
 const User = require("../models/User");
 // Import Cart Model
 const Cart = require("../models/Cart");
+// Import Orders Model
+const Orders = require("../models/Orders");
 
 // User Registration
 router.post("/registration", async (req, res) => {
@@ -267,7 +269,8 @@ router.post("/login", async (req, res) => {
           adress: user.adress,
           phone: user.phone,
           zip: user.zip,
-          city: user.city
+          city: user.city,
+          orders: user.orders
         },
         key,
         { expiresIn: "1h" }
@@ -286,7 +289,7 @@ router.get("/me", auth, async (req, res, next) => {
   if (user.isAdmin) {
     const allcart = await Cart.find();
     const alluser = await User.find();
-    res.status(200).json({ alluser,allcart, user });
+    res.status(200).json({ alluser, allcart, user });
   } else {
     res.status(200).json({ user });
   }
@@ -325,4 +328,54 @@ router.post("/addtocart", async (req, res) => {
   user.products = inCart;
   user.save().then(res.status(200).json(user));
 });
+
+// Buy Products
+router.post("/buy-products", async (req, res) => {
+  const user = await User.findOne({ _id: req.body.user });
+  const usercart = await Cart.deleteOne({ user: req.body.user });
+  const orders = await Orders.find({});
+
+  if (orders && user) {
+    const newOrder = new Orders({
+      user: req.body.user,
+      products: req.body.carts
+    });
+
+    await newOrder.save();
+
+    const products = newOrder._id;
+    user.orders.push(products);
+    user.money -= req.body.total;
+    await user.save();
+
+    const token = jwt.sign(
+      {
+        _id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        username: user.username,
+        email: user.email,
+        day: user.day,
+        month: user.month,
+        year: user.year,
+        gender: user.gender,
+        money: user.money,
+        cart: user.carts,
+        adress: user.adress,
+        phone: user.phone,
+        zip: user.zip,
+        city: user.city,
+        orders: user.orders
+      },
+      key,
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json(token);
+    await usercart.save();
+  } else {
+    console.log("some error");
+  }
+});
+
 module.exports = router;

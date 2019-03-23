@@ -74,6 +74,21 @@ router.post("/add-product", upload.single("imageUrl"), async (req, res) => {
   }
 });
 
+router.post("/update-product", async (req, res) => {
+  const product = await Product.findOne({ _id: req.body.id });
+
+  if (product) {
+    product.title = req.body.title;
+    product.price = req.body.price;
+    product.description = req.body.description;
+
+    await product.save();
+    res.status(200).json(product);
+  } else {
+    console.log("product not found");
+  }
+});
+
 router.put("/add-new-company", async (req, res) => {
   // console.log(req.body);
   const product = await Product.findOne({ _id: req.body.product });

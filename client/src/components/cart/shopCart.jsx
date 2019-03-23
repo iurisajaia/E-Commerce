@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MyContext } from "../../State";
+import { Link } from "react-router-dom";
 class ShopCart extends Component {
   static contextType = MyContext;
 
@@ -64,7 +65,12 @@ class ShopCart extends Component {
                 );
               })}
               {total > 0 ? (
-                <h4 className="alert alert-warning d-block mt-2">{total}</h4>
+                <>
+                  <h4 className="alert alert-warning d-block mt-2">{total}</h4>
+                  <Link to="/Checkout" className="btn btn-success">
+                    Checkout
+                  </Link>
+                </>
               ) : null}
             </div>
           </>
