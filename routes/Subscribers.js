@@ -2,18 +2,18 @@ const express = require("express");
 const router = express.Router();
 const Subscribes = require("../models/Subscribe");
 
-router.post("/", async (req, res) => {
-    // const Subscribe = await Subscribes.findOne({ user: req.body.name });
-    // Subscribes
-    res.status(200).json(req.body.email);
-  
-    // if (category) {
-    //   res.status(400).json("ასეთი კატეგორია უკვე არსებობს");
-    // } else {
-    //   var newCategory = new Categories({
-    //     name: req.body.name
-    //   });
-    //   await newCategory.save();
-    //   res.status(200).json(newCategory);
-    // }
+// Add New Email
+router.post("/subscribe", async (req, res) => {
+    const email = await Subscribes.findOne({ emails : req.body.email });
+    if(email){
+      res.status(400).json({msg : 'mail already is in our db'})
+    }else{
+     const newemail = new Subscribes ({
+       emails : req.body.email
+     })
+     await newemail.save()
+     res.status(200).json({msg  : 'email added'})
+    }
+    
   });
+  module.exports = router;

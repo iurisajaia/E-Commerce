@@ -43,7 +43,7 @@ app.use("/", users);
 app.use("/", categories);
 app.use("/", companies);
 app.use("/", products);
-// app.use("/",subscribes);
+app.use("/",subscribes);
 
 const port = process.env.port || 5000;
 

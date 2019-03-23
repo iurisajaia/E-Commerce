@@ -3,11 +3,8 @@ const Schema = mongoose.Schema;
 
 // Create Cart Schema
 const UserSub = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
-  },
-  Submails: []
+  
+  emails: { type : Array , required : true}
 
 });
 
