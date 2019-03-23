@@ -68,6 +68,11 @@ class Navbar extends Component {
                         </Link>
                       </li>
                       <li className="nav-item">
+                        <Link to="/subscribe" className="nav-link">
+                          Subscribe
+                        </Link>
+                      </li>
+                      <li className="nav-item">
                         <Link to="/cart" className="nav-link">
                           <i className="fas fa-cart-plus" />
 

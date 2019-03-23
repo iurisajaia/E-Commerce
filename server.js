@@ -10,6 +10,7 @@ const users = require("./routes/users");
 const categories = require("./routes/categories");
 const companies = require("./routes/companies");
 const products = require("./routes/products");
+const subscribes = require("./routes/Subscribers");
 // Protect Routes
 const auth = require("./middleware/login");
 
@@ -42,6 +43,7 @@ app.use("/", users);
 app.use("/", categories);
 app.use("/", companies);
 app.use("/", products);
+// app.use("/",subscribes);
 
 const port = process.env.port || 5000;
 
