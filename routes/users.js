@@ -283,10 +283,10 @@ router.post("/login", async (req, res) => {
 //User Profile
 router.get("/me", auth, async (req, res, next) => {
   const user = await User.findById(req.user._id);
-
   if (user.isAdmin) {
+    const allcart = await Cart.find();
     const alluser = await User.find();
-    res.status(200).json({ alluser, user });
+    res.status(200).json({ alluser,allcart, user });
   } else {
     res.status(200).json({ user });
   }

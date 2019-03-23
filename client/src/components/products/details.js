@@ -82,6 +82,7 @@ export default class details extends Component {
 
   render() {
     let { product } = this.state;
+    console.log(product);
     return (
       <MyContext.Consumer>
         {context => (
@@ -203,7 +204,7 @@ export default class details extends Component {
                     <hr />
 
                     {/* // Add company to product */}
-                    <div className="row">
+                    {/* <div className="row">
                       <form
                         className="col-md-6 form-group"
                         onSubmit={this.addCompanyToProduct}
@@ -238,7 +239,7 @@ export default class details extends Component {
                           Add Company
                         </button>
                       </form>
-                    </div>
+                    </div> */}
                   </>
                 )}
               </div>

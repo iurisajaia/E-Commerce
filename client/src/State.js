@@ -19,14 +19,18 @@ class MyProvider extends Component {
           this.setState({
             user: decoded,
             active: true,
-            admin: res.data.alluser
+            admin: res.data.alluser,
+            cartsadmin: res.data.allcart
           });
         })
         .catch(err => {
           console.log(err);
         });
       var decoded = jwt_decode(token);
-      this.setState({ user: decoded, cartTotal: decoded.total });
+      this.setState({
+        user: decoded,
+        cartTotal: decoded.total
+      });
     }
 
     Promise.all([
@@ -185,7 +189,7 @@ class MyProvider extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        window.setTimeout(window.location.reload(), 2000);
       })
       .catch(error => {
         console.error(error);
@@ -210,14 +214,15 @@ class MyProvider extends Component {
       .then(res => res.json())
       .then(res => {
         if (!res.msg) {
+          res.total = res.total * res.price;
           var carts = this.state.carts;
           carts.push(res);
 
           // Count Products Prices
           var numbers = [];
           for (let x = 0; x < carts.length; x++) {
-            numbers.push(carts[x].price);
             var total = 0;
+            numbers.push(carts[x].total);
             for (var i in numbers) {
               total += numbers[i];
             }
@@ -284,7 +289,7 @@ class MyProvider extends Component {
         // Count Products Prices
         var nums = [];
         for (let x = 0; x < defiltered.length; x++) {
-          nums.push(defiltered[x].price);
+          nums.push(defiltered[x].total);
           var tot = 0;
           for (var i in nums) {
             tot += nums[i];
