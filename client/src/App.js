@@ -13,12 +13,8 @@ import Compare from "./components/compare";
 import Categories from "./components/products/categories";
 import MyProvider from "./State";
 import Checkout from "./components/cart/checkout";
-<<<<<<< HEAD
-import Submail from "./components/products/Submail"
-=======
+import Submail from "./components/products/Submail";
 import Orders from "./components/cart/orders";
->>>>>>> 8f47ed05afea97d1952092d545b6ae11d3e547ee
-
 class App extends Component {
   state = {};
 
@@ -42,11 +38,8 @@ class App extends Component {
               <Categories exact path="/cat/:id" />
               <Profile exact path="/me" />
               <Checkout exact path="/checkout" />
-<<<<<<< HEAD
-              <Submail exact path ="/Subscribe" />
-=======
+              <Submail exact path="/Subscribe" />
               <Orders exact path="/orders" />
->>>>>>> 8f47ed05afea97d1952092d545b6ae11d3e547ee
             </Switch>
           </MyProvider>
         </div>
