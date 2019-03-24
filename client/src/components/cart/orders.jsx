@@ -97,6 +97,14 @@ class Orders extends Component {
                               >
                                 Delivery
                               </button>
+                              <button
+                                onClick={context.deleteOrder}
+                                data-prodid={order._id}
+                                data-userid={order.user._id}
+                                className="btn btn-danger ml-1"
+                              >
+                                Delete
+                              </button>
                             </div>
                           </form>
                         );

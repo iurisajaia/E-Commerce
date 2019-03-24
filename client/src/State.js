@@ -428,6 +428,32 @@ class MyProvider extends Component {
       });
   };
 
+  // Delete Order
+  deleteOrder = e => {
+    e.preventDefault();
+    const data = {
+      product: e.target.dataset.prodid,
+      user: e.target.dataset.userid
+    };
+    fetch("/delete-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.allorder) {
+          this.setState({ orders: res.allorder });
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -443,7 +469,8 @@ class MyProvider extends Component {
           updateCart: this.updateCart,
           cheCkoutProduct: this.cheCkoutProduct,
           filterProducts: this.filterProducts,
-          acceptDelivery: this.acceptDelivery
+          acceptDelivery: this.acceptDelivery,
+          deleteOrder: this.deleteOrder
         }}
       >
         {this.props.children}

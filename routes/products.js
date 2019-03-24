@@ -243,4 +243,29 @@ router.post("/accept-delivery", async (req, res) => {
     console.log(err);
   }
 });
+
+// Delete Order
+router.post("/delete-order", async (req, res) => {
+  const order = await Orders.findOne({ _id: req.body.product });
+  const user = await User.findOne({ _id: req.body.user });
+  try {
+    // console.log(user);
+    if (user && order) {
+      const money = order.products[0].total;
+      var index = user.orders.indexOf(order);
+      console.log(money);
+      console.log(user.money);
+      user.orders.splice(index, 1);
+      user.money += money;
+      console.log(user.money);
+      await user.save();
+      order.remove();
+      const allorder = await Orders.find({});
+
+      return res.status(200).json({ allorder });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;
