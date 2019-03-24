@@ -224,7 +224,7 @@ export default class details extends Component {
                         placeholder="Add Review"
                         id="review"
                       />
-                      <input type="hidden" id="product" value={product._id} />
+                      <input type="hidden" id="product" value={product.id} />
                       {context.state.user && (
                         <>
                           <input

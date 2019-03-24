@@ -4,7 +4,9 @@ import axios from "axios";
 export const MyContext = React.createContext();
 
 class MyProvider extends Component {
-  state = {};
+  state = {
+    search: ""
+  };
 
   componentDidMount() {
     const token = localStorage.getItem("token");
@@ -34,11 +36,11 @@ class MyProvider extends Component {
     }
 
     Promise.all([
-      fetch("http://localhost:5000/admin/companies"),
-      fetch("http://localhost:5000/admin/categories"),
-      fetch("http://localhost:5000/all-product"),
-      fetch("http://localhost:5000/get-all-cart"),
-      fetch("http://localhost:5000/get-all-orders")
+      fetch("/admin/companies"),
+      fetch("/admin/categories"),
+      fetch("/all-product"),
+      fetch("/get-all-cart"),
+      fetch("/get-all-orders")
     ])
       .then(([companies, categories, products, carts, orders]) => {
         return Promise.all([
@@ -368,6 +370,13 @@ class MyProvider extends Component {
   // Checkout Product
   cheCkoutProduct = e => {
     e.preventDefault();
+
+    // const cartone = e.target.cartone.value;
+    // const carttwo = e.target.carttwo.value;
+    // const cartthree = e.target.cartthree.value;
+    // const cartfour = e.target.cartfour.value;
+    // const cec = e.target.cec.value;
+
     const data = {
       carts: this.state.carts,
       user: this.state.user,
@@ -393,6 +402,32 @@ class MyProvider extends Component {
       });
   };
 
+  // Accept Delivery
+  acceptDelivery = e => {
+    e.preventDefault();
+    const data = {
+      product: e.target.dataset.prodid,
+      user: e.target.dataset.userid
+    };
+    fetch("/accept-delivery", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.allorder) {
+          this.setState({ orders: res.allorder });
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -406,7 +441,9 @@ class MyProvider extends Component {
           removeProduct: this.removeProduct,
           removeProductFromCart: this.removeProductFromCart,
           updateCart: this.updateCart,
-          cheCkoutProduct: this.cheCkoutProduct
+          cheCkoutProduct: this.cheCkoutProduct,
+          filterProducts: this.filterProducts,
+          acceptDelivery: this.acceptDelivery
         }}
       >
         {this.props.children}

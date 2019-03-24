@@ -16,6 +16,7 @@ class Home extends Component {
   componentDidMount() {
     this.setState({ cart: this.context.state.carts });
   }
+
   // Handle filter with search input
   filterProducts = e => {
     this.setState({ search: e.target.value });
@@ -23,13 +24,13 @@ class Home extends Component {
 
   render() {
     var productsup = this.context.state.products;
-
     if (productsup) {
       var filteredProds = productsup.filter(product => {
         return product.title
           .toLowerCase()
           .includes(this.state.search.toLowerCase());
       });
+      console.log(filteredProds);
     }
 
     return (
@@ -67,8 +68,8 @@ class Home extends Component {
                 </div>
                 <div className="col-lg-9">
                   <div className="row">
-                    {filteredProds
-                      ? filteredProds.map(product => {
+                    {context.state.products
+                      ? context.state.products.map(product => {
                           return (
                             <Product
                               key={product._id}

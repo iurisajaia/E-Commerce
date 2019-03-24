@@ -8,12 +8,17 @@ class Home extends Component {
     await this.setState({ user: this.context.state.user });
   }
   render() {
+    console.log(this.state);
     return (
       <MyContext.Consumer>
         {context => (
           <>
             <div className="jumbotron">
-              <h1 className="display-4">Hello, world!</h1>
+              <h1 className="display-4">
+                {context.state.user ? (
+                  <>Hello, {context.state.user.firstname}!</>
+                ) : null}
+              </h1>
               <p className="lead">
                 This is a simple hero unit, a simple jumbotron-style component
                 for calling extra attention to featured content or information.

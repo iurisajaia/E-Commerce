@@ -20,3 +20,5 @@ export default class details extends Component {
     )
   }
 }
+იუზერს ახალი ველები დაემატა და ახალით შედი აწი, 123456 ს პაროლი guga da 123456 ? guga@guga kk bye xd DAICA is gaketda ? xo kai araferi :) ra?
+araferi ameria ragaca ok, madloba

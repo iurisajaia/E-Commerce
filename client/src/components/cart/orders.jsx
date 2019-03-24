@@ -19,14 +19,33 @@ class Orders extends Component {
                       <ul className="list-group">
                         {order.products.map(prod => {
                           return (
-                            <li key={prod.date} className="list-group-item">
-                              title : {prod.title} <br />
-                              description : {prod.description} <br />
-                              price : {prod.price} <br />
-                              quantity : {prod.total / prod.price} <br />
-                              you pay : {prod.total} <br />
-                              status : {order.status}
-                            </li>
+                            <div key={prod.date} className="row">
+                              <div className="col-md-2">
+                                title :<br /> {prod.title}
+                              </div>
+                              <div className="col-md-2">
+                                Description : <br />
+                                {prod.description}
+                              </div>
+                              <div className="col-md-2">
+                                <img
+                                  src={prod.imageUrl}
+                                  style={{ width: "160px", heigth: "160px" }}
+                                  alt={prod.title}
+                                />
+                              </div>
+                              <div className="col-md-2">
+                                price : {prod.price}
+                                <br />
+                                quantity : {prod.total / prod.price}
+                              </div>
+                              <div className="col-md-2">
+                                user pay : <br /> {prod.total}$
+                              </div>
+                              <div className="col-md-">
+                                Seller : {prod.company}
+                              </div>
+                            </div>
                           );
                         })}
                       </ul>
@@ -40,22 +59,48 @@ class Orders extends Component {
                 Orders For Admin
                 {context.state.orders.map(order => {
                   return (
-                    <div key={order._id} className="row">
-                      <ul className="list-group col-md-6">
-                        {order.products.map(prod => {
-                          return (
-                            <li key={prod.date} className="list-group-item">
-                              title : {prod.title} <br />
-                              description : {prod.description} <br />
-                              price : {prod.price} <br />
-                              quantity : {prod.total / prod.price} <br />
-                              you pay : {prod.total} <br />
-                              status : {order.status} <br />
-                              User : {order.user.firstname}
-                            </li>
-                          );
-                        })}
-                      </ul>
+                    <div key={order._id}>
+                      {order.products.map(prod => {
+                        return (
+                          <form key={prod.date} className="row">
+                            <div className="col-md-2">
+                              User : <br /> {order.user.firstname}{" "}
+                              {order.user.lastname}
+                            </div>
+                            <div className="col-md-2">
+                              title :<br /> {prod.title}
+                              Seller : {prod.company}
+                            </div>
+                            <div className="col-md-2">
+                              <img
+                                src={prod.imageUrl}
+                                style={{ width: "160px", heigth: "160px" }}
+                                alt={prod.title}
+                              />
+                            </div>
+                            <div className="col-md-2">
+                              price : {prod.price}
+                              <br />
+                              quantity : {prod.total / prod.price}
+                            </div>
+                            <div className="col-md-2">
+                              user pay : <br /> {prod.total}$
+                            </div>
+                            <div className="col-md-2">
+                              <input type="hidden" id="deliveredprod" />
+                              <button
+                                onClick={context.acceptDelivery}
+                                type="submit"
+                                data-prodid={order._id}
+                                data-userid={order.user._id}
+                                className="btn btn-success"
+                              >
+                                Delivery
+                              </button>
+                            </div>
+                          </form>
+                        );
+                      })}
                     </div>
                   );
                 })}

@@ -18,7 +18,7 @@ class UserCard extends Component {
             <li className="list-group-item">{user.email}</li>
             <li className="list-group-item">{user.gender}</li>
             <li className="list-group-item">{user.money}</li>
-            <li className="list-group-item">Products : {user.products}</li>
+            {/* <li className="list-group-item">Products : {user.products}</li> */}
             <li className="list-group-item">
               {user.day}/{user.month}/{user.year}
             </li>

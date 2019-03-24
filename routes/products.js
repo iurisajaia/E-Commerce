@@ -14,7 +14,7 @@ const auth = require("../middleware/login");
 const key = require("../config/keys").secretOrKey;
 
 // Import User Schemas
-// const User = require("../models/User");
+const User = require("../models/User");
 const Categories = require("../models/Categories");
 const Companies = require("../models/Companies");
 const Product = require("../models/Product");
@@ -108,20 +108,25 @@ router.put("/add-new-company", async (req, res) => {
 });
 
 router.put("/add-new-review", async (req, res) => {
-  // console.log(req.body);
   const product = await Product.findOne({ _id: req.body.product });
+  try {
+    console.log(req.body);
+    if (product) {
+      console.log(product);
 
-  if (product) {
-    const newReview = {
-      user: req.body.user,
-      userName: req.body.userName,
-      review: req.body.review
-    };
+      const newReview = {
+        user: req.body.user,
+        userName: req.body.userName,
+        review: req.body.review
+      };
 
-    await product.reviews.push(newReview);
-    product.save().then(res.status(200).json(product));
-  } else {
-    res.status(400).json("არ დაემატა");
+      await product.reviews.push(newReview);
+      product.save().then(res.status(200).json(product));
+    } else {
+      res.status(400).json("არ დაემატა");
+    }
+  } catch (err) {
+    console.log(err);
   }
 });
 
@@ -220,4 +225,22 @@ router.get("/get-all-orders", async (req, res) => {
   }
 });
 
+// Accept Order
+router.post("/accept-delivery", async (req, res) => {
+  const order = await Orders.findOne({ _id: req.body.product });
+  const user = await User.findOne({ _id: req.body.user });
+  try {
+    if (user && order) {
+      user.products.push(order.products);
+      var index = user.orders.indexOf(order);
+      user.orders.splice(index, 1);
+      await user.save();
+      order.remove();
+      const allorder = await Orders.find({});
+      return res.status(200).json({ user, allorder });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;

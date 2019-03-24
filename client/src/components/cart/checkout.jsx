@@ -46,79 +46,52 @@ class Checkout extends Component {
               <br />
 
               <form className="form-group" onSubmit={context.cheCkoutProduct}>
-                <div className="row">
-                  <div className="col-md-6 mb-3">
-                    {/* {context.state.user ? (
-                      <>
-                        <input
-                          type="hidden"
-                          value={context.state.user._id}
-                          id="idofuser"
-                        />
-                        <input
-                          type="hidden"
-                          data-prodcarts={context.state.carts}
-                          id="usercarts"
-                        />
-                      </>
-                    ) : null} */}
-                    <label htmlFor="cc-name">Name on card</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="cc-name"
-                      placeholder=""
-                      required=""
-                    />
-                    <small className="text-muted">
-                      Full name as displayed on card
-                    </small>
-                    <div className="invalid-feedback">
-                      Name on card is required
-                    </div>
-                  </div>
-                  <div className="col-md-6 mb-3">
-                    <label htmlFor="cc-number">Credit card number</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="cc-number"
-                      placeholder=""
-                      required=""
-                    />
-                    <div className="invalid-feedback">
-                      Credit card number is required
-                    </div>
-                  </div>
+                <div className="row" style={{ width: "300px" }}>
+                  <input
+                    type="text"
+                    placeholder="0123"
+                    maxLength="4"
+                    className="form-control col-lg-3 col-md-3 col-sm-3"
+                    id="cartone"
+                  />
+                  <input
+                    type="text"
+                    placeholder="4567"
+                    maxLength="4"
+                    className="form-control col-lg-3 col-md-3 col-sm-3"
+                    id="carttwo"
+                  />
+                  <input
+                    type="text"
+                    placeholder="8901"
+                    maxLength="4"
+                    className="form-control col-lg-3 col-md-3 col-sm-3"
+                    id="cartthree"
+                  />
+                  <input
+                    type="text"
+                    placeholder="2345"
+                    maxLength="4"
+                    className="form-control col-lg-3 col-md-3 col-sm-3"
+                    id="cartfour"
+                  />
                 </div>
-                <div className="row">
-                  <div className="col-md-3 mb-3">
-                    <label htmlFor="cc-expiration">Expiration</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="cc-expiration"
-                      placeholder=""
-                      required=""
-                    />
-                    <div className="invalid-feedback">
-                      Expiration date required
-                    </div>
-                  </div>
-                  <div className="col-md-3 mb-3">
-                    <label htmlFor="cc-expiration">CVV</label>
-                    <input
-                      htmlFor="text"
-                      className="form-control"
-                      id="cc-cvv"
-                      placeholder=""
-                      required=""
-                    />
-                    <div className="invalid-feedback">
-                      Security code required
-                    </div>
-                  </div>
+                <div className="row" style={{ width: "300px" }}>
+                  <select name="" id="month" className="custom-select col-6">
+                    <option value="01">01</option>
+                  </select>
+                  <select name="" id="year" className="custom-select col-6">
+                    <option value="2019">19</option>
+                  </select>
                 </div>
+                <input
+                  type="text"
+                  placeholder="123"
+                  maxLength="3"
+                  className="form-control"
+                  id="cec"
+                  style={{ width: "300px" }}
+                />
                 <button type="submit" className="btn btn-block btn-success">
                   Buy Products
                 </button>
