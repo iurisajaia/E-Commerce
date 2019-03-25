@@ -222,6 +222,7 @@ class MyProvider extends Component {
       user: e.target.user.value,
       product: e.target.product.value
     };
+    console.log(data);
     fetch("http://localhost:5000/add-product-to-cart", {
       method: "POST",
       headers: {

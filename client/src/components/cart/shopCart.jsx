@@ -12,6 +12,7 @@ class ShopCart extends Component {
     var removeProductFromCart = this.context.removeProductFromCart;
     var updateCart = this.context.updateCart;
     var total = this.context.state.cartTotal;
+    console.log(carts);
     return (
       <>
         {carts && (

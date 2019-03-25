@@ -78,7 +78,7 @@ class ProductPart extends Component {
                           />
                         </>
                       )}
-                      <h5 className="add-cart item_add">Add To Cart</h5>
+                      <button className="add-cart item_add">Add To Cart</button>
                     </form>
                   </div>
                 </div>

@@ -34,7 +34,6 @@ class Home extends Component {
           .toLowerCase()
           .includes(this.state.search.toLowerCase());
       });
-      console.log(filteredProds);
     }
     return (
       <MyContext.Consumer>
