@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import React, { Component } from "react";
-import { MyContext } from "../State";
+import { MyContext } from "../../State";
 
+import HeaderTop from "./header-top";
+import Navigation from "./navigation";
 class Navbar extends Component {
   static contextType = MyContext;
 
@@ -32,8 +34,14 @@ class Navbar extends Component {
       <MyContext.Consumer>
         {context => (
           <>
-            {console.log(context.state, "navbar")}
-            <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <>
+              <HeaderTop />
+
+              <Navigation compareLength={compareLength} />
+            </>
+
+            {/* {console.log(context.state, "navbar")} */}
+            {/* <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
               <button
                 className="navbar-toggler"
                 type="button"
@@ -134,6 +142,7 @@ class Navbar extends Component {
                 )}
               </div>
             </nav>
+           */}
           </>
         )}
       </MyContext.Consumer>

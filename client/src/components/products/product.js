@@ -5,22 +5,20 @@ export default function details(props) {
 
   return (
     <React.Fragment>
-      <div className="col-lg-4 col-md-6 mb-4">
-        <div className="card h-100">
-          <Link to="#">
-            <img className="card-img-top" src={product.imageUrl} alt="" />
+      <div className="col-md-3 product-left">
+        <div className="p-one simpleCart_shelfItem">
+          <Link to={/details/ + product._id}>
+            <img src={product.imageUrl} alt={product.title} />
+            <div className="mask">
+              <span>Quick View</span>
+            </div>
           </Link>
-          <div className="card-body">
-            <h4 className="card-title">
-              <Link to={/details/ + product._id}>{product.title}</Link>
-            </h4>
-            <p className="card-text">{product.description}</p>
-          </div>
-          <div className="card-footer">
-            <small className="text-muted">
-              &#9733; &#9733; &#9733; &#9733; &#9734;
-            </small>
-          </div>
+          <h4>{product.title}</h4>
+          <p>
+            <Link className="item_add" to="#">
+              <i /> <span className=" item_price">${product.price}</span>
+            </Link>
+          </p>
         </div>
       </div>
     </React.Fragment>

@@ -24,3 +24,14 @@ code {
   width: 50%;
   margin: auto;
 }
+
+.simpleCart_shelfItem img {
+  width: 100%;
+  height: 255px;
+  object-fit: contain;
+}
+.single-product__img {
+  width: 100%;
+  height: 370px;
+  object-fit: contain;
+}
