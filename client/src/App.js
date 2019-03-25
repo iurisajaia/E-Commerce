@@ -16,7 +16,7 @@ import Checkout from "./components/cart/checkout";
 import Submail from "./components/products/Submail";
 import Orders from "./components/cart/orders";
 import Footer from "./components/footer/footer";
-
+import UserProfileForAdmin from "./components/user/admin/singleuser";
 class App extends Component {
   state = {};
 
@@ -37,7 +37,8 @@ class App extends Component {
               <ShopCart exact path="/cart" />
               <Details exact path="/details/:id" />
               <Categories exact path="/cat/:id" />
-              <Profile exact path="/me" />
+              <Profile exact path="/me/:id" />
+              <UserProfileForAdmin exact path="/user/:id" />
               <Checkout exact path="/checkout" />
               <Submail exact path="/Subscribe" />
               <Orders exact path="/orders" />

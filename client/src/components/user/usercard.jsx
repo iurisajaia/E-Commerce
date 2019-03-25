@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 class UserCard extends Component {
   state = {};
   render() {
@@ -9,9 +9,9 @@ class UserCard extends Component {
         <div className="card col-md-4 col-sm-12 mb-3">
           {/* <img className="card-img-top" src="..." alt="Card image cap" /> */}
           <div className="card-body">
-            <h5 className="card-title">
+            <Link className="card-title" to={/user/ + user._id}>
               {user.firstname} {user.lastname}
-            </h5>
+            </Link>
             <h5 className="card-title">{user.username}</h5>
           </div>
           <ul className="list-group list-group-flush">

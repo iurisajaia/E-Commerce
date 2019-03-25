@@ -56,7 +56,10 @@ class HeaderTop extends Component {
                               className="dropdown-menu"
                               aria-labelledby="dropdownMenuButton"
                             >
-                              <Link className="dropdown-item" to="/me">
+                              <Link
+                                className="dropdown-item"
+                                to={/me/ + context.state.user._id}
+                              >
                                 Profile
                               </Link>
                               <Link className="dropdown-item" to="/me">

@@ -7,8 +7,7 @@ class MyProvider extends Component {
   state = {
     search: "",
     direction: {
-      price: "asc",
-      date: "asc"
+      price: "asc"
     }
   };
 
@@ -468,13 +467,6 @@ class MyProvider extends Component {
         [key]: this.state.direction[key] === "asc" ? "desc" : "asc"
       }
     });
-  };
-
-  // Filter By Category
-  filterCategories = e => {
-    e.preventDefault();
-   
-    // console.log(filteredProds);
   };
 
   render() {

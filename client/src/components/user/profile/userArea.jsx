@@ -155,9 +155,7 @@ class UserArea extends Component {
                         <strong>Delivered Orders</strong>
                       </span>{" "}
                       {context.state.user.products ? (
-                        <>
-                        {context.state.user.products.length}
-                        </>
+                        <>{context.state.user.products.length}</>
                       ) : null}
                     </li>
                     <li className="list-group-item">
@@ -165,9 +163,7 @@ class UserArea extends Component {
                         <strong>Items In Cart</strong>
                       </span>{" "}
                       {context.state.carts ? (
-                        <>
-                        {context.state.carts.length}
-                        </>
+                        <>{context.state.carts.length}</>
                       ) : null}
                     </li>
                   </ul>
@@ -175,24 +171,29 @@ class UserArea extends Component {
                 <div className="col-sm-9">
                   <ul className="nav nav-tabs">
                     <li className="">
-                      <a data-toggle="tab" href="#home">
+                      <a data-toggle="tab" href="#information">
                         User Information
                       </a>
                     </li>
                     <li>
-                      <a data-toggle="tab" href="#messages">
+                      <a data-toggle="tab" href="#shipping">
                         User Shipping
                       </a>
                     </li>
                     <li>
-                      <a data-toggle="tab" href="#settings">
+                      <a data-toggle="tab" href="#products">
                         Products
+                      </a>
+                    </li>
+                    <li>
+                      <a data-toggle="tab" href="#messages">
+                        Messages
                       </a>
                     </li>
                   </ul>
 
                   <div className="tab-content">
-                    <div className="tab-pane active" id="home">
+                    <div className="tab-pane active" id="information">
                       <hr />
                       <form className="form row" onSubmit={this.updateUser}>
                         <div className="form-group col-md-6">
@@ -296,7 +297,7 @@ class UserArea extends Component {
                       </form>
                       <hr />
                     </div>
-                    <div className="tab-pane" id="messages">
+                    <div className="tab-pane" id="shipping">
                       <h2 />
 
                       <hr />
@@ -379,7 +380,7 @@ class UserArea extends Component {
                         </div>
                       </form>
                     </div>
-                    <div className="tab-pane" id="settings">
+                    <div className="tab-pane" id="products">
                       <hr />
                       {context.state.user.products ? (
                         <>
@@ -399,130 +400,13 @@ class UserArea extends Component {
                         </>
                       ) : null}
                     </div>
+                    <div className="tab-pane" id="messages">
+                      <h1>User Messages</h1>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <>
-              {/* <div className="row">
-                <form
-                  onSubmit={this.updateUser}
-                  className="col-md-6 form-group"
-                >
-                  <input
-                    className="form-control"
-                    type="text"
-                    value={this.state.firstname}
-                    onChange={this.changeUserName.bind(this)}
-                  />
-                  <input
-                    className="form-control"
-                    type="text"
-                    value={this.state.lastname}
-                    onChange={this.changeUserLastName.bind(this)}
-                  />
-                  <input
-                    className="form-control"
-                    type="text"
-                    value={this.state.username}
-                    onChange={this.changeUserUserName.bind(this)}
-                  />
-                  <input
-                    className="form-control"
-                    type="email"
-                    value={this.state.email}
-                    onChange={this.changeUserEmail.bind(this)}
-                  />
-                  <input
-                    className="form-control"
-                    type="password"
-                    value={this.state.oldpassword}
-                    placeholder="old password"
-                    onChange={this.changeUserOldPass.bind(this)}
-                  />
-                  <input
-                    className="form-control"
-                    type="password"
-                    value={this.state.newpassword}
-                    placeholder="new password"
-                    onChange={this.changeUserNewPass.bind(this)}
-                  />
-                  <br />
-                  <button type="submit" className="btn btn-success btn-block">
-                    Update User
-                  </button>
-                  {this.state.error && (
-                    <>
-                      <p className="alert alert-danger">{this.state.error}</p>
-                    </>
-                  )}
-                  {this.state.success && (
-                    <>
-                      <p className="alert alert-success">
-                        {this.state.success}
-                      </p>
-                    </>
-                  )}
-                </form>
-
-                <form
-                  className="col-md-6 form-group"
-                  onSubmit={this.updateInfo}
-                >
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="city"
-                    placeholder="city"
-                    value={this.state.city}
-                    onChange={this.changeUserCity.bind(this)}
-                  />
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="adress"
-                    placeholder="adress"
-                    value={this.state.adress}
-                    onChange={this.changeUserAdress.bind(this)}
-                  />
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="zip"
-                    value={this.state.zip}
-                    placeholder="zip code"
-                    onChange={this.changeUserZip.bind(this)}
-                  />
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="phone"
-                    placeholder="phone number"
-                    value={this.state.phone}
-                    onChange={this.changeUserPhone.bind(this)}
-                  />
-                  <button type="submit" className="btn btn-success btn-block">
-                    Update Info
-                  </button>
-                </form>
-              </div>
-
-              <ul className="list-group">
-                <li className="list-group-item">
-                  {context.state.user.firstname}
-                </li>
-                <li className="list-group-item">
-                  {" "}
-                  {context.state.user.lastname}
-                </li>
-                <li className="list-group-item">
-                  {context.state.user.username}
-                </li>
-                <li className="list-group-item">{context.state.user.email}</li>
-              </ul>
-              <br /> */}
-            </>
           </>
         )}
       </MyContext.Consumer>

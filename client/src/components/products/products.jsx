@@ -15,7 +15,8 @@ class Home extends Component {
 
   componentDidMount() {
     this.setState({
-      cart: this.context.state.carts
+      cart: this.context.state.carts,
+      products: this.context.state.products
     });
   }
 
@@ -33,7 +34,7 @@ class Home extends Component {
           .includes(this.state.search.toLowerCase());
       });
     }
-    console.log(this.context.state.products);
+    console.log(this.state);
     return (
       <MyContext.Consumer>
         {context => (
