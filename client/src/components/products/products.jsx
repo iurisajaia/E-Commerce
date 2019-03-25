@@ -14,7 +14,9 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.setState({ cart: this.context.state.carts });
+    this.setState({
+      cart: this.context.state.carts
+    });
   }
 
   // Handle filter with search input
@@ -30,25 +32,24 @@ class Home extends Component {
           .toLowerCase()
           .includes(this.state.search.toLowerCase());
       });
-      console.log(filteredProds);
     }
-
+    console.log(this.context.state.products);
     return (
       <MyContext.Consumer>
         {context => (
           <>
-            <div>
-              <input
+            <div className="pt-5">
+              {/* <input
                 type="text"
                 className="form-control"
                 onChange={this.filterProducts}
-              />
+              /> */}
             </div>
             <div className="container">
               <div className="row">
                 {/* <AsideCategories categories={categories} /> */}
                 <div className="col-lg-3">
-                  <h1 className="my-4">Categories</h1>
+                  <h2 className="my-4">Categories</h2>
                   <div className="list-group">
                     {context.state.categories
                       ? context.state.categories.map(category => {
@@ -56,10 +57,11 @@ class Home extends Component {
                             <Link
                               to={`cat/${category._id}`}
                               key={category._id}
-                              className="list-group-item"
+                              className="list-group-item category-item d-flex justify-content-between align-items-center"
                               value={category._id}
                             >
                               {category.name}
+                              <i className="fas fa-angle-double-right" />
                             </Link>
                           );
                         })
@@ -67,6 +69,14 @@ class Home extends Component {
                   </div>
                 </div>
                 <div className="col-lg-9">
+                  <div className="text-right pt-2 pb-2">
+                    <button
+                      className="btn btn-info"
+                      onClick={() => context.sortPrice("price")}
+                    >
+                      Sort By Price
+                    </button>
+                  </div>
                   <div className="row">
                     {context.state.products
                       ? context.state.products.map(product => {

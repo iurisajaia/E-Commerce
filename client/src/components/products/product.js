@@ -8,7 +8,7 @@ export default function details(props) {
       <div className="col-md-3 col-sm-12 mb-3 product-left">
         <div className="p-one simpleCart_shelfItem">
           <Link to={/details/ + product._id}>
-            <img src={product.imageUrl} alt={product.title} />
+            <img src={`/${product.imageUrl}`} alt={product.title} />
             <div className="mask">
               <span>Quick View</span>
             </div>

@@ -27,18 +27,26 @@ class Categories extends Component {
               <div className="row">
                 {/* <AsideCategories categories={categories} /> */}
                 <div className="col-lg-3">
-                  <h1 className="my-4">Categories</h1>
+                  <h2 className="my-4">Categories</h2>
                   <div className="list-group">
+                    <Link
+                      to="/products"
+                      className="list-group-item category-item d-flex justify-content-between align-items-center"
+                    >
+                      All
+                      <i className="fas fa-angle-double-right" />
+                    </Link>
                     {context.state.categories
                       ? context.state.categories.map(category => {
                           return (
                             <Link
                               to={`${category._id}`}
                               key={category._id}
-                              className="list-group-item"
+                              className="list-group-item category-item d-flex justify-content-between align-items-center"
                               value={category._id}
                             >
                               {category.name}
+                              <i className="fas fa-angle-double-right" />
                             </Link>
                           );
                         })
@@ -50,11 +58,7 @@ class Categories extends Component {
                     {filteredProds
                       ? filteredProds.map(product => {
                           return (
-                            <Product
-                              key={product._id}
-                              product={product}
-                              // companies={context.state.companies}
-                            />
+                            <Product key={product._id} product={product} />
                           );
                         })
                       : null}

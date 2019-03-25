@@ -5,7 +5,11 @@ export const MyContext = React.createContext();
 
 class MyProvider extends Component {
   state = {
-    search: ""
+    search: "",
+    direction: {
+      price: "asc",
+      date: "asc"
+    }
   };
 
   componentDidMount() {
@@ -280,9 +284,6 @@ class MyProvider extends Component {
     e.target.parentElement.parentElement.remove();
   };
 
-  // Edit Product (Name/Description)
-  editProduct = e => {};
-
   // remove product from cart
   removeProductFromCart = e => {
     e.preventDefault();
@@ -455,6 +456,20 @@ class MyProvider extends Component {
       });
   };
 
+  // Sort By Price
+  sortPrice = key => {
+    this.setState({
+      products: this.state.products.sort((a, b) =>
+        this.state.direction[key] === "asc"
+          ? parseFloat(a[key]) - parseFloat(b[key])
+          : parseFloat(b[key]) - parseFloat(a[key])
+      ),
+      direction: {
+        [key]: this.state.direction[key] === "asc" ? "desc" : "asc"
+      }
+    });
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -471,7 +486,8 @@ class MyProvider extends Component {
           cheCkoutProduct: this.cheCkoutProduct,
           filterProducts: this.filterProducts,
           acceptDelivery: this.acceptDelivery,
-          deleteOrder: this.deleteOrder
+          deleteOrder: this.deleteOrder,
+          sortPrice: this.sortPrice
         }}
       >
         {this.props.children}

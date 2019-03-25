@@ -59,3 +59,10 @@ code {
 .text-center {
   text-align: center;
 }
+
+.category-item:hover {
+  text-decoration: none;
+}
+.footer {
+  margin-top: 40px;
+}
