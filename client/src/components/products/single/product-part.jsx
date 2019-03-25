@@ -7,7 +7,7 @@ class ProductPart extends Component {
   state = {};
 
   addToDetails = async () => {
-    const productID = this.props.computedMatch.params.id;
+    const productID = this.props.id;
     let details = [];
     if (localStorage.getItem("details")) {
       details = JSON.parse(localStorage.getItem("details"));
@@ -31,7 +31,7 @@ class ProductPart extends Component {
         {context => (
           <>
             {product.id ? (
-              <>
+              <div className="row">
                 <div className="col-md-5 single-top">
                   <img
                     className="single-product__img"
@@ -58,12 +58,12 @@ class ProductPart extends Component {
                         <span className="women1">{product.company}</span>
                       </li>
                       <li>
-                        <h6
+                        <button
                           className="add-cart item_add"
                           onClick={this.addToDetails}
                         >
                           Compare
-                        </h6>
+                        </button>
                       </li>
                     </ul>
                     <form onSubmit={context.addProductToShopCart}>
@@ -83,7 +83,7 @@ class ProductPart extends Component {
                   </div>
                 </div>
                 <div className="clearfix"> </div>
-              </>
+              </div>
             ) : null}
           </>
         )}

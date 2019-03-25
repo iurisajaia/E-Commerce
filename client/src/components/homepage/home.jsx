@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { MyContext } from "../../State";
 // import { Link } from "react-router-dom";
-// import Slider from "./slider";
+import Slider from "./slider";
 // import Product from "../products/product";
 // import Baner from "../header/baner";
 import LatestProducts from "./latest-products";
@@ -39,7 +39,7 @@ class Home extends Component {
       <MyContext.Consumer>
         {context => (
           <>
-            {/* <Baner /> */}
+            <Slider />
             <LatestProducts />
 
             <div className="container">

@@ -2,167 +2,148 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Footer extends Component {
-  state = {};
+  state = {
+    inputValue: ""
+  };
+  myFunction = () => {
+    const data = {
+      email: this.state.inputValue
+    };
+    fetch("http://localhost:5000/subscribe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  inputFn = e => {
+    this.setState({ inputValue: e.target.value });
+  };
   render() {
     return (
       <>
         <div className="footer">
           <div className="container">
-            <div className="col-md-4 footer-top">
-              <h3>Quick Contact</h3>
-              <form>
-                <input type="text" />
+            <div className="row text-center">
+              <div className="col-md-4 footer-top">
+                <h3>Subscribe</h3>
+                <form onSubmit={this.myFunction}>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="Your Email"
+                    onChange={e => this.inputFn(e)}
+                  />
 
-                <input type="text" />
+                  <button
+                    type="submit"
+                    className="btn btn-info d-block mt-2 subscribe-button"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+              <div className="col-md-4 footer-middle">
+                <h3>Team</h3>
+                <div className="product-go">
+                  <ul>
+                    <li className="btn btn-info mb-1 d-block">Iuri Sajaia</li>
+                    <li className="btn btn-info mb-1 d-block">
+                      Guga Tchetchelashvili
+                    </li>
+                    <li className="btn btn-info mb-1 d-block">
+                      Irakli Mtchedlishvili
+                    </li>
+                    <li className="btn btn-info mb-1 d-block">
+                      David Varadashvili
+                    </li>
+                  </ul>
+                  <Link to="http://techub.ge">
+                    <img
+                      className="img-responsive "
+                      src="/img/techub-logo-3.png"
+                      alt=""
+                    />
+                  </Link>
 
-                <input type="text" />
-
-                <input type="submit" placeholder="SEND MESSAGE" />
-              </form>
-            </div>
-            <div className="col-md-4 footer-middle">
-              <h3>Top Rated Products</h3>
-              <div className="product-go">
-                <div className="grid-product">
-                  <h6>
-                    <a href="#">Fashion Combo Goggles</a>
-                  </h6>
-                  <div className="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                  </div>
-                  <span className=" price-in">
-                    <small>$70.00</small> $40.00
-                  </span>
-                </div>
-                <div className="fashion">
-                  <a href="#">
-                    <img className="img-responsive " src="/img/f1.jpg" alt="" />
-                    <p>SALE</p>
-                  </a>
-                </div>
-                <div className="clearfix"> </div>
-              </div>
-              <div className="product-go">
-                <div className="grid-product">
-                  <h6>
-                    <a href="#">classNameic Combo Goggles</a>
-                  </h6>
-                  <div className="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                  </div>
-                  <span className=" price-in">
-                    <small>$70.00</small> $40.00
-                  </span>
-                </div>
-                <div className="fashion">
-                  <a href="#">
-                    <img className="img-responsive " src="/img/f2.jpg" alt="" />
-                    <p className="new1">NEW</p>
-                  </a>
-                </div>
-                <div className="clearfix"> </div>
-              </div>
-              <div className="product-go">
-                <div className="grid-product">
-                  <h6>
-                    <a href="#">sun Combo Goggles</a>
-                  </h6>
-                  <div className="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                  </div>
-                  <span className=" price-in">
-                    <small>$70.00</small> $40.00
-                  </span>
-                </div>
-                <div className="fashion">
-                  <a href="#">
-                    <img className="img-responsive " src="/img/f3.jpg" alt="" />
-                    <p className="new1">NEW</p>
-                  </a>
-                </div>
-                <div className="clearfix"> </div>
-              </div>
-            </div>
-            <div className="col-md-4 footer-bottom">
-              <h3>Get In Touch</h3>
-              <div className="logo-footer">
-                <ul className="social">
-                  <li>
-                    <a href="#">
-                      <i className="fb"> </i>{" "}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="rss"> </i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="twitter"> </i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="dribble"> </i>
-                    </a>
-                  </li>
                   <div className="clearfix"> </div>
-                </ul>
-                <div className="clearfix"> </div>
+                </div>
               </div>
-              <div className="indo">
-                <ul className="social-footer ">
-                  <li>
-                    <span>
-                      <i className="glyphicon glyphicon-earphone"> </i>+62
-                      226759804{" "}
-                    </span>
-                  </li>
-                  <li>
-                    <a href="mailto:info@example.com">
-                      <i
-                        className="glyphicon glyphicon-envelope"
-                        className="mes"
-                      >
-                        {" "}
-                      </i>
-                      info@example.com
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i
-                        className="glyphicon glyphicon-link"
-                        className="mes-in"
-                      >
-                        {" "}
-                      </i>
-                      http://example.com
-                    </a>
-                  </li>
-                </ul>
-                <a href="#">
-                  <img src="/img/pa.png" alt="" />
-                </a>
+              <div className="col-md-4 footer-bottom">
+                <h3>Get In Touch</h3>
+                <div className="logo-footer">
+                  <ul className="social">
+                    <li>
+                      <Link to="#">
+                        <i className="fb"> </i>{" "}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <i className="rss"> </i>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <i className="twitter"> </i>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <i className="dribble"> </i>
+                      </Link>
+                    </li>
+                    <div className="clearfix"> </div>
+                  </ul>
+                  <div className="clearfix"> </div>
+                </div>
+                <div className="indo">
+                  <ul className="social-footer ">
+                    <li>
+                      <span>
+                        <i className="glyphicon glyphicon-earphone"> </i>+955
+                        598 12 34 56{" "}
+                      </span>
+                    </li>
+                    <li>
+                      <Link to="mailto:info@example.com">
+                        <i
+                          className="glyphicon glyphicon-envelope"
+                          className="mes"
+                        >
+                          {" "}
+                        </i>
+                        info@ibuy.com
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#">
+                        <i
+                          className="glyphicon glyphicon-link"
+                          className="mes-in"
+                        >
+                          {" "}
+                        </i>
+                        http://ibuy.com
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div className="clearfix"> </div>
             <p className="footer-class">
-              Copyrights © 2015 I Wear. All rights reserved | Design by{" "}
-              <a href="http://w3layouts.com/">W3layouts</a>
+              <Link to="/"> Copyrights © 2018 I Buy. All rights reserved</Link>
             </p>
           </div>
         </div>

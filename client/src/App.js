@@ -15,7 +15,7 @@ import MyProvider from "./State";
 import Checkout from "./components/cart/checkout";
 import Submail from "./components/products/Submail";
 import Orders from "./components/cart/orders";
-// import Footer from "./components/footer/footer";
+import Footer from "./components/footer/footer";
 
 class App extends Component {
   state = {};
@@ -42,7 +42,7 @@ class App extends Component {
               <Submail exact path="/Subscribe" />
               <Orders exact path="/orders" />
             </Switch>
-            {/* <Footer /> */}
+            <Footer />
           </MyProvider>
         </div>
       </BrowserRouter>

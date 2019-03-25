@@ -126,7 +126,7 @@ export default class details extends Component {
         {context => (
           <>
             <div className="product">
-              <div className="container">
+              <div className="container row">
                 <AsideCategories categories={this.context.state.categories} />
 
                 <div className="col-md-9 product-price1">

@@ -1,6 +1,6 @@
 body{
-	background:#fff;
-	font-family: 'Lato', sans-serif;
+	background:#F3F3F1;
+	font-family: 'Open Sans', sans-serif;
 	overflow-x:hidden;
 }
 body a{
@@ -89,11 +89,11 @@ h1,h2,h3,h4,h5,h6,label,p{
 
 }
 .header-top{
-	  background: rgba(255, 93, 86, 0.26);
+	  background: #AFBCBF;
 }
 .header-info {
   padding: 0;
-  background: #ffffff;
+  background: #F3F3F1;
   /* border-bottom-left-radius: 20px; */
   /* border-bottom-right-radius: 20px; */
   border-top: 3px solid#D2D2D2;
@@ -137,7 +137,7 @@ ul.support-right li i.tele {
   background-position: -80px -9px;
 }
 .header-bottom {
-  padding: 1em 0 1em;
+  /* padding: 1em 0 1em; */
 }
 .logo  h1{	
   font-size: 4em;
@@ -153,7 +153,8 @@ ul.support-right li i.tele {
 }
 .logo{
 	float:left;
-	  margin-top: 0.5em;
+	padding-bottom:10px;
+	  /* margin-top: 0.5em; */
 }
 .top-nav{
   margin-top: 0;
@@ -393,7 +394,7 @@ span.dollor{
 	float: right;
 }
 .social {
-	float:left;
+	/* float:left; */
 }
 .social li{
 	display:inline-block;
@@ -466,7 +467,8 @@ span.dollor{
   /* Webkit: Animation duration; */
   -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
-  background-color: #F7F7F7;
+	background-color: #fff;
+	border-radius:10px;
   padding: 0px 18px 0 12px;
 }
 .product-left:hover .p-one p a{
@@ -526,7 +528,7 @@ color: #242424;
 }
 .p-one p a {
 	text-decoration: none;
-	color: #999;
+	color: #597075;
 	  font-size: 18px;
 }
 .p-one p i {
@@ -2381,7 +2383,7 @@ li.ring-in img{
 	  width: 32%;
 	}
 	.header-bottom {
-	   padding: .9em 0 .1em;
+	   /* padding: .9em 0 .1em; */
 	}
 	.sell {
 	  width: 35%;
@@ -2647,7 +2649,7 @@ li.ring-in img{
 	  width: 32%;
 	}
 	.header-bottom {
-	   padding: .9em 0 .1em;
+	   /* padding: .9em 0 .1em; */
 	}
 	.sell {
 	  width: 35%;
@@ -3244,7 +3246,7 @@ li.ring-in img{
 	  right: 0;
 	}
 	.header-bottom {
-	    padding: 0.3em 0 0em;
+	    /* padding: 0.3em 0 0em; */
 	}
 	.banner h2 {
 	  font-size: 1.8em;
@@ -4301,7 +4303,7 @@ li.ring-in img{
 
 .memenu
 {margin:0;padding:0;width:100%;list-style:none;display:inline-block;position:relative;font-family:Calibri,Arial;font-size:15px}
-.memenu li{display:inline-block;}
+.memenu li{display:inline-block;font-size:21px;}
 ul.memenu.skyblue {text-align: center;}
 .memenu>li>a{font-family: 'Alegreya Sans SC', sans-serif;float:left;padding: 5px 30px 5px 30px;color:#555;font-weight:600;text-decoration:none;text-transform:uppercase;transition:color .4s ease-in-out;-moz-transition:color .4s ease-in-out;-webkit-transition:color .4s ease-in-out;-o-transition:color .4s ease-in-out}
 .memenu>li>.mepanel {
