@@ -54,6 +54,14 @@ class Categories extends Component {
                   </div>
                 </div>
                 <div className="col-lg-9">
+                  <div className="text-right pt-2 pb-2">
+                    <button
+                      className="btn btn-info"
+                      onClick={() => context.sortPrice("price")}
+                    >
+                      Sort By Price
+                    </button>
+                  </div>
                   <div className="row">
                     {filteredProds
                       ? filteredProds.map(product => {

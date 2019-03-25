@@ -138,7 +138,8 @@ router.put("/update-user", async (req, res) => {
             phone: user.phone,
             zip: user.zip,
             city: user.city,
-            orders: user.orders
+            orders: user.orders,
+            products: user.products
           },
           key,
           { expiresIn: "1h" }
@@ -219,7 +220,8 @@ router.put("/update-info", async (req, res) => {
         phone: user.phone,
         zip: user.zip,
         city: user.city,
-        orders: user.orders
+        orders: user.orders,
+        products: user.products
       },
       key,
       { expiresIn: "1h" }
@@ -273,7 +275,8 @@ router.post("/login", async (req, res) => {
           phone: user.phone,
           zip: user.zip,
           city: user.city,
-          orders: user.orders
+          orders: user.orders,
+          products: user.products
         },
         key,
         { expiresIn: "1h" }

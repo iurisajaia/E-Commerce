@@ -470,6 +470,13 @@ class MyProvider extends Component {
     });
   };
 
+  // Filter By Category
+  filterCategories = e => {
+    e.preventDefault();
+   
+    // console.log(filteredProds);
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -487,7 +494,8 @@ class MyProvider extends Component {
           filterProducts: this.filterProducts,
           acceptDelivery: this.acceptDelivery,
           deleteOrder: this.deleteOrder,
-          sortPrice: this.sortPrice
+          sortPrice: this.sortPrice,
+          filterCategories: this.filterCategories
         }}
       >
         {this.props.children}

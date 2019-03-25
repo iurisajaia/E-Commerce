@@ -66,3 +66,15 @@ code {
 .footer {
   margin-top: 40px;
 }
+.nav-tabs li a {
+  padding: 10px 20px;
+}
+.nav-tabs .active {
+  border: 1px solid #ff5d56;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.nav-tabs {
+  padding-bottom: 5px;
+}
