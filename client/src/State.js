@@ -469,6 +469,30 @@ class MyProvider extends Component {
     });
   };
 
+  // Send Message
+  sendMessage = e => {
+    e.preventDefault();
+    const data = {
+      user: e.target.user.value,
+      message: e.target.message.value
+    };
+    fetch("/send-message-to-admin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -487,7 +511,8 @@ class MyProvider extends Component {
           acceptDelivery: this.acceptDelivery,
           deleteOrder: this.deleteOrder,
           sortPrice: this.sortPrice,
-          filterCategories: this.filterCategories
+          filterCategories: this.filterCategories,
+          sendMessage: this.sendMessage
         }}
       >
         {this.props.children}

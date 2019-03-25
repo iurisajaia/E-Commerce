@@ -61,22 +61,40 @@ const UserSchema = new Schema({
   adress: { type: String, default: "Chavchavadze Ave" },
   zip: { type: String, default: "0112" },
 
-  messages: [
-    {
-      messageBody: {
-        type: String,
-        required: true
-      },
-      messageDate: {
-        type: Date,
-        default: Date.now
-      },
-      messageUser: {
-        type: Schema.Types.ObjectId,
-        ref: "users"
+  messages: {
+    inbox: [
+      {
+        messageBody: {
+          type: String,
+          required: true
+        },
+        messageDate: {
+          type: Date,
+          default: Date.now
+        },
+        messageUser: {
+          type: Schema.Types.ObjectId,
+          ref: "users"
+        }
       }
-    }
-  ],
+    ],
+    send: [
+      {
+        messageBody: {
+          type: String,
+          required: true
+        },
+        messageDate: {
+          type: Date,
+          default: Date.now
+        },
+        messageUser: {
+          type: Schema.Types.ObjectId,
+          ref: "users"
+        }
+      }
+    ]
+  },
   date: {
     type: Date,
     default: Date.now

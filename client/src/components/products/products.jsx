@@ -34,7 +34,7 @@ class Home extends Component {
           .includes(this.state.search.toLowerCase());
       });
     }
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <MyContext.Consumer>
         {context => (

@@ -22,11 +22,23 @@ class UserProfileForAdmin extends Component {
                   <div className="row">
                     <div className="col-sm-3">
                       <div className="text-center">
-                        <img
-                          src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                          className="avatar img-circle img-thumbnail"
-                          alt="avatar"
-                        />
+                        {user.gender === "male" ? (
+                          <>
+                            <img
+                              src="http://btmarines.com/btmarines/wp-content/uploads/2017/03/user-placeholder.d2a3ff8.png"
+                              className="avatar img-circle img-thumbnail"
+                              alt="avatar"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              src="http://www.thatentertains.com/wp-content/uploads/2018/01/female-place-holder-profile-image.jpg"
+                              className="avatar img-circle img-thumbnail"
+                              alt="avatar"
+                            />
+                          </>
+                        )}
                       </div>
                       <hr />
                       <br />
@@ -74,7 +86,7 @@ class UserProfileForAdmin extends Component {
                       </ul>
 
                       <div className="tab-content">
-                        <div className="tab-pane active" id="information">
+                        <div className="tab-pane" id="information">
                           <hr />
                           <form className="form row">
                             <div className="form-group col-md-6">

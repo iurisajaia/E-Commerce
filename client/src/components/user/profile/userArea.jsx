@@ -128,7 +128,7 @@ class UserArea extends Component {
   };
 
   render() {
-    console.log(this.context, "userarea");
+    // console.log(this.context, "userarea");
     return (
       <MyContext.Consumer>
         {context => (
@@ -137,11 +137,23 @@ class UserArea extends Component {
               <div className="row">
                 <div className="col-sm-3">
                   <div className="text-center">
-                    <img
-                      src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                      className="avatar img-circle img-thumbnail"
-                      alt="avatar"
-                    />
+                    {context.state.user.gender === "male" ? (
+                      <>
+                        <img
+                          src="http://btmarines.com/btmarines/wp-content/uploads/2017/03/user-placeholder.d2a3ff8.png"
+                          className="avatar img-circle img-thumbnail"
+                          alt="avatar"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          src="http://www.thatentertains.com/wp-content/uploads/2018/01/female-place-holder-profile-image.jpg"
+                          className="avatar img-circle img-thumbnail"
+                          alt="avatar"
+                        />
+                      </>
+                    )}
                   </div>
                   <hr />
                   <br />
@@ -401,7 +413,46 @@ class UserArea extends Component {
                       ) : null}
                     </div>
                     <div className="tab-pane" id="messages">
-                      <h1>User Messages</h1>
+                      {/* Messages */}
+                      <form
+                        className="form-group mt-3 mb-3"
+                        onSubmit={context.sendMessage}
+                      >
+                        <input
+                          type="text"
+                          id="message"
+                          className="form-control mb-1"
+                          placeholder="enter message"
+                        />
+                        <input
+                          type="hidden"
+                          value={context.state.user._id}
+                          id="user"
+                        />
+                        <button className="btn btn-success">Send</button>
+                      </form>
+
+                      <ul className="nav nav-tabs mt-5">
+                        <li className="">
+                          <a data-toggle="tab" href="#inbox">
+                            Inbox
+                          </a>
+                        </li>
+                        <li>
+                          <a data-toggle="tab" href="#send">
+                            Send
+                          </a>
+                        </li>
+                      </ul>
+
+                      <div className="tab-content">
+                        <div className="tab-pane" id="inbox">
+                          inbox
+                        </div>
+                        <div className="tab-pane" id="send">
+                          send
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
