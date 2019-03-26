@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { MyContext } from "../../State";
 
 import HeaderTop from "./header-top";
-import Navigation from "./navigation";
+// import Navigation from "./navigation";
 class Navbar extends Component {
   static contextType = MyContext;
 
@@ -25,15 +25,15 @@ class Navbar extends Component {
   }
 
   render() {
-    var compareLength;
-    if (this.state.compareLength > 0) {
-      compareLength = this.state.compareLength;
-    }
+    // var compareLength;
+    // if (this.state.compareLength > 0) {
+    //   compareLength = this.state.compareLength;
+    // }
 
-    if (this.context.state.user) {
-      var user = this.context.state.user;
-    }
-    console.log(this.context);
+    // if (this.context.state.user) {
+    //   var user = this.context.state.user;
+    // }
+    // console.log(this.context);
     return (
       <MyContext.Consumer>
         {context => (

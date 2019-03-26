@@ -12,7 +12,7 @@ class HeaderTop extends Component {
           <>
             <header className="shop-header">
               <div className="aside-left">
-                <img src="/img/techub-logo-3.png" />
+                <img src="/img/techub-logo-3.png" alt="logo" />
                 <ul className="menu-list">
                   <li>
                     <Link to="/">Home</Link>
@@ -37,6 +37,13 @@ class HeaderTop extends Component {
                           <i className="far fa-user" />
                           <br />
                           Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/orders">
+                          <i className="far fa-hourglass" />
+                          <br />
+                          Orders
                         </Link>
                       </li>
                       <li className="number-catcher">

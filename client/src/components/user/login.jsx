@@ -43,7 +43,7 @@ class Login extends Component {
     }
     return (
       <>
-        <form className="login-form" onSubmit={this.hanldeFormSubmit}>
+        <form className="login-form mt-5" onSubmit={this.hanldeFormSubmit}>
           <div className="form-group ">
             <label htmlFor="email">Email address</label>
             <input
@@ -62,22 +62,24 @@ class Login extends Component {
               id="password"
             />
           </div>
-          <button type="submit" className="btn btn-block btn-primary">
-            Submit
+          <button type="submit" className="btn btn-block btn-info">
+            Log In
           </button>
         </form>
 
-        {error && (
-          <>
-            <p className="alert alert-danger">{error}</p>
-          </>
-        )}
+        <div className="login-form mt-2">
+          {error && (
+            <>
+              <p className="alert alert-danger">{error}</p>
+            </>
+          )}
 
-        {success && (
-          <>
-            <p className="alert alert-success">{success}</p>
-          </>
-        )}
+          {success && (
+            <>
+              <p className="alert alert-success">{success}</p>
+            </>
+          )}
+        </div>
       </>
     );
   }

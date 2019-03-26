@@ -6,7 +6,7 @@ class Messages extends Component {
   state = {};
   render() {
     const user = this.context.state.user;
-    console.log(user);
+    // console.log(user);
     return (
       <MyContext.Consumer>
         {context => (
@@ -25,7 +25,7 @@ class Messages extends Component {
                           aria-controls={`#${msg._id}`}
                         >
                           <div className="col-md-3">
-                            {msg.status == false ? "Unread" : "Readed"}
+                            {msg.status === false ? "Unread" : "Readed"}
                           </div>
                           <div className="col-md-9">{msg.messageBody}</div>
                         </div>

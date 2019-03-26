@@ -164,6 +164,17 @@ class UserArea extends Component {
                     </li>
                     <li className="list-group-item">
                       <span className="pull-left">
+                        <strong>Money</strong>
+                      </span>{" "}
+                      {context.state.user ? (
+                        <>
+                          : &nbsp; <i class="fas fa-dollar-sign" />{" "}
+                          {context.state.user.money}
+                        </>
+                      ) : null}
+                    </li>
+                    <li className="list-group-item">
+                      <span className="pull-left">
                         <strong>Delivered Orders</strong>
                       </span>{" "}
                       {context.state.user.products ? (
@@ -310,8 +321,6 @@ class UserArea extends Component {
                       <hr />
                     </div>
                     <div className="tab-pane" id="shipping">
-                      <h2 />
-
                       <hr />
                       <form className="form row" onSubmit={this.updateInfo}>
                         <div className="form-group col-md-6">

@@ -15,40 +15,46 @@ class Orders extends Component {
               <>
                 {context.state.userorders.map(order => {
                   return (
-                    <div key={order._id}>
-                      <ul className="list-group">
-                        {order.products.map(prod => {
-                          return (
-                            <div key={prod.date} className="row">
-                              <div className="col-md-2">
-                                title :<br /> {prod.title}
-                              </div>
-                              <div className="col-md-2">
-                                Description : <br />
-                                {prod.description}
-                              </div>
-                              <div className="col-md-2">
-                                <img
-                                  src={prod.imageUrl}
-                                  style={{ width: "160px", heigth: "160px" }}
-                                  alt={prod.title}
-                                />
-                              </div>
-                              <div className="col-md-2">
-                                price : {prod.price}
-                                <br />
-                                quantity : {prod.total / prod.price}
-                              </div>
-                              <div className="col-md-2">
-                                user pay : <br /> {prod.total}$
-                              </div>
-                              <div className="col-md-">
-                                Seller : {prod.company}
-                              </div>
+                    <div className="container">
+                      {order.products.map(prod => {
+                        return (
+                          <div className="row mb-5" key={prod.date}>
+                            <div className="col-md-3 col-sm-12 cart-image-section">
+                              <img
+                                className="img-thumbnail"
+                                src={prod.imageUrl}
+                                alt=""
+                              />
                             </div>
-                          );
-                        })}
-                      </ul>
+                            <div className="col-md-9 col-sm-12">
+                              <h4 className="cart-prod_title">
+                                <i class="fas fa-tshirt" />
+                                &nbsp;&nbsp;&nbsp;
+                                {prod.title}
+                              </h4>
+                              <hr className="custom-line" />
+                              <h4 className="cart-prod_title">
+                                <i class="fab fa-creative-commons-by" />
+                                &nbsp;&nbsp;&nbsp;{prod.company}
+                              </h4>{" "}
+                              <h4 className="cart-prod_title">
+                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;
+                                <i class="fas fa-dollar-sign" />{" "}
+                                &nbsp;&nbsp;&nbsp;
+                                {prod.price}
+                              </h4>
+                              <hr className="custom-line" />
+                              <h4 className="cart-prod_title">
+                                <i class="fas fa-luggage-cart" />
+                                &nbsp; quantity : &nbsp;&nbsp;&nbsp;
+                                {prod.total / prod.price}
+                              </h4>
+                              <hr className="custom-line" />
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 })}
@@ -56,62 +62,77 @@ class Orders extends Component {
             ) : null}
             {context.state.admin && context.state.orders ? (
               <>
-                Orders For Admin
-                {context.state.orders.map(order => {
-                  return (
-                    <div key={order._id}>
-                      {order.products.map(prod => {
-                        return (
-                          <form key={prod.date} className="row">
-                            <div className="col-md-2">
-                              User : <br /> {order.user.firstname}{" "}
-                              {order.user.lastname}
-                            </div>
-                            <div className="col-md-2">
-                              title :<br /> {prod.title}
-                              Seller : {prod.company}
-                            </div>
-                            <div className="col-md-2">
-                              <img
-                                src={prod.imageUrl}
-                                style={{ width: "160px", heigth: "160px" }}
-                                alt={prod.title}
-                              />
-                            </div>
-                            <div className="col-md-2">
-                              price : {prod.price}
-                              <br />
-                              quantity : {prod.total / prod.price}
-                            </div>
-                            <div className="col-md-2">
-                              user pay : <br /> {prod.total}$
-                            </div>
-                            <div className="col-md-2">
-                              <input type="hidden" id="deliveredprod" />
-                              <button
-                                onClick={context.acceptDelivery}
-                                type="submit"
-                                data-prodid={order._id}
-                                data-userid={order.user._id}
-                                className="btn btn-success"
-                              >
-                                Delivery
-                              </button>
-                              <button
-                                onClick={context.deleteOrder}
-                                data-prodid={order._id}
-                                data-userid={order.user._id}
-                                className="btn btn-danger ml-1"
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          </form>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
+                <div className="container">
+                  Orders For Admin
+                  {context.state.orders.map(order => {
+                    return (
+                      <div key={order._id}>
+                        {order.products.map(prod => {
+                          return (
+                            <form className="row mb-5" key={prod.date}>
+                              <div className="col-md-3 col-sm-12 cart-image-section">
+                                <img
+                                  className="img-thumbnail"
+                                  src={prod.imageUrl}
+                                  alt=""
+                                />
+                              </div>
+                              <div className="col-md-9 col-sm-12">
+                                <h4 className="cart-prod_title">
+                                  <i class="far fa-user" />
+                                  &nbsp;&nbsp;&nbsp;
+                                  {order.user.firstname} {order.user.lastname}
+                                </h4>
+                                <hr className="custom-line" />
+                                <h4 className="cart-prod_title">
+                                  <i class="fas fa-tshirt" />
+                                  &nbsp;&nbsp;&nbsp;
+                                  {prod.title}
+                                </h4>
+                                <hr className="custom-line" />
+                                <h4 className="cart-prod_title">
+                                  <i class="fab fa-creative-commons-by" />
+                                  &nbsp;&nbsp;&nbsp;{prod.company}
+                                </h4>{" "}
+                                <h4 className="cart-prod_title">
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp;
+                                  <i class="fas fa-dollar-sign" />{" "}
+                                  &nbsp;&nbsp;&nbsp;
+                                  {prod.price}
+                                  &nbsp;&nbsp;&nbsp;
+                                  <i class="fas fa-luggage-cart" />
+                                  &nbsp; quantity : &nbsp;&nbsp;&nbsp;
+                                  {prod.total / prod.price}
+                                </h4>
+                                <hr className="custom-line" />
+                                <input type="hidden" id="deliveredprod" />
+                                <button
+                                  onClick={context.acceptDelivery}
+                                  type="submit"
+                                  data-prodid={order._id}
+                                  data-userid={order.user._id}
+                                  className="btn btn-success"
+                                >
+                                  Delivery
+                                </button>
+                                <button
+                                  onClick={context.deleteOrder}
+                                  data-prodid={order._id}
+                                  data-userid={order.user._id}
+                                  className="btn btn-danger ml-1"
+                                >
+                                  Delete
+                                </button>
+                                <hr className="custom-line" />
+                              </div>
+                            </form>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
               </>
             ) : null}
           </>

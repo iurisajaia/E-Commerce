@@ -474,7 +474,7 @@ class MyProvider extends Component {
     e.preventDefault();
     const data = {
       user: e.target.user.value,
-      username : e.target.userUsername.value,
+      username: e.target.userUsername.value,
       message: e.target.message.value
     };
     fetch("/send-message-to-admin", {
@@ -532,7 +532,7 @@ class MyProvider extends Component {
           sortPrice: this.sortPrice,
           filterCategories: this.filterCategories,
           sendMessage: this.sendMessage,
-          addToDetails : this.addToDetails
+          addToDetails: this.addToDetails
         }}
       >
         {this.props.children}

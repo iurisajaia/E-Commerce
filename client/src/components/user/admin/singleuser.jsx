@@ -145,8 +145,6 @@ class UserProfileForAdmin extends Component {
                           <hr />
                         </div>
                         <div className="tab-pane" id="shipping">
-                          <h2 />
-
                           <hr />
                           <form className="form row">
                             <div className="form-group col-md-6">
