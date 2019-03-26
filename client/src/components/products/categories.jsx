@@ -27,8 +27,8 @@ class Categories extends Component {
               <div className="row">
                 {/* <AsideCategories categories={categories} /> */}
                 <div className="col-lg-3">
-                  <h2 className="my-4">Categories</h2>
-                  <div className="list-group">
+                  <h4 className="categories-title">Categories</h4>
+                  <div className="list-group categories-list">
                     <Link
                       to="/products"
                       className="list-group-item category-item d-flex justify-content-between align-items-center"
@@ -56,13 +56,13 @@ class Categories extends Component {
                 <div className="col-lg-9">
                   <div className="text-right pt-2 pb-2">
                     <button
-                      className="btn btn-info"
+                      className="btn btn-info mr-2"
                       onClick={() => context.sortPrice("price")}
                     >
                       Sort By Price
                     </button>
                   </div>
-                  <div className="row">
+                  <div className="products-page-row">
                     {filteredProds
                       ? filteredProds.map(product => {
                           return (

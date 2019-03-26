@@ -46,12 +46,12 @@ class Home extends Component {
                 onChange={this.filterProducts}
               /> */}
             </div>
-            <div className="container">
+            <div className="custom-container">
               <div className="row">
                 {/* <AsideCategories categories={categories} /> */}
                 <div className="col-lg-3">
-                  <h2 className="my-4">Categories</h2>
-                  <div className="list-group">
+                  <h4 className="categories-title">Categories</h4>
+                  <div className="list-group categories-list">
                     {context.state.categories
                       ? context.state.categories.map(category => {
                           return (
@@ -72,13 +72,13 @@ class Home extends Component {
                 <div className="col-lg-9">
                   <div className="text-right pt-2 pb-2">
                     <button
-                      className="btn btn-info"
+                      className="btn btn-info mr-2"
                       onClick={() => context.sortPrice("price")}
                     >
                       Sort By Price
                     </button>
                   </div>
-                  <div className="row">
+                  <div className="products-page-row">
                     {context.state.products
                       ? context.state.products.map(product => {
                           return (

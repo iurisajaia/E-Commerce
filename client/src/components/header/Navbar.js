@@ -33,15 +33,18 @@ class Navbar extends Component {
     if (this.context.state.user) {
       var user = this.context.state.user;
     }
-
+    console.log(this.context);
     return (
       <MyContext.Consumer>
         {context => (
           <>
             <>
-              <HeaderTop user={user} handleLogout={this.handleLogout} />
-
-              <Navigation compareLength={compareLength} user={user} />
+              <HeaderTop
+                compareLength={this.state.compareLength}
+                handleLogout={this.handleLogout}
+              />
+              <div style={{ height: "90px" }} />
+              {/* <Navigation compareLength={compareLength} user={user} /> */}
             </>
           </>
         )}

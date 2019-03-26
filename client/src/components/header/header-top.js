@@ -5,6 +5,7 @@ class HeaderTop extends Component {
   static contextType = MyContext;
   state = {};
   render() {
+    var compareLength = this.props.compareLength;
     return (
       <MyContext.Consumer>
         {context => (
@@ -38,17 +39,31 @@ class HeaderTop extends Component {
                           Profile
                         </Link>
                       </li>
-                      <li>
+                      <li className="number-catcher">
                         <Link to="/compare">
                           <i className="fas fa-glasses" />
                           <br />
+                          {compareLength ? (
+                            <span className="number_counter">
+                              {compareLength}
+                            </span>
+                          ) : null}
                           Compare
                         </Link>
                       </li>
-                      <li>
+                      <li className="number-catcher">
                         <Link to="/cart">
                           <i className="fas fa-shopping-bag" />
                           <br />
+                          {context.state.carts ? (
+                            <>
+                              {context.state.carts.length > 0 ? (
+                                <span className="number_counter cart-counter">
+                                  {context.state.carts.length}
+                                </span>
+                              ) : null}
+                            </>
+                          ) : null}
                           Cart
                         </Link>
                       </li>
