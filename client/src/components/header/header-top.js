@@ -9,95 +9,73 @@ class HeaderTop extends Component {
       <MyContext.Consumer>
         {context => (
           <>
-            <div className="header-info">
-              <div className="container">
-                <div className="header-top-in">
-                  <ul className="support">
-                    <li>
-                      <Link to="mailto:info@example.com">
-                        <i className="fas fa-envelope" />
-                        info@example.com
-                      </Link>
-                    </li>
-                    <li>
-                      <span>
-                        <i className="fas fa-mobile-alt" />
-                        +995 598 12 34 56
-                      </span>
-                    </li>
-                  </ul>
-                  <ul className=" support-right">
-                    {context.state.user && (
-                      <>
-                        <li>
-                          <Link to="/cart">
-                            <i className="fas fa-shopping-basket user-cart">
-                              {context.state.carts ? (
-                                <span className="badge badge-success">
-                                  {context.state.carts.length}
-                                </span>
-                              ) : null}
-                            </i>
-                          </Link>
-                        </li>
-                        <li>
-                          <div className="dropdown">
-                            <button
-                              className="btn btn-info dropdown-toggle"
-                              type="button"
-                              id="dropdownMenuButton"
-                              data-toggle="dropdown"
-                              aria-haspopup="true"
-                              aria-expanded="false"
-                            >
-                              {context.state.user.username}
-                            </button>
-                            <div
-                              className="dropdown-menu"
-                              aria-labelledby="dropdownMenuButton"
-                            >
-                              <Link
-                                className="dropdown-item"
-                                to={/me/ + context.state.user._id}
-                              >
-                                Profile
-                              </Link>
-                              <Link className="dropdown-item" to="/me">
-                                Ballance - {context.state.user.money}$
-                              </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/"
-                                onClick={this.props.handleLogout}
-                              >
-                                Logout
-                              </Link>
-                            </div>
-                          </div>
-                        </li>
-                      </>
-                    )}
-                    {!context.state.user && (
-                      <>
-                        <li>
-                          <Link to="/login">
-                            <i className="glyphicon glyphicon-user men"> </i>
-                            Login
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/registration">
-                            <i className="glyphicon glyphicon-lock tele"> </i>
-                            Create an Account
-                          </Link>
-                        </li>
-                      </>
-                    )}
-                  </ul>
-                  <div className="clearfix"> </div>
-                </div>
+            <header className="shop-header">
+              <div className="aside-left">
+                <img src="/img/techub-logo-3.png" />
+                <ul className="menu-list">
+                  <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/products">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/about">About</Link>
+                  </li>
+                  <li>
+                    <Link to="/contact">Contact</Link>
+                  </li>
+                </ul>
               </div>
-            </div>
+              <div className="aside-right">
+                {context.state.user && (
+                  <>
+                    <ul className="menu-list">
+                      <li>
+                        <Link to={/me/ + context.state.user._id}>
+                          <i class="far fa-user" />
+                          <br />
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/compare">
+                          <i class="fas fa-glasses" />
+                          <br />
+                          Compare
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/cart">
+                          <i class="fas fa-shopping-bag" />
+                          <br />
+                          Cart
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/" onClick={this.props.handleLogout}>
+                          <i class="fas fa-power-off" />
+                          <br />
+                          Log Out
+                        </Link>
+                      </li>
+                    </ul>
+                  </>
+                )}
+                {!context.state.user && (
+                  <>
+                    <ul className="menu-list">
+                      <li>
+                        <Link to="/login">Login</Link>
+                      </li>
+                      <li>
+                        <Link to="/registration">Registration</Link>
+                      </li>
+                    </ul>
+                  </>
+                )}
+              </div>
+            </header>
           </>
         )}
       </MyContext.Consumer>

@@ -309,18 +309,18 @@ router.get("/me", auth, async (req, res, next) => {
 // Send Message
 router.post("/send-message-to-admin", async (req, res) => {
   // console.log(req.body);
-  const user = await User.find({ isAdmin: true });
+  const user = await User.findOne({ isAdmin: true });
   try {
     if (user) {
       // console.log(user);
       const newMessage = {
         messageBody: req.body.message,
-        messageUser: req.body.user
+        messageUser: req.body.user,
+        username: req.body.username
       };
-      // console.log(user[0]);
-      // console.log(newMessage);
-      await user[0].messages.inbox.push(newMessage);
-      user[0].save().then(res.status(200).json("message sent!"));
+
+      await user.messages.inbox.push(newMessage);
+      user.save().then(res.status(200).json("message sent!"));
     } else {
       res.status(400).json("არ გაიგზავნა");
     }

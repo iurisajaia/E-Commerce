@@ -1,26 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { MyContext } from "../../State";
+import axios from "axios";
 export default function details(props) {
   const { product } = props;
 
   return (
-    <React.Fragment>
-      <div className="col-md-3 col-sm-12 mb-3 product-left">
-        <div className="p-one simpleCart_shelfItem">
-          <Link to={/details/ + product._id}>
-            <img src={`/${product.imageUrl}`} alt={product.title} />
-            <div className="mask">
-              <span>Quick View</span>
+    <MyContext.Consumer>
+      {context => (
+        <>
+          <div className="product-item">
+            <div className="item-box">
+              <div className="image-box">
+                <img src={`/${product.imageUrl}`} alt={product.title} />
+                <div className="over-image-box">
+                  <form onSubmit={context.addProductToShopCart}>
+                    <input type="hidden" value={product._id} id="product" />
+
+                    {context.state.user && (
+                      <>
+                        <input
+                          type="hidden"
+                          id="user"
+                          value={context.state.user._id}
+                        />
+                      </>
+                    )}
+                    <button className="cart-btn">Add To Cart</button>
+                  </form>
+                  <button
+                    className="compare-btn"
+                    onClick={context.addToDetails}
+                  >
+                    Compare
+                  </button>
+                </div>
+              </div>
+
+              <div className="product-info">
+                <Link to={/details/ + product._id}>{product.title}</Link>
+                <span>${product.price}</span>
+              </div>
             </div>
-          </Link>
-          <h4>{product.title}</h4>
-          <p>
-            <Link className="item_add" to="#">
-              <span className=" item_price">${product.price}</span>
-            </Link>
-          </p>
-        </div>
-      </div>
-    </React.Fragment>
+          </div>
+        </>
+      )}
+    </MyContext.Consumer>
   );
 }

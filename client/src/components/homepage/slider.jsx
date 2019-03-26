@@ -19,17 +19,25 @@ function Slider(props) {
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img className="d-block w-100" src="/img/2.png" alt="First slide" />
+            <img
+              className="d-block w-100"
+              src="/img/cover1.jpg"
+              alt="First slide"
+            />
           </div>
           <div className="carousel-item">
             <img
               className="d-block w-100"
-              src="/img/3.png"
+              src="/img/cover.jpg"
               alt="Second slide"
             />
           </div>
           <div className="carousel-item">
-            <img className="d-block w-100" src="/img/4.png" alt="Third slide" />
+            <img
+              className="d-block w-100"
+              src="/img/cover2.jpg"
+              alt="Third slide"
+            />
           </div>
         </div>
         <a

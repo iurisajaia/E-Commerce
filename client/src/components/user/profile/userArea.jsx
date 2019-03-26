@@ -426,6 +426,11 @@ class UserArea extends Component {
                         />
                         <input
                           type="hidden"
+                          value={context.state.user.username}
+                          id="userUsername"
+                        />
+                        <input
+                          type="hidden"
                           value={context.state.user._id}
                           id="user"
                         />

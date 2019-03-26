@@ -75,6 +75,14 @@ const UserSchema = new Schema({
         messageUser: {
           type: Schema.Types.ObjectId,
           ref: "users"
+        },
+        status: {
+          type: Boolean,
+          default: false
+        },
+        username: {
+          type: String,
+          required: true
         }
       }
     ],
@@ -91,6 +99,14 @@ const UserSchema = new Schema({
         messageUser: {
           type: Schema.Types.ObjectId,
           ref: "users"
+        },
+        status: {
+          type: Boolean,
+          default: false
+        },
+        author: {
+          type: String,
+          default: "Administrator"
         }
       }
     ]

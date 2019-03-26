@@ -474,6 +474,7 @@ class MyProvider extends Component {
     e.preventDefault();
     const data = {
       user: e.target.user.value,
+      username : e.target.userUsername.value,
       message: e.target.message.value
     };
     fetch("/send-message-to-admin", {
@@ -493,6 +494,24 @@ class MyProvider extends Component {
       });
   };
 
+  // Compare
+  addToDetails = async () => {
+    const productID = this.props.id;
+    let details = [];
+    if (localStorage.getItem("details")) {
+      details = JSON.parse(localStorage.getItem("details"));
+    } else {
+      localStorage.setItem("details", JSON.stringify(details));
+    }
+    const res = await axios.get("http://localhost:5000/all-product");
+    const product = res.data.filter(el => {
+      return el._id.match(productID);
+    });
+    if (details.length < 2) {
+      details.push(product[0]);
+      localStorage.setItem("details", JSON.stringify(details));
+    }
+  };
   render() {
     return (
       <MyContext.Provider
@@ -512,7 +531,8 @@ class MyProvider extends Component {
           deleteOrder: this.deleteOrder,
           sortPrice: this.sortPrice,
           filterCategories: this.filterCategories,
-          sendMessage: this.sendMessage
+          sendMessage: this.sendMessage,
+          addToDetails : this.addToDetails
         }}
       >
         {this.props.children}
