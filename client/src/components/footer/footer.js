@@ -79,16 +79,16 @@ class Footer extends Component {
                 </div>
                 <ul className="footer-navigation-social">
                   <li>
-                    <i class="fab fa-facebook" />
+                    <i className="fab fa-facebook" />
                   </li>
                   <li>
-                    <i class="fab fa-twitter-square" />
+                    <i className="fab fa-twitter-square" />
                   </li>
                   <li>
-                    <i class="fab fa-instagram" />
+                    <i className="fab fa-instagram" />
                   </li>
                   <li>
-                    <i class="fab fa-youtube" />
+                    <i className="fab fa-youtube" />
                   </li>
                 </ul>
               </div>

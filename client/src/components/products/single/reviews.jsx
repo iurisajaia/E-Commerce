@@ -22,27 +22,36 @@ class Reviews extends Component {
                     </ul>
                   </nav>
 
+                  <div className="reviews-box">
+                    {product.reviews.map(review => {
+                      return (
+                        <>
+                          <div className="row mb-2" key={review._id}>
+                            <div className="col-md-1 col-sm-12">
+                              <img
+                                className="img-responsive"
+                                src="/img/co.png"
+                                alt=""
+                              />
+                            </div>
+                            <div className="col-md-11 col-sm-12">
+                              <h6>
+                                <i class="far fa-user" /> {review.userName}
+                              </h6>
+                              <p>
+                                <i class="fas fa-comments" /> {review.review}
+                              </p>
+                            </div>
+                          </div>
+                          <hr className="custom-line" />
+                        </>
+                      );
+                    })}
+                  </div>
+
                   <ul className="cd-tabs-content">
                     <li data-content="television" className="selected">
                       <div className="comments-top-top">
-                        {product.reviews.map(review => {
-                          return (
-                            <div key={review._id}>
-                              <div className="top-comment-left">
-                                <img
-                                  className="img-responsive"
-                                  src="/img/co.png"
-                                  alt=""
-                                />
-                              </div>
-                              <div className="top-comment-right">
-                                <h6>{review.userName}</h6>
-                                <p>{review.review}</p>
-                              </div>
-                              <div className="clearfix"> </div>
-                            </div>
-                          );
-                        })}
                         <h6 className="add-re">ADD REVIEW</h6>
                         {/* Add Review */}
                         <div className="form-group">
@@ -52,8 +61,7 @@ class Reviews extends Component {
                           >
                             <input
                               type="text"
-                              className="form-control"
-                              placeholder="Add Review"
+                              className="add-new-review-input"
                               id="review"
                             />
                             <input
@@ -75,7 +83,7 @@ class Reviews extends Component {
                                 />
                               </>
                             )}
-                            <button className="btn btn-warning btn-block">
+                            <button className="add-review-btn">
                               Add Review
                             </button>
                           </form>

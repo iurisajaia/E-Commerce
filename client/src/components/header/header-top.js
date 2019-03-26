@@ -33,28 +33,28 @@ class HeaderTop extends Component {
                     <ul className="menu-list">
                       <li>
                         <Link to={/me/ + context.state.user._id}>
-                          <i class="far fa-user" />
+                          <i className="far fa-user" />
                           <br />
                           Profile
                         </Link>
                       </li>
                       <li>
                         <Link to="/compare">
-                          <i class="fas fa-glasses" />
+                          <i className="fas fa-glasses" />
                           <br />
                           Compare
                         </Link>
                       </li>
                       <li>
                         <Link to="/cart">
-                          <i class="fas fa-shopping-bag" />
+                          <i className="fas fa-shopping-bag" />
                           <br />
                           Cart
                         </Link>
                       </li>
                       <li>
                         <Link to="/" onClick={this.props.handleLogout}>
-                          <i class="fas fa-power-off" />
+                          <i className="fas fa-power-off" />
                           <br />
                           Log Out
                         </Link>

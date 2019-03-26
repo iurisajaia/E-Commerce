@@ -32,54 +32,65 @@ class ProductPart extends Component {
           <>
             {product.id ? (
               <div className="row">
-                <div className="col-md-5 single-top">
+                <div className="col-md-5 col-sm-12 single-top">
                   <img
                     className="single-product__img"
                     src={`/${product.imageUrl}`}
                     alt={product.title}
                   />
                 </div>
-                <div className="col-md-7 single-top-in simpleCart_shelfItem">
-                  <div className="single-para ">
-                    <h4>{product.title}</h4>
-                    <div className="star-on">
-                      <div className="review">
-                        <h6> 1 customer review </h6>
-                      </div>
-                      <div className="clearfix"> </div>
-                    </div>
-                    <h5 className="item_price">$ {product.price}</h5>
-                    <div className="available">
-                      <h4>{product.description}</h4>
-                    </div>
-                    <ul className="tag-men">
-                      <li>
-                        <span>Seller</span>
-                        <span className="women1">{product.company}</span>
-                      </li>
-                      <li>
-                        <button
-                          className="add-cart item_add"
-                          onClick={this.addToDetails}
-                        >
-                          Compare
-                        </button>
-                      </li>
-                    </ul>
-                    <form onSubmit={context.addProductToShopCart}>
-                      <input type="hidden" value={product.id} id="product" />
+                <div className="col-md-7 col-sm-12 single-top-in simpleCart_shelfItem">
+                  <div className="product-info">
+                    <h4 className="product-title">
+                      {" "}
+                      <i className="fas fa-tshirt" /> {product.title}
+                    </h4>
+                    <hr className="custom-line" />
 
-                      {context.state.user && (
-                        <>
-                          <input
-                            type="hidden"
-                            id="user"
-                            value={context.state.user._id}
-                          />
-                        </>
-                      )}
-                      <button className="add-cart item_add">Add To Cart</button>
-                    </form>
+                    <h5 className="product-price">
+                      <i className="fas fa-dollar-sign" /> {product.price}
+                    </h5>
+
+                    <hr className="custom-line" />
+
+                    <h4 className="product-description">
+                      <i className="fas fa-quote-left" />
+                      {product.description}
+                      <i className="fas fa-quote-right" />
+                    </h4>
+
+                    <hr className="custom-line" />
+
+                    <h4 className="product-seller">
+                      <i className="fab fa-creative-commons-by" />
+                      {product.company}
+                    </h4>
+
+                    <hr className="custom-line" />
+
+                    <div className="flex mt-3">
+                      <form onSubmit={context.addProductToShopCart}>
+                        <input type="hidden" value={product.id} id="product" />
+
+                        {context.state.user && (
+                          <>
+                            <input
+                              type="hidden"
+                              id="user"
+                              value={context.state.user._id}
+                            />
+                          </>
+                        )}
+                        <button className="cart-btn">Add To Cart</button>
+                      </form>
+                      <button
+                        className="compare-btn ml-4"
+                        onClick={this.addToDetails}
+                      >
+                        Compare
+                      </button>
+                    </div>
+                    <hr className="custom-line" />
                   </div>
                 </div>
                 <div className="clearfix"> </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import axios from "axios";
 import { MyContext } from "../../State";
-import AsideCategories from "./asidecategories";
+// import AsideCategories from "./asidecategories";
 import ProductPart from "./single/product-part";
 import Reviews from "./single/reviews";
 // import AnotherProducts from "./single/anotherproducts";
@@ -126,21 +126,17 @@ export default class details extends Component {
         {context => (
           <>
             <div className="product">
-              <div className="container row">
-                <AsideCategories categories={this.context.state.categories} />
-
-                <div className="col-md-9 product-price1">
-                  <ProductPart product={product} />
-                  <Reviews product={product} />
-                  {/* <AnotherProducts /> */}
-                  <EditProducts
-                    product={product}
-                    updateProduct={this.updateProduct}
-                    changePrice={this.changePrice}
-                    changeDescription={this.changeDescription}
-                    changeTitle={this.changeTitle}
-                  />
-                </div>
+              <div className="container">
+                <ProductPart product={product} />
+                <Reviews product={product} />
+                {/* <AnotherProducts /> */}
+                <EditProducts
+                  product={product}
+                  updateProduct={this.updateProduct}
+                  changePrice={this.changePrice}
+                  changeDescription={this.changeDescription}
+                  changeTitle={this.changeTitle}
+                />
                 <div className="clearfix"> </div>
               </div>
             </div>

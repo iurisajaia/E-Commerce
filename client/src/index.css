@@ -32,6 +32,7 @@ code {
   width: 100%;
   height: 370px;
   object-fit: contain;
+  background: #fff;
 }
 .product-one {
   display: flex;
@@ -288,4 +289,71 @@ code {
 }
 .footer-copyright a {
   color: #ff5d56;
+}
+
+.flex {
+  display: flex;
+}
+
+.product-title,
+.product-price,
+.product-seller {
+  font-size: 20px;
+}
+.product-description {
+  font-size: 14px;
+}
+.product-title i,
+.product-price i,
+.product-description i,
+.product-seller i {
+  margin-right: 20px;
+  font-size: 20px;
+}
+.fa-quote-right {
+  margin-left: 20px;
+}
+
+.reviews-box img {
+  border-radius: 50%;
+}
+.reviews-box h6 {
+  transition: 0.5s;
+  cursor: pointer;
+}
+.reviews-box p {
+  transition: 0.5s;
+  cursor: pointer;
+}
+.reviews-box h6:hover {
+  color: #ff5d56;
+}
+.reviews-box p:hover {
+  color: #ff5d56;
+}
+.add-new-review-input {
+  width: 400px;
+  height: 150px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  padding: 10px;
+}
+.add-review-btn {
+  width: 400px;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background: #ff5d56;
+  text-align: center;
+  color: #fff;
+  transition: 0.5s;
+  display: block;
+}
+.add-review-btn:hover {
+  background: transparent;
+  color: black;
+  border-color: #000;
+  cursor: pointer;
 }
