@@ -168,7 +168,7 @@ class UserArea extends Component {
                       </span>{" "}
                       {context.state.user ? (
                         <>
-                          : &nbsp; <i class="fas fa-dollar-sign" />{" "}
+                          : &nbsp; <i className="fas fa-dollar-sign" />{" "}
                           {context.state.user.money}
                         </>
                       ) : null}
@@ -408,13 +408,48 @@ class UserArea extends Component {
                           <div className="mb-5">
                             {context.state.user.products.map(products => {
                               return (
-                                <ul key={products.products} className="mb-5">
+                                <div key={products.products} className="mb-5">
                                   {products.map(prod => {
                                     return (
-                                      <li key={prod.prod}>{prod.title}</li>
+                                      <div className="row mb-5" key={prod.prod}>
+                                        <div className="col-md-3 col-sm-12 cart-image-section">
+                                          <img
+                                            className="img-thumbnail"
+                                            src={`/${prod.imageUrl}`}
+                                            alt=""
+                                          />
+                                        </div>
+                                        <div className="col-md-9 col-sm-12">
+                                          <hr className="custom-line" />
+                                          <h4 className="cart-prod_title">
+                                            <i class="fas fa-tshirt" />
+                                            &nbsp;&nbsp;&nbsp;
+                                            {prod.title}
+                                          </h4>
+                                          <hr className="custom-line" />
+                                          <h4 className="cart-prod_title">
+                                            <i class="fab fa-creative-commons-by" />
+                                            &nbsp;&nbsp;&nbsp;{prod.company}
+                                          </h4>
+                                          <hr className="custom-line" />
+                                          <h4 className="cart-prod_title">
+                                            <i class="fas fa-dollar-sign" />{" "}
+                                            &nbsp;&nbsp;&nbsp;
+                                            {prod.price}
+                                          </h4>
+                                          <hr className="custom-line" />
+
+                                          <h4 className="cart-prod_title">
+                                            <i class="fas fa-luggage-cart" />
+                                            &nbsp; quantity : &nbsp;&nbsp;&nbsp;
+                                            {prod.total / prod.price}
+                                          </h4>
+                                          <hr className="custom-line" />
+                                        </div>
+                                      </div>
                                     );
                                   })}
-                                </ul>
+                                </div>
                               );
                             })}
                           </div>

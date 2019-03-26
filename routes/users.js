@@ -329,6 +329,30 @@ router.post("/send-message-to-admin", async (req, res) => {
   }
 });
 
+// Answer
+router.post("/admin-answer", async (req, res) => {
+  const user = await User.findOne({ _id: req.body.user });
+  const admin = await User.findOne({ isAdmin: true });
+  console.log(req.body);
+  try {
+    const answer = {
+      messageBody: req.body.message,
+      username: "Administrator"
+    };
+    const sent = {
+      messageBody: req.body.message,
+      username: "Administrator",
+      messageUser: req.body.user
+    };
+    user.messages.inbox.push(answer);
+    admin.messages.send.push(sent);
+    await user.save();
+    await admin.save();
+    res.status(200).json({ msg: "message sent!" });
+  } catch (err) {
+    console.log(err);
+  }
+});
 // Insert Product In User Prop
 router.post("/addtocart", async (req, res) => {
   const decoded = jwt_decode(req.body.token);

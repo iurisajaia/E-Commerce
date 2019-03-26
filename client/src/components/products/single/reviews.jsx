@@ -29,7 +29,7 @@ class Reviews extends Component {
                           <div className="row mb-2" key={review._id}>
                             <div className="col-md-1 col-sm-12">
                               <img
-                                className="img-responsive"
+                                className="avatar img-circle img-thumbnail"
                                 src="/img/co.png"
                                 alt=""
                               />

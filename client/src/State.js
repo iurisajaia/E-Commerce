@@ -494,6 +494,30 @@ class MyProvider extends Component {
       });
   };
 
+  // Admin's Answer
+  adminAnswer = e => {
+    e.preventDefault();
+    const data = {
+      message: e.target.message.value,
+      user: e.target.userId.value,
+      id: e.target.msgId.value
+    };
+    fetch("/admin-answer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   // Compare
   addToDetails = async () => {
     const productID = this.props.id;
@@ -532,7 +556,8 @@ class MyProvider extends Component {
           sortPrice: this.sortPrice,
           filterCategories: this.filterCategories,
           sendMessage: this.sendMessage,
-          addToDetails: this.addToDetails
+          addToDetails: this.addToDetails,
+          adminAnswer: this.adminAnswer
         }}
       >
         {this.props.children}
