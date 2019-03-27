@@ -1,14 +1,17 @@
-= Welcome to the E-Commerce Website!
+Welcome to the E-Commerce Website!
+===================================
 
-=== You can start project with command : 
+### You can start project with command :
+	npm run dev
 
-npm run dev
-
-=== Project Description : 
+### Project Description :
 
 This is an E-Commerce platform where users are allowed to buy a big variety of sport and hiking related products online. The Project has two main sides - the User and Administrator areas. In the process of working on the project, we used following technologies: Node.Js/Express , MongoDb , React , HTML5 / CSS3 / Bootstrap
 
-=== Users Can : 
+		
+
+Users Can
+------------
 * Registration
 * Authorization
 * Compare Products
@@ -21,7 +24,8 @@ This is an E-Commerce platform where users are allowed to buy a big variety of s
 * Subscribe news with e-mail
 
 
-===  Administrator Can : 
+Administrator Can :
+------------
 * Add Product
 * Edit Product
 * Delete Product
@@ -33,4 +37,3 @@ This is an E-Commerce platform where users are allowed to buy a big variety of s
 * See any orders made by users
 * Confirm orders 
 * Danny orders and return back the amount to costumer 
-
