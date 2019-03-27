@@ -460,3 +460,6 @@ code {
   padding: 10px 0;
   cursor: pointer;
 }
+.about-container p {
+  margin-bottom: 25px;
+}

@@ -43,7 +43,7 @@ class Navbar extends Component {
                 compareLength={this.state.compareLength}
                 handleLogout={this.handleLogout}
               />
-              <div style={{ height: "90px" }} />
+              <div style={{ height: "85px" }} />
               {/* <Navigation compareLength={compareLength} user={user} /> */}
             </>
           </>

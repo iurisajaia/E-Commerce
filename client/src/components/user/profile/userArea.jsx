@@ -128,7 +128,7 @@ class UserArea extends Component {
   };
 
   render() {
-    // console.log(this.context, "userarea");
+    console.log(this.context, "userarea");
     return (
       <MyContext.Consumer>
         {context => (
@@ -480,9 +480,8 @@ class UserArea extends Component {
                         />
                         <button className="btn btn-success">Send</button>
                       </form>
-
                       <ul className="nav nav-tabs mt-5">
-                        <li className="">
+                        <li className="active">
                           <a data-toggle="tab" href="#inbox">
                             Inbox
                           </a>
@@ -496,10 +495,70 @@ class UserArea extends Component {
 
                       <div className="tab-content">
                         <div className="tab-pane" id="inbox">
-                          inbox
+                          {context.state.user ? (
+                            <>
+                              {context.state.user.messages.inbox.map(msg => {
+                                return (
+                                  <div key={msg._id}>
+                                    <div
+                                      className="row ml-2 mb-1 btn-info messages-row"
+                                      data-toggle="collapse"
+                                      data-target={`#${msg.username}`}
+                                      aria-expanded="false"
+                                      aria-controls={`#${msg.username}`}
+                                    >
+                                      <div className="col-md-1">
+                                        <i className="far fa-envelope" />
+                                      </div>
+                                      <div className="col-md-11">
+                                        {msg.username}
+                                      </div>
+                                    </div>
+
+                                    <div className="collapse" id={msg.username}>
+                                      <div className="card card-body">
+                                        <p>{msg.messageBody}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </>
+                          ) : null}
                         </div>
                         <div className="tab-pane" id="send">
-                          send
+                          {context.state.user ? (
+                            <>
+                              {context.state.user.messages.send.map(msg => {
+                                return (
+                                  <div key={msg._id}>
+                                    <div
+                                      className="row ml-2 mb-1 btn-info messages-row"
+                                      data-toggle="collapse"
+                                      data-target={`#${msg.username}`}
+                                      aria-expanded="false"
+                                      aria-controls={`#${msg.username}`}
+                                    >
+                                      <div className="col-md-1">
+                                        <i className="far fa-envelope" />
+                                      </div>
+                                      <div className="col-md-11">
+                                        {msg.username}
+                                      </div>
+                                    </div>
+
+                                    <div className="collapse" id={msg.username}>
+                                      <div className="card card-body">
+                                        <p>{msg.messageBody}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <p>No Messages</p>
+                          )}
                         </div>
                       </div>
                     </div>
