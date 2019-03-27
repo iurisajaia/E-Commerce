@@ -29,6 +29,7 @@ export default function details(props) {
                     <button className="cart-btn">Add To Cart</button>
                   </form>
                   <button
+                    value={product._id}
                     className="compare-btn"
                     onClick={context.addToDetails}
                   >

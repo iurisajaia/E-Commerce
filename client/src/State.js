@@ -519,8 +519,8 @@ class MyProvider extends Component {
       });
   };
   // Compare
-  addToDetails = async () => {
-    const productID = this.props.id;
+  addToDetails = async e => {
+    const productID = e.target.value;
     let details = [];
     if (localStorage.getItem("details")) {
       details = JSON.parse(localStorage.getItem("details"));

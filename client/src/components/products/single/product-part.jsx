@@ -81,7 +81,9 @@ class ProductPart extends Component {
                             />
                           </>
                         )}
-                        <button className="cart-btn">Add To Cart</button>
+                        <button value={product._id} className="cart-btn">
+                          Add To Cart
+                        </button>
                       </form>
                       <button
                         className="compare-btn ml-4"
