@@ -22,7 +22,7 @@ class Profile extends Component {
 
     // console.log(data);
 
-    fetch("http://localhost:5000/message/:id", {
+    fetch("/message/:id", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

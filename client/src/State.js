@@ -15,7 +15,7 @@ class MyProvider extends Component {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("http://localhost:5000/me", {
+        .get("/me", {
           headers: {
             "x-auth-token": token
           }
@@ -113,7 +113,7 @@ class MyProvider extends Component {
     };
     event.target.company.value = "";
 
-    fetch("http://localhost:5000/add-company", {
+    fetch("/add-company", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -139,7 +139,7 @@ class MyProvider extends Component {
       name: event.target.category.value
     };
     event.target.category.value = "";
-    fetch("http://localhost:5000/add-category", {
+    fetch("/add-category", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -176,7 +176,7 @@ class MyProvider extends Component {
 
     axios({
       method: "POST",
-      url: "http://localhost:5000/add-product",
+      url: "/add-product",
       data: data,
       config: { headers: { "Content-Type": "multpart/form-data" } }
     })
@@ -201,7 +201,7 @@ class MyProvider extends Component {
       userName: event.target.userName.value
     };
 
-    fetch("http://localhost:5000/add-new-review", {
+    fetch("/add-new-review", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -226,7 +226,7 @@ class MyProvider extends Component {
       product: e.target.product.value
     };
     console.log(data);
-    fetch("http://localhost:5000/add-product-to-cart", {
+    fetch("/add-product-to-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -265,7 +265,7 @@ class MyProvider extends Component {
     const data = {
       id: e.target.value
     };
-    fetch("http://localhost:5000/remove-product", {
+    fetch("/remove-product", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -290,7 +290,7 @@ class MyProvider extends Component {
       user: e.target.cartUser.value,
       product: e.target.cartId.value
     };
-    fetch("http://localhost:5000/remove-product-from-cart", {
+    fetch("/remove-product-from-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -330,7 +330,7 @@ class MyProvider extends Component {
       user: e.target.dataset.userid,
       quantity: e.target.value
     };
-    fetch("http://localhost:5000/update-cart", {
+    fetch("/update-cart", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -383,7 +383,7 @@ class MyProvider extends Component {
       user: this.state.user,
       total: this.state.cartTotal
     };
-    fetch("http://localhost:5000/buy-products", {
+    fetch("/buy-products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -527,7 +527,7 @@ class MyProvider extends Component {
     } else {
       localStorage.setItem("details", JSON.stringify(details));
     }
-    const res = await axios.get("http://localhost:5000/all-product");
+    const res = await axios.get("/all-product");
     const product = res.data.filter(el => {
       return el._id.match(productID);
     });

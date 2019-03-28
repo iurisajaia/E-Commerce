@@ -9,7 +9,7 @@ class Login extends Component {
       password: event.target.password.value
     };
 
-    fetch("http://localhost:5000/login", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

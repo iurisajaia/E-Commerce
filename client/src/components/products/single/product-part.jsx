@@ -14,7 +14,7 @@ class ProductPart extends Component {
     } else {
       localStorage.setItem("details", JSON.stringify(details));
     }
-    const res = await axios.get("http://localhost:5000/all-product");
+    const res = await axios.get("/all-product");
     const product = res.data.filter(el => {
       return el._id.match(productID);
     });

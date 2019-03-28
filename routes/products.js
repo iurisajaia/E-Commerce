@@ -46,8 +46,7 @@ const upload = multer({
 });
 
 router.get("/all-product", async (req, res) => {
-  const product = await Product.find();
-
+  const product = await Product.find().sort({ date: -1 });
   if (!product) {
     return res.status(400).json("No Products");
   } else {

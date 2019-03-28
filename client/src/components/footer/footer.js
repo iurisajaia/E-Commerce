@@ -9,7 +9,7 @@ class Footer extends Component {
     const data = {
       email: this.state.inputValue
     };
-    fetch("http://localhost:5000/subscribe", {
+    fetch("/subscribe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

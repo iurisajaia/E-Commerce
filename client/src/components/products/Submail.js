@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { MyContext } from "../../State";
-
 
 export default class Submail extends Component {
   static contextType = MyContext;
-    state = {
-        inputValue:''
-    }
-    myFunction = () =>{
-      const data = {
-        email : this.state.inputValue
-      }
-      fetch("http://localhost:5000/subscribe", {
+  state = {
+    inputValue: ""
+  };
+  myFunction = () => {
+    const data = {
+      email: this.state.inputValue
+    };
+    fetch("/subscribe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,31 +20,29 @@ export default class Submail extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        console.log(res);
       })
       .catch(error => {
         console.error(error);
       });
-    }
-      inputFn =(e)=> {
-          this.setState({inputValue:e.target.value})
-      }
-  
+  };
+  inputFn = e => {
+    this.setState({ inputValue: e.target.value });
+  };
+
   render() {
     return (
       <MyContext.Consumer>
         {context => (
           <div>
-         <input type='email' onChange={(e)=>this.inputFn(e)}/>
-        <button onClick={this.myFunction}>Subscribe</button>
-      </div>
+            <input type="email" onChange={e => this.inputFn(e)} />
+            <button onClick={this.myFunction}>Subscribe</button>
+          </div>
         )}
-        </MyContext.Consumer>
-      
-    )
+      </MyContext.Consumer>
+    );
   }
 }
-
 
 // import { MyContext } from "../../State";
 

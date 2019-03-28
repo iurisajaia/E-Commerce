@@ -44,7 +44,7 @@ class UserArea extends Component {
       newpassword: this.state.newpassword,
       id: this.state.id
     };
-    fetch("http://localhost:5000/update-user", {
+    fetch("/update-user", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ class UserArea extends Component {
       phone: this.state.phone,
       id: this.state.id
     };
-    fetch("http://localhost:5000/update-info", {
+    fetch("/update-info", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

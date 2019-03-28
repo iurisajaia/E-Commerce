@@ -21,7 +21,7 @@ export default class details extends Component {
       product: event.target.product.value
     };
 
-    fetch("http://localhost:5000/add-new-company", {
+    fetch("/add-new-company", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default class details extends Component {
       // cart = []
       localStorage.setItem("cart", JSON.stringify(cart));
     }
-    const res = await axios.get("http://localhost:5000/all-product");
+    const res = await axios.get("/all-product");
     const product = res.data.filter(el => {
       return el._id.match(productID);
     });
@@ -83,7 +83,7 @@ export default class details extends Component {
       description: e.target.description.value,
       price: e.target.price.value
     };
-    fetch("http://localhost:5000/update-product", {
+    fetch("/update-product", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export default class details extends Component {
   };
 
   async componentDidMount() {
-    const products = await axios.get("http://localhost:5000/all-product");
+    const products = await axios.get("/all-product");
     const targetProduct = products.data.filter(product => {
       return product._id.match(this.props.computedMatch.params.id);
     });
