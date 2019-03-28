@@ -463,3 +463,28 @@ code {
 .about-container p {
   margin-bottom: 25px;
 }
+
+.similar-products-box {
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.another-item {
+  width: 220px;
+  margin-right: 10px;
+}
+
+.another-item img {
+  width: 220px;
+  height: 240px;
+  object-fit: cover;
+}
+.another-item a {
+  color: #000;
+  transition: 0.5s;
+}
+.another-item a:hover {
+  color: #ff5d56;
+  text-decoration: none;
+}

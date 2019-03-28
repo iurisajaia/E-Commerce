@@ -5,7 +5,7 @@ import { MyContext } from "../../State";
 // import AsideCategories from "./asidecategories";
 import ProductPart from "./single/product-part";
 import Reviews from "./single/reviews";
-// import AnotherProducts from "./single/anotherproducts";
+import AnotherProducts from "./single/anotherproducts";
 import EditProducts from "./single/editproducts";
 export default class details extends Component {
   static contextType = MyContext;
@@ -101,26 +101,35 @@ export default class details extends Component {
   };
 
   async componentDidMount() {
-    const products = await axios.get("/all-product");
-    const targetProduct = products.data.filter(product => {
-      return product._id.match(this.props.computedMatch.params.id);
-    });
+    try {
+      const products = await axios.get("/all-product");
+      const targetProduct = products.data.filter(product => {
+        return product._id.match(this.props.computedMatch.params.id);
+      });
+      const similarfilter = products.data.filter(product => {
+        return product.company.match(targetProduct[0].company);
+      });
 
-    this.setState({
-      title: targetProduct[0].title,
-      description: targetProduct[0].description,
-      categories: targetProduct[0].categories,
-      company: targetProduct[0].company,
-      imageUrl: targetProduct[0].imageUrl,
-      price: targetProduct[0].price,
-      reviews: targetProduct[0].reviews,
-      id: targetProduct[0]._id
-    });
-    // console.log(this.state);
+      await this.setState({
+        similarfilter,
+        title: targetProduct[0].title,
+        description: targetProduct[0].description,
+        categories: targetProduct[0].categories,
+        company: targetProduct[0].company,
+        imageUrl: targetProduct[0].imageUrl,
+        price: targetProduct[0].price,
+        reviews: targetProduct[0].reviews,
+        id: targetProduct[0]._id
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
     let product = this.state;
+    let similarfilter = this.state.similarfilter;
+
     return (
       <MyContext.Consumer>
         {context => (
@@ -128,8 +137,11 @@ export default class details extends Component {
             <div className="product">
               <div className="container">
                 <ProductPart product={product} />
+                <AnotherProducts
+                  similarfilter={similarfilter}
+                  product={product}
+                />
                 <Reviews product={product} />
-                {/* <AnotherProducts /> */}
                 <EditProducts
                   product={product}
                   updateProduct={this.updateProduct}
