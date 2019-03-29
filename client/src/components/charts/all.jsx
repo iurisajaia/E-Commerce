@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Bar, Pie, Line } from "react-chartjs-2";
 
-class Gender extends Component {
+class AllStats extends Component {
   constructor(props) {
     super(props);
     // console.log(this.props.state.categories);
@@ -27,6 +27,9 @@ class Gender extends Component {
   render() {
     return (
       <div className="gender-chart">
+        <div className="text-center mt-3 mb-3">
+          <h3 className="section-title">Shop Statistic</h3>
+        </div>
         <Bar
           data={this.state.chartData}
           fontSize={25}
@@ -38,4 +41,4 @@ class Gender extends Component {
   }
 }
 
-export default Gender;
+export default AllStats;

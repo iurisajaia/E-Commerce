@@ -21,6 +21,10 @@ const UserSchema = new Schema({
   tags: {
     type: Array
   },
+  sold: {
+    type: Number,
+    default: 0
+  },
   reviews: [
     {
       user: {

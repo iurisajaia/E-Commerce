@@ -226,6 +226,8 @@ router.get("/get-all-orders", async (req, res) => {
 
 // Accept Order
 router.post("/accept-delivery", async (req, res) => {
+  const product = await Product.findOne({ _id: req.body.prod });
+
   const order = await Orders.findOne({ _id: req.body.product });
   const user = await User.findOne({ _id: req.body.user });
   try {
@@ -235,6 +237,8 @@ router.post("/accept-delivery", async (req, res) => {
       user.orders.splice(index, 1);
       await user.save();
       order.remove();
+      product.sold += 1;
+      product.save();
       const allorder = await Orders.find({});
       return res.status(200).json({ user, allorder });
     }

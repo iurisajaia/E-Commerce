@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { MyContext } from "../../../State";
-import Gender from "../../charts/gender";
+import All from "../../charts/all";
+import Sold from "../../charts/sold";
 
 class Statistics extends Component {
   static contextType = MyContext;
@@ -12,7 +13,8 @@ class Statistics extends Component {
         {context => (
           <>
             <div id="adminstatistics" className="tab-pane fade">
-              <Gender state={state} />
+              <All state={state} />
+              <Sold state={state} />
             </div>
           </>
         )}
