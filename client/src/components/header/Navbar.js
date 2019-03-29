@@ -33,7 +33,7 @@ class Navbar extends Component {
     // if (this.context.state.user) {
     //   var user = this.context.state.user;
     // }
-    // console.log(this.context);
+    console.log(this.context);
     return (
       <MyContext.Consumer>
         {context => (

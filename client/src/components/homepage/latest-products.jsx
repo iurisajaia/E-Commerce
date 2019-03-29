@@ -6,7 +6,7 @@ class LatestProducts extends Component {
   static contextType = MyContext;
   state = {};
   render() {
-    console.log(this.context.state);
+    // console.log(this.context.state);
     return (
       <>
         <MyContext.Consumer>

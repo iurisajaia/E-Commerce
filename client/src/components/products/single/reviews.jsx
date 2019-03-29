@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { MyContext } from "../../../State";
 
 class Reviews extends Component {
+  static contextType = MyContext;
+
   state = {};
   render() {
     const product = this.props.product;
+
     return (
       <MyContext.Consumer>
         {context => (

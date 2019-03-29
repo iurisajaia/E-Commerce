@@ -8,6 +8,7 @@ import ProfileNav from "./profileNav";
 import Users from "./admin/users";
 import Companies from "./admin/companies";
 import Messages from "./admin/messages";
+import Statistics from "./admin/statistics";
 import { MyContext } from "../../State";
 
 class Profile extends Component {
@@ -56,6 +57,7 @@ class Profile extends Component {
                     <Categories />
                     <Companies />
                     <Messages />
+                    <Statistics />
                   </div>
                 </>
               )}

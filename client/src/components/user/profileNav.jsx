@@ -30,6 +30,11 @@ class ProfileNav extends Component {
             Messages
           </a>
         </li>
+        <li>
+          <a data-toggle="tab" href="#adminstatistics" className="mr-3">
+            Statistic
+          </a>
+        </li>
       </ul>
     );
   }

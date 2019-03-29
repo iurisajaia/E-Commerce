@@ -9,6 +9,7 @@ class EditProducts extends Component {
     const changePrice = this.props.changePrice;
     const changeDescription = this.props.changeDescription;
     const changeTitle = this.props.changeTitle;
+
     return (
       <MyContext.Consumer>
         {context => (
