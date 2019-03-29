@@ -113,6 +113,7 @@ class Orders extends Component {
                                   data-prodid={order._id}
                                   data-product={prod._id}
                                   data-userid={order.user._id}
+                                  data-quantity={prod.total / prod.price}
                                   className="btn btn-success"
                                 >
                                   Delivery

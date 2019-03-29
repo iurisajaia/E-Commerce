@@ -237,7 +237,7 @@ router.post("/accept-delivery", async (req, res) => {
       user.orders.splice(index, 1);
       await user.save();
       order.remove();
-      product.sold += 1;
+      product.sold += req.body.quantity;
       product.save();
       const allorder = await Orders.find({});
       return res.status(200).json({ user, allorder });

@@ -40,7 +40,7 @@ class AllStats extends Component {
     return (
       <div className="gender-chart">
         <div className="text-center mt-3 mb-3">
-          <h3 className="section-title">Product Sold</h3>
+          <h3 className="section-title">Sold Production</h3>
         </div>
         <Pie
           data={this.state.chartData}

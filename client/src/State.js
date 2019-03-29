@@ -409,7 +409,8 @@ class MyProvider extends Component {
     const data = {
       product: e.target.dataset.prodid,
       user: e.target.dataset.userid,
-      prod: e.target.dataset.product
+      prod: e.target.dataset.product,
+      quantity: e.target.dataset.quantity
     };
     fetch("/accept-delivery", {
       method: "POST",
@@ -537,7 +538,6 @@ class MyProvider extends Component {
       localStorage.setItem("details", JSON.stringify(details));
     }
   };
-
 
   render() {
     return (

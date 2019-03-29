@@ -135,7 +135,7 @@ class UserArea extends Component {
           <>
             <div className="container bootstrap snippet">
               <div className="row">
-                <div className="col-sm-3">
+                <div className="col-md-3 col-sm-12">
                   <div className="text-center">
                     {context.state.user.gender === "male" ? (
                       <>
@@ -191,7 +191,7 @@ class UserArea extends Component {
                     </li>
                   </ul>
                 </div>
-                <div className="col-sm-9">
+                <div className="col-md-9 col-sm-12">
                   <ul className="nav nav-tabs">
                     <li className="">
                       <a data-toggle="tab" href="#information">

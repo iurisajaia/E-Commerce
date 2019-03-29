@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 class TopUsers extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class TopUsers extends Component {
         <div className="text-center mt-3 mb-3">
           <h3 className="section-title">Top Users</h3>
         </div>
-        <Pie
+        <Doughnut
           data={this.state.chartData}
           fontSize={25}
           height={100}
