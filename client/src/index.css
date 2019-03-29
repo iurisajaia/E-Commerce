@@ -10,6 +10,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+li {
+  list-style-type: none;
+}
+
+.product,
+.cart-row {
+  margin-top: 80px !important;
+}
 
 .login-form {
   width: 400px;
@@ -20,7 +28,7 @@ code {
 }
 .checkout-container {
   width: 50%;
-  margin: auto;
+  margin: 40px auto !important;
 }
 
 .simpleCart_shelfItem img {
