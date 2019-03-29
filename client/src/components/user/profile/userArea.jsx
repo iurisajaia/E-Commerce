@@ -532,25 +532,17 @@ class UserArea extends Component {
                               {context.state.user.messages.send.map(msg => {
                                 return (
                                   <div key={msg._id}>
-                                    <div
-                                      className="row ml-2 mb-1 btn-info messages-row"
-                                      data-toggle="collapse"
-                                      data-target={`#${msg.username}`}
-                                      aria-expanded="false"
-                                      aria-controls={`#${msg.username}`}
-                                    >
+                                    <div className="row ml-2 mb-1 btn-info messages-row">
                                       <div className="col-md-1">
                                         <i className="far fa-envelope" />
                                       </div>
                                       <div className="col-md-11">
-                                        {msg.username}
+                                        Administrator
                                       </div>
                                     </div>
 
-                                    <div className="collapse" id={msg.username}>
-                                      <div className="card card-body">
-                                        <p>{msg.messageBody}</p>
-                                      </div>
+                                    <div className="card card-body">
+                                      <p>{msg.messageBody}</p>
                                     </div>
                                   </div>
                                 );

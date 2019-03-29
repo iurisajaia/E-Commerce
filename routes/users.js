@@ -310,6 +310,7 @@ router.get("/me", auth, async (req, res, next) => {
 router.post("/send-message-to-admin", async (req, res) => {
   // console.log(req.body);
   const user = await User.findOne({ isAdmin: true });
+  const author = await User.findOne({ username: req.body.username });
   try {
     if (user) {
       // console.log(user);
@@ -320,6 +321,8 @@ router.post("/send-message-to-admin", async (req, res) => {
       };
 
       await user.messages.inbox.push(newMessage);
+      await author.messages.send.push(newMessage);
+      author.save();
       user.save().then(res.status(200).json("message sent!"));
     } else {
       res.status(400).json("არ გაიგზავნა");
@@ -333,7 +336,6 @@ router.post("/send-message-to-admin", async (req, res) => {
 router.post("/admin-answer", async (req, res) => {
   const user = await User.findOne({ _id: req.body.user });
   const admin = await User.findOne({ isAdmin: true });
-  console.log(req.body);
   try {
     const answer = {
       messageBody: req.body.message,
