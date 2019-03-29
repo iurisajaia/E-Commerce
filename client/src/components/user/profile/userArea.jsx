@@ -128,7 +128,7 @@ class UserArea extends Component {
   };
 
   render() {
-    // console.log(this.context, "userarea");
+    console.log(this.context, "userarea");
     return (
       <MyContext.Consumer>
         {context => (
@@ -137,23 +137,53 @@ class UserArea extends Component {
               <div className="row">
                 <div className="col-md-3 col-sm-12">
                   <div className="text-center">
-                    {context.state.user.gender === "male" ? (
+                    {context.state.user.image ? (
                       <>
                         <img
-                          src="http://btmarines.com/btmarines/wp-content/uploads/2017/03/user-placeholder.d2a3ff8.png"
+                          src={`/${context.state.user.image}`}
                           className="avatar img-circle img-thumbnail"
                           alt="avatar"
                         />
                       </>
                     ) : (
                       <>
-                        <img
-                          src="http://www.thatentertains.com/wp-content/uploads/2018/01/female-place-holder-profile-image.jpg"
-                          className="avatar img-circle img-thumbnail"
-                          alt="avatar"
-                        />
+                        {context.state.user.gender === "male" ? (
+                          <>
+                            <img
+                              src="http://btmarines.com/btmarines/wp-content/uploads/2017/03/user-placeholder.d2a3ff8.png"
+                              className="avatar img-circle img-thumbnail"
+                              alt="avatar"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              src="http://www.thatentertains.com/wp-content/uploads/2018/01/female-place-holder-profile-image.jpg"
+                              className="avatar img-circle img-thumbnail"
+                              alt="avatar"
+                            />
+                          </>
+                        )}
                       </>
                     )}
+                    {context.state.succesmsg ? (
+                      <>
+                        <p className="alert alert-success">
+                          {context.state.succesmsg}
+                        </p>
+                      </>
+                    ) : null}
+
+                    <form onSubmit={context.updateUserImage}>
+                      <input type="file" id="image" name="image" />
+                      <input
+                        type="hidden"
+                        id="user"
+                        name="user"
+                        value={context.state.user._id}
+                      />
+                      <button className="btn btn-success">Update</button>
+                    </form>
                   </div>
                   <hr />
                   <br />

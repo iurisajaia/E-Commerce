@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwt_decode = require("jwt-decode");
 const router = express.Router();
-
+const multer = require("multer");
 // Protect Routes
 const auth = require("../middleware/login");
 
@@ -20,6 +20,69 @@ const Cart = require("../models/Cart");
 // Import Orders Model
 const Orders = require("../models/Orders");
 
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
+
+router.post("/add-user-image", upload.single("image"), async (req, res) => {
+  const user = await User.findOne({ _id: req.body.user });
+  try {
+    if (user) {
+      user.image = req.file.filename;
+      user.save();
+
+      const token = jwt.sign(
+        {
+          _id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          username: user.username,
+          email: user.email,
+          day: user.day,
+          month: user.month,
+          image: user.image,
+          year: user.year,
+          gender: user.gender,
+          money: user.money,
+          cart: user.cart,
+          adress: user.adress,
+          phone: user.phone,
+          zip: user.zip,
+          city: user.city,
+          orders: user.orders,
+          products: user.products,
+          messages: user.messages
+        },
+        key,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({token})
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 // User Registration
 router.post("/registration", async (req, res) => {
   let errors = [];
@@ -128,6 +191,7 @@ router.put("/update-user", async (req, res) => {
             lastname: user.lastname,
             username: user.username,
             email: user.email,
+            image: user.image,
             day: user.day,
             month: user.month,
             year: user.year,
@@ -165,6 +229,7 @@ router.put("/update-user", async (req, res) => {
           email: user.email,
           day: user.day,
           month: user.month,
+          image: user.image,
           year: user.year,
           gender: user.gender,
           money: user.money,
@@ -215,6 +280,7 @@ router.put("/update-info", async (req, res) => {
         email: user.email,
         day: user.day,
         month: user.month,
+        image: user.image,
         year: user.year,
         gender: user.gender,
         money: user.money,
@@ -270,6 +336,7 @@ router.post("/login", async (req, res) => {
           username: user.username,
           email: user.email,
           day: user.day,
+          image: user.image,
           month: user.month,
           year: user.year,
           gender: user.gender,
@@ -404,6 +471,7 @@ router.post("/buy-products", async (req, res) => {
           money: user.money,
           cart: user.carts,
           adress: user.adress,
+          image: user.image,
           phone: user.phone,
           zip: user.zip,
           city: user.city,

@@ -539,6 +539,31 @@ class MyProvider extends Component {
     }
   };
 
+  // Update Users Image
+  updateUserImage = e => {
+    e.preventDefault();
+    const data = new FormData();
+
+    data.append("user", e.target.user.value);
+    data.append("image", e.target.image.files[0]);
+
+    axios({
+      method: "POST",
+      url: "/add-user-image",
+      data: data,
+      config: { headers: { "Content-Type": "multpart/form-data" } }
+    })
+      .then(res => {
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+          this.setState({ succesmsg: "image uploaded" });
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -559,7 +584,8 @@ class MyProvider extends Component {
           filterCategories: this.filterCategories,
           sendMessage: this.sendMessage,
           addToDetails: this.addToDetails,
-          adminAnswer: this.adminAnswer
+          adminAnswer: this.adminAnswer,
+          updateUserImage: this.updateUserImage
         }}
       >
         {this.props.children}

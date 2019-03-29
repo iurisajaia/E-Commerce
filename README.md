@@ -17,6 +17,7 @@ This is an E-Commerce platform where users are allowed to buy a big variety of s
 - Make Order / Buy Products
 - Sort products by price
 - Update Private info
+- Edit Own Information / Shipping Adress / Upload Profile Image
 - Review products with comment
 - Contact with administrator
 - Subscribe news with e-mail
@@ -33,5 +34,6 @@ This is an E-Commerce platform where users are allowed to buy a big variety of s
 - Can delete user
 - See any orders made by users
 - Confirm orders
+- See any active shopping carts by users
 - Danny orders and return back the amount to costumer
 - See any statistics of application
