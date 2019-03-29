@@ -537,6 +537,8 @@ class MyProvider extends Component {
       localStorage.setItem("details", JSON.stringify(details));
     }
   };
+
+
   render() {
     return (
       <MyContext.Provider
@@ -551,7 +553,6 @@ class MyProvider extends Component {
           removeProductFromCart: this.removeProductFromCart,
           updateCart: this.updateCart,
           cheCkoutProduct: this.cheCkoutProduct,
-          filterProducts: this.filterProducts,
           acceptDelivery: this.acceptDelivery,
           deleteOrder: this.deleteOrder,
           sortPrice: this.sortPrice,

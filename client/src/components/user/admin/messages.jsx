@@ -6,7 +6,7 @@ class Messages extends Component {
   state = {};
   render() {
     const user = this.context.state.user;
-    console.log(user);
+    // console.log(user);
     return (
       <MyContext.Consumer>
         {context => (

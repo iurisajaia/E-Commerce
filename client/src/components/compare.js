@@ -77,7 +77,7 @@ export default class Compare extends Component {
     ) : (
       <h2>Empey List</h2>
     );
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div className="container">
         <div className="text-center">

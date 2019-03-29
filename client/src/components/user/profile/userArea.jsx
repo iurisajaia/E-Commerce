@@ -128,7 +128,7 @@ class UserArea extends Component {
   };
 
   render() {
-    console.log(this.context, "userarea");
+    // console.log(this.context, "userarea");
     return (
       <MyContext.Consumer>
         {context => (

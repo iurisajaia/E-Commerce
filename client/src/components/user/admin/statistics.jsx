@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { MyContext } from "../../../State";
 import All from "../../charts/all";
 import Sold from "../../charts/sold";
+import TopUsers from "../../charts/topusers";
 
 class Statistics extends Component {
   static contextType = MyContext;
@@ -15,6 +16,7 @@ class Statistics extends Component {
             <div id="adminstatistics" className="tab-pane fade">
               <All state={state} />
               <Sold state={state} />
+              <TopUsers state={state} />
             </div>
           </>
         )}
