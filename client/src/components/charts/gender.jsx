@@ -4,7 +4,7 @@ import { Bar, Pie, Line } from "react-chartjs-2";
 class Gender extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.state.categories);
+    // console.log(this.props.state.categories);
     this.state = {
       chartData: {
         labels: ["Categories", "Products", "Users", "Companies"],

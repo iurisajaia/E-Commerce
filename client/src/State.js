@@ -408,7 +408,8 @@ class MyProvider extends Component {
     e.preventDefault();
     const data = {
       product: e.target.dataset.prodid,
-      user: e.target.dataset.userid
+      user: e.target.dataset.userid,
+      prod: e.target.dataset.product
     };
     fetch("/accept-delivery", {
       method: "POST",

@@ -111,6 +111,7 @@ class Orders extends Component {
                                   onClick={context.acceptDelivery}
                                   type="submit"
                                   data-prodid={order._id}
+                                  data-product={prod._id}
                                   data-userid={order.user._id}
                                   className="btn btn-success"
                                 >

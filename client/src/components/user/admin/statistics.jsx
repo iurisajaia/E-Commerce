@@ -6,7 +6,6 @@ class Statistics extends Component {
   static contextType = MyContext;
   state = {};
   render() {
-    const user = this.context.state.user;
     const state = this.context.state;
     return (
       <MyContext.Consumer>
