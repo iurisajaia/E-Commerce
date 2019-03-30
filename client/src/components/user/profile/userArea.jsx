@@ -175,7 +175,12 @@ class UserArea extends Component {
                     ) : null}
 
                     <form onSubmit={context.updateUserImage}>
-                      <input type="file" id="image" name="image" />
+                      <input
+                        className="form-control-file mt-2 mb-2"
+                        type="file"
+                        id="image"
+                        name="image"
+                      />
                       <input
                         type="hidden"
                         id="user"

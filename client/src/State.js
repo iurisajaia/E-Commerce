@@ -393,7 +393,9 @@ class MyProvider extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res) {
+        if (res.msg) {
+          this.setState({moneyerror : res.msg})
+        } else if (res) {
           localStorage.setItem("token", res);
           setInterval((window.location = "/orders"), 2000);
         }

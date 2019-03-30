@@ -20,7 +20,7 @@ const UserSchema = new Schema({
   },
   money: {
     type: Number,
-    default: 10000
+    default: 0
   },
   email: {
     type: String,
@@ -53,6 +53,10 @@ const UserSchema = new Schema({
     type: Array
   },
   isAdmin: {
+    type: Boolean,
+    default: false
+  },
+  isActive: {
     type: Boolean,
     default: false
   },

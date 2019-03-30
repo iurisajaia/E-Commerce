@@ -77,7 +77,7 @@ router.post("/add-user-image", upload.single("image"), async (req, res) => {
         key,
         { expiresIn: "1h" }
       );
-      res.status(200).json({token})
+      res.status(200).json({ token });
     }
   } catch (err) {
     console.log(err);
@@ -442,48 +442,56 @@ router.post("/addtocart", async (req, res) => {
 router.post("/buy-products", async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.body.user });
-    const usercart = await Cart.deleteOne({ user: req.body.user }).exec();
     const orders = await Orders.find({});
     if (orders && user) {
-      const newOrder = new Orders({
-        user: req.body.user,
-        products: req.body.carts
-      });
+      if (req.body.total > user.money) {
+        res
+          .status(400)
+          .json({
+            msg: "you don't have enought money, you can check in your profile"
+          });
+      } else {
+        const usercart = await Cart.deleteOne({ user: req.body.user }).exec();
+        const newOrder = new Orders({
+          user: req.body.user,
+          products: req.body.carts
+        });
 
-      await newOrder.save();
+        await newOrder.save();
 
-      const products = newOrder._id;
-      user.orders.push(products);
-      user.money -= req.body.total;
-      await user.save();
+        const products = newOrder._id;
+        user.orders.push(products);
+        user.money -= req.body.total;
+        await user.save();
 
-      const token = jwt.sign(
-        {
-          _id: user.id,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          username: user.username,
-          email: user.email,
-          day: user.day,
-          month: user.month,
-          year: user.year,
-          gender: user.gender,
-          money: user.money,
-          cart: user.carts,
-          adress: user.adress,
-          image: user.image,
-          phone: user.phone,
-          zip: user.zip,
-          city: user.city,
-          orders: user.orders,
-          messages: user.messages
-        },
-        key,
-        { expiresIn: "1h" }
-      );
+        const token = jwt.sign(
+          {
+            _id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            username: user.username,
+            email: user.email,
+            day: user.day,
+            month: user.month,
+            year: user.year,
+            gender: user.gender,
+            money: user.money,
+            cart: user.carts,
+            adress: user.adress,
+            image: user.image,
+            phone: user.phone,
+            zip: user.zip,
+            city: user.city,
+            orders: user.orders,
+            messages: user.messages
+          },
+          key,
+          { expiresIn: "1h" }
+        );
 
-      res.status(200).json(token);
-      // await usercart.save();
+        res.status(200).json(token);
+        await usercart.save();
+      }
     } else {
       console.log("some error");
     }

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 class Checkout extends Component {
   state = {};
   render() {
+    console.log(this.context.state);
     return (
       <MyContext.Consumer>
         {context => (
@@ -12,14 +13,14 @@ class Checkout extends Component {
             <div className="checkout-container mt-4">
               {context.state.carts ? (
                 <h4 className="cart-prod_title d-block mt-2">
-                  <i class="fas fa-shopping-bag" />
+                  <i className="fas fa-shopping-bag" />
                   &nbsp;&nbsp;&nbsp;
                   {context.state.carts.length}
                 </h4>
               ) : null}
               <hr className="custom-line" />
               <h4 className="cart-prod_title d-block mt-2">
-                <i class="fas fa-dollar-sign" />
+                <i className="fas fa-dollar-sign" />
                 &nbsp;&nbsp;&nbsp; {context.state.cartTotal}
               </h4>
               <hr className="custom-line" />
@@ -57,6 +58,13 @@ class Checkout extends Component {
                   Buy Products
                 </button>
               </form>
+              {context.state.moneyerror ? (
+                <>
+                  <p className="alert alert-danger text-center">
+                    {context.state.moneyerror}
+                  </p>
+                </>
+              ) : null}
             </div>
           </>
         )}
