@@ -7,6 +7,9 @@ const jwt = require("jsonwebtoken");
 const jwt_decode = require("jwt-decode");
 const router = express.Router();
 const multer = require("multer");
+const randomstring = require("randomstring");
+const config = require("../config/mailer");
+const nodemailer = require("nodemailer");
 // Protect Routes
 const auth = require("../middleware/login");
 
@@ -21,10 +24,10 @@ const Cart = require("../models/Cart");
 const Orders = require("../models/Orders");
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     cb(null, "uploads/");
   },
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     cb(null, file.originalname);
   }
 });
@@ -445,11 +448,9 @@ router.post("/buy-products", async (req, res) => {
     const orders = await Orders.find({});
     if (orders && user) {
       if (req.body.total > user.money) {
-        res
-          .status(400)
-          .json({
-            msg: "you don't have enought money, you can check in your profile"
-          });
+        res.status(400).json({
+          msg: "you don't have enought money, you can check in your profile"
+        });
       } else {
         const usercart = await Cart.deleteOne({ user: req.body.user }).exec();
         const newOrder = new Orders({
@@ -500,4 +501,43 @@ router.post("/buy-products", async (req, res) => {
   }
 });
 
+// Verify User - Send Email
+router.post("/verify-user", async (req, res) => {
+  const user = await User.findOne({ _id: req.body.user });
+
+  // const secrettoken = randomstring.generate();
+  var transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: config.MAILGUN_USER,
+      pass: config.MAILGUN_PASS
+    }
+  });
+
+  const html = `<h1>Hello ${user.username} </h1> <br/>  <a href="http://localhost:5000/verify/${user._id}" style="background:green;padding:15px 30px 30px; color:#fff;text-decoration:none;" target="_blank">Confirm And Get Money</a>`;
+  var mailOptions = {
+    from: "sajaiaiuri@gmail.com",
+    to: user.email,
+    subject: "Confirm email",
+    html: html
+  };
+  await transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+});
+
+// Confirm Email
+router.get('/verify/:id', async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id })
+  if (user) {
+    user.isActive = true;
+    user.money = 10000;
+    user.save();
+    res.redirect('http://localhost:3000/login')
+  }
+})
 module.exports = router;

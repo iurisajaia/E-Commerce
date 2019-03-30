@@ -394,7 +394,7 @@ class MyProvider extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.msg) {
-          this.setState({moneyerror : res.msg})
+          this.setState({ moneyerror: res.msg });
         } else if (res) {
           localStorage.setItem("token", res);
           setInterval((window.location = "/orders"), 2000);
@@ -477,7 +477,7 @@ class MyProvider extends Component {
   sendMessage = e => {
     e.preventDefault();
     const data = {
-      user: e.target.user.value,
+      user: e.target.usermsg.value,
       username: e.target.userUsername.value,
       message: e.target.message.value
     };
@@ -566,6 +566,28 @@ class MyProvider extends Component {
       });
   };
 
+  // Verify Account
+  verifyAccount = e => {
+    e.preventDefault();
+    const data = {
+      user: e.target.user_id.value
+    };
+    fetch("/verify-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   render() {
     return (
       <MyContext.Provider
@@ -587,7 +609,8 @@ class MyProvider extends Component {
           sendMessage: this.sendMessage,
           addToDetails: this.addToDetails,
           adminAnswer: this.adminAnswer,
-          updateUserImage: this.updateUserImage
+          updateUserImage: this.updateUserImage,
+          verifyAccount: this.verifyAccount
         }}
       >
         {this.props.children}

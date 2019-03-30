@@ -134,6 +134,23 @@ class UserArea extends Component {
         {context => (
           <>
             <div className="container bootstrap snippet">
+              {context.state.user.money == 0 ? (
+                <>
+                  <form
+                    onSubmit={context.verifyAccount}
+                    className="d-block mb-5 text-center"
+                  >
+                    <input
+                      type="hidden"
+                      id="user_id"
+                      value={context.state.user._id}
+                    />
+                    <button className="btn btn-danger">
+                      Verify Yur Account and Get Money
+                    </button>
+                  </form>
+                </>
+              ) : null}
               <div className="row">
                 <div className="col-md-3 col-sm-12">
                   <div className="text-center">
@@ -511,7 +528,7 @@ class UserArea extends Component {
                         <input
                           type="hidden"
                           value={context.state.user._id}
-                          id="user"
+                          id="usermsg"
                         />
                         <button className="btn btn-success">Send</button>
                       </form>
