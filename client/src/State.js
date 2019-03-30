@@ -341,6 +341,7 @@ class MyProvider extends Component {
       .then(res => res.json())
       .then(res => {
         var changedfiltered = [];
+
         for (let i = 0; i < this.state.products.length; i++) {
           for (let a = 0; a < res.length; a++) {
             if (this.state.products[i]._id.match(res[a].product)) {

@@ -89,7 +89,7 @@ router.post("/add-user-image", upload.single("image"), async (req, res) => {
 // User Registration
 router.post("/registration", async (req, res) => {
   let errors = [];
-
+  console.log(req.body)
   if (
     req.body.firstname == "" ||
     req.body.firstname == undefined ||
@@ -120,23 +120,23 @@ router.post("/registration", async (req, res) => {
     req.body.year == null ||
     req.body.gender == "" ||
     req.body.gender == undefined ||
-    req.body.gender == null
+    req.body.gender == null || req.body.terms == false
   ) {
-    errors.push({ message: "ყველა ველი სავალდებულოა" });
+    errors.push({ message: "all fields are required" });
   }
 
   if (req.body.password.legnth < 6) {
-    errors.push({ message: "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს" });
+    errors.push({ message: "password must be min 6 simbols" });
   }
 
   if (req.body.password != req.body.repassword) {
-    errors.push({ message: "პაროლები არ ემთხვევა" });
+    errors.push({ message: "passwords dont match" });
   }
 
   let user = await User.findOne({ email: req.body.email });
 
   if (user) {
-    errors.push({ message: "იმეილი უკვე დარეგისტრირებულია" });
+    errors.push({ message: "email already exists" });
   }
 
   if (errors.length > 0) {
@@ -159,7 +159,7 @@ router.post("/registration", async (req, res) => {
     await newUser.save();
     return res
       .status(200)
-      .json({ success: "თქვენ წარმატებით გაირეთ რეგისტრაცია" });
+      .json({ success: "succes!" });
   }
 });
 

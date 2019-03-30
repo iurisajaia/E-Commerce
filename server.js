@@ -4,6 +4,13 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const app = express();
+// const socketIO = require('socket.io');
+
+// const server = express()
+//   .use(app)
+//   .listen(5555, () => console.log(`Listening Socket on 5555`));
+
+// const io = socketIO(server);
 
 // Require Routes
 const users = require("./routes/users");
@@ -38,12 +45,42 @@ app.get("/", auth, (req, res) => {
   res.send("Hello E-Commerce");
 });
 
+
+// Socket 
+// const Message = require('./models/Message')
+// // io.on('connection', () => {
+// //   console.log('a user is connected')
+// // })
+
+// app.get('/messages', (req, res) => {
+//   Message.find({}, (err, messages) => {
+//     res.send(messages);
+//   })
+// })
+// app.post('/messages', (req, res) => {
+//   var message = new Message(req.body);
+//   message.save((err) => {
+//     if (err)
+//       sendStatus(500);
+//     io.emit('message', req.body);
+//     res.sendStatus(200);
+//   })
+// })
+
+
+
+
+
+
+
+
+
 // Use Routes
 app.use("/", users);
 app.use("/", categories);
 app.use("/", companies);
 app.use("/", products);
-app.use("/",subscribes);
+app.use("/", subscribes);
 
 const port = process.env.port || 5000;
 

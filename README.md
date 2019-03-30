@@ -21,6 +21,7 @@ This is an E-Commerce platform where users are allowed to buy a big variety of s
 - Review products with comment
 - Contact with administrator
 - Subscribe news with e-mail
+- Email Verification And Get Free 10 000$ for shopping
 
 ## Administrator Can :
 

@@ -19,6 +19,8 @@ import Footer from "./components/footer/footer";
 import UserProfileForAdmin from "./components/user/admin/singleuser";
 import About from "./components/static/about";
 import Contact from "./components/static/contact";
+import ChatBox from './components/chat/chatbox';
+import Terms from './components/static/terms'
 
 class App extends Component {
   state = {};
@@ -30,11 +32,12 @@ class App extends Component {
           <MyProvider>
             <Navbar />
             <Switch>
+              <ChatBox exact path="/chat" />
               <Route exact path="/registration" component={Registration} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/compare" component={Compare} />
               <Home exact path="/" />
-
+              <Terms exact path="/terms" />
               <Products path="/products" />
               <About path="/about" />
               <Contact path="/contact" />
