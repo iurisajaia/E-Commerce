@@ -60,13 +60,13 @@ class Footer extends Component {
                 </div>
                 <ul className="footer-navigation">
                   <li>
-                    <Link to="/products">Terms Of Services</Link>
+                    <Link to="/terms">Terms Of Services</Link>
                   </li>
                   <li>
                     <Link to="/about">FAQ</Link>
                   </li>
                   <li>
-                    <Link to="/contact">Terms Of Use</Link>
+                    <Link to="/terms">Terms Of Use</Link>
                   </li>
                   <li>
                     <Link to="/compare">Blog</Link>

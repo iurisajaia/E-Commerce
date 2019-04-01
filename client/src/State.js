@@ -43,18 +43,20 @@ class MyProvider extends Component {
       fetch("/admin/categories"),
       fetch("/all-product"),
       fetch("/get-all-cart"),
-      fetch("/get-all-orders")
+      fetch("/get-all-orders"),
+      fetch('/get-custom-orders')
     ])
-      .then(([companies, categories, products, carts, orders]) => {
+      .then(([companies, categories, products, carts, orders,hoodies]) => {
         return Promise.all([
           companies.json(),
           categories.json(),
           products.json(),
           carts.json(),
-          orders.json()
+          orders.json(),
+          hoodies.json()
         ]);
       })
-      .then(([companies, categories, products, carts, orders]) => {
+      .then(([companies, categories, products, carts, orders,hoodies]) => {
         if (this.state.user) {
           var filtered = carts.filter(cart => {
             return cart.user.match(this.state.user._id);
@@ -100,7 +102,8 @@ class MyProvider extends Component {
           companies: companies.companies,
           categories: categories.categories,
           products,
-          orders
+          orders,
+          hoodies
         });
       });
   }

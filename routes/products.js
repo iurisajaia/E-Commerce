@@ -19,12 +19,14 @@ const Categories = require("../models/Categories");
 const Companies = require("../models/Companies");
 const Product = require("../models/Product");
 const Orders = require("../models/Orders");
+const Hoodies = require('../models/CustomHoodie');
+
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     cb(null, "uploads/");
   },
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     cb(null, file.originalname);
   }
 });
@@ -268,4 +270,35 @@ router.post("/delete-order", async (req, res) => {
   }
 });
 
+
+// Create Custom Hoodie
+router.post('/create-custom-hoodie', async (req, res) => {
+  const user = await User.findOne({ _id: req.body.user }).populate('users')
+  try {
+
+    const newHoode = new Hoodies({
+      users: user,
+      hoodie: req.body.hoodie,
+      logo: req.body.logo
+    })
+
+    newHoode.save();
+    return res.status(200).json({ newHoode })
+  } catch (err) {
+    console.log(err)
+  }
+
+})
+
+// Get Custom Orders
+router.get('/get-custom-orders', async (req, res) => {
+  const hoodies = await Hoodies.find({}).populate('users');
+  try {
+    if (hoodies) {
+      return res.status(200).json({ hoodies })
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
 module.exports = router;

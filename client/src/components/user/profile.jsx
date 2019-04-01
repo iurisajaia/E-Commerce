@@ -9,6 +9,7 @@ import Users from "./admin/users";
 import Companies from "./admin/companies";
 import Messages from "./admin/messages";
 import Statistics from "./admin/statistics";
+import Hoodie from './admin/hoodie';
 import { MyContext } from "../../State";
 
 class Profile extends Component {
@@ -57,6 +58,7 @@ class Profile extends Component {
                     <Categories />
                     <Companies />
                     <Messages />
+                    <Hoodie />
                     <Statistics />
                   </div>
                 </>

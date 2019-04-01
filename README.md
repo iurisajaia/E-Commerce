@@ -15,6 +15,7 @@ This is an E-Commerce platform where users are allowed to buy a big variety of s
 - Compare Products
 - Add Products to cart
 - Make Order / Buy Products
+- Create/Order Custom Hoodie 
 - Sort products by price
 - Update Private info
 - Edit Own Information / Shipping Adress / Upload Profile Image
