@@ -1,1 +1,32 @@
-#messages{height:300px;}
+#drag-1, #drag-2, #drag-3 , #drag-4, #drag-5, #drag-6, #drag-7{
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    background-color: transparent;
+    user-select: none;
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+  .drag-container{
+      background-image: url('/img/grey-hoodie.png');
+      background-size: inherit;
+      background-repeat: no-repeat;
+      background-position: center 230px;
+      padding:60px 20px;
+      margin: 40px 0;
+      box-shadow: 0 4px 12px 22px rgba(0, 0, 0, 0.05);
+      height: 1000px;
+      display: flex;
+      flex-wrap: wrap;
+}
+
+  .drag-container .drag-logo{
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+  }
+  
+  .order-custom-hoodie{
+      display: flex;
+      width: 50%;
+  }

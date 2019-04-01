@@ -26,6 +26,9 @@ class HeaderTop extends Component {
                   <li>
                     <Link to="/contact">Contact</Link>
                   </li>
+                  <li>
+                    <Link to="/create">Create</Link>
+                  </li>
                 </ul>
               </div>
               <div className="aside-right">
