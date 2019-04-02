@@ -38,7 +38,7 @@ class CreateHoodie extends Component {
         })
             .then(res => res.json())
             .then(res => {
-                console.log(res);
+                // console.log(res);
             })
             .catch(error => {
                 console.error(error);

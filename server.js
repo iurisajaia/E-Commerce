@@ -4,14 +4,6 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const app = express();
-// const socketIO = require('socket.io');
-
-// const server = express()
-//   .use(app)
-//   .listen(5555, () => console.log(`Listening Socket on 5555`));
-
-// const io = socketIO(server);
-
 // Require Routes
 const users = require("./routes/users");
 const categories = require("./routes/categories");
@@ -41,36 +33,6 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-app.get("/", auth, (req, res) => {
-  res.send("Hello E-Commerce");
-});
-
-
-// Socket 
-// const Message = require('./models/Message')
-// // io.on('connection', () => {
-// //   console.log('a user is connected')
-// // })
-
-// app.get('/messages', (req, res) => {
-//   Message.find({}, (err, messages) => {
-//     res.send(messages);
-//   })
-// })
-// app.post('/messages', (req, res) => {
-//   var message = new Message(req.body);
-//   message.save((err) => {
-//     if (err)
-//       sendStatus(500);
-//     io.emit('message', req.body);
-//     res.sendStatus(200);
-//   })
-// })
-
-
-
-
-
 
 
 
@@ -82,7 +44,13 @@ app.use("/", companies);
 app.use("/", products);
 app.use("/", subscribes);
 
-const port = process.env.port || 5000;
+
+app.use(express.static(path.join(__dirname, '/client/build/')))
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
+
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
