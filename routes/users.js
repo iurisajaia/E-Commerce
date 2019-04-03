@@ -516,7 +516,7 @@ router.post("/verify-user", async (req, res) => {
 
   const html = `<h1>Hello ${user.username} </h1> <br/>  <a href="http://localhost:5000/verify/${user._id}" style="background:green;padding:15px 30px 30px; color:#fff;text-decoration:none;" target="_blank">Confirm And Get Money</a>`;
   var mailOptions = {
-    from: "sajaiaiuri@gmail.com",
+    from: "shopstoretechub@gmail.com",
     to: user.email,
     subject: "Confirm email",
     html: html

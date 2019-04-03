@@ -17,7 +17,6 @@ class Users extends Component {
                                         <div className="col-md-4" key={order}>
                                             <h3>{order.hoodie}</h3>
                                             <h3>{order.logo}</h3>
-                                            <h4>{order.users.firstname}</h4>
 
                                         </div>
                                     )

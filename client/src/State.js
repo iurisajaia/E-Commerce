@@ -46,7 +46,7 @@ class MyProvider extends Component {
       fetch("/get-all-orders"),
       fetch('/get-custom-orders')
     ])
-      .then(([companies, categories, products, carts, orders,hoodies]) => {
+      .then(([companies, categories, products, carts, orders, hoodies]) => {
         return Promise.all([
           companies.json(),
           categories.json(),
@@ -56,7 +56,7 @@ class MyProvider extends Component {
           hoodies.json()
         ]);
       })
-      .then(([companies, categories, products, carts, orders,hoodies]) => {
+      .then(([companies, categories, products, carts, orders, hoodies]) => {
         if (this.state.user) {
           var filtered = carts.filter(cart => {
             return cart.user.match(this.state.user._id);
@@ -592,6 +592,7 @@ class MyProvider extends Component {
         console.error(error);
       });
   };
+
   render() {
     return (
       <MyContext.Provider

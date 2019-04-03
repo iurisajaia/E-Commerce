@@ -1,4 +1,4 @@
 module.exports = {
-  MAILGUN_USER: "sajaiaiuri@gmail.com",
-  MAILGUN_PASS: "googleadsense1"
+  MAILGUN_USER: "shopstoretechub@gmail.com",
+  MAILGUN_PASS: "techub123"
 };
