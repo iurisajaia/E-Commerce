@@ -1,5 +1,11 @@
 # Welcome to the E-Commerce Website!
 
+## Demo
+https://agile-island-62739.herokuapp.com/
+
+
+
+
 ### You can start project with command :
 
     npm run dev
@@ -8,8 +14,7 @@
 
 This is an E-Commerce platform where users are allowed to buy a big variety of sport and hiking related products online. The Project has two main sides - the User and Administrator areas. In the process of working on the project, we used following technologies: Node.Js/Express , MongoDb , React , HTML5 / CSS3 / Bootstrap
 
-## Demo
-# https://agile-island-62739.herokuapp.com/
+
 
 ## Users Can
 
